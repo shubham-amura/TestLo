@@ -9,19 +9,20 @@
 <li>User Login(Student/JobSeeker)</li>
 <li>Variable Test Pattern</li>
 	<ul>
-	<li> - Single choice question.<li>
-	<li> - Multiple choice question.<li>
-	<li> - Numerical Type question.<li>
+	<li> - Single choice question.</li>
+	<li> - Multiple choice question.</li>
+	<li> - Numerical Type question.</li>
 	</ul>
 <li>Dashboard</li>
 <li>Discussion Portal</li> 
 <li>LeaderBoard</li>
 </ol>
 
-Future Scope:
-1.Online Compiler.
-2.Google/Facebook Login.
-
+<h>Future Scope:</h>
+<ol>
+<li>Online Compiler.</li>
+<li>Google/Facebook Login.</li>
+</ol>
 
 
 <tt>rake doc:app</tt>.
