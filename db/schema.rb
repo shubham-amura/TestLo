@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20160916130623) do
     t.integer  "category"
     t.string   "name"
     t.date     "date"
-    t.time     "duration"
+    t.integer  "duration"
     t.integer  "number_of_questions"
     t.integer  "marks"
     t.datetime "created_at",          null: false
