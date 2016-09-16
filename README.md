@@ -22,13 +22,13 @@
 </ol>
 
 
-<h2> Entities <h2>
+<h2> Entities </h2>
 
-<h3> User (Student and Job Seeker)<h3>
+<h3> User (Student and Job Seeker)</h3>
 <p> <b>Description :</b> User can take various test available by all the companies hosted on TestLo based on eligibility. Can mark test for future and enroll for them before schedule. Can practise test </p>
 
 <h3> Employer </h3>
-<p> <b>Description :<b> Employer can host test for his company. He can add various type of question and can choose from question bank provided.Contribute to universal question bank hosted on TestLO portal. Check statistic in his dashboard and get candidate details to contact them. </p>
+<p> <b>Description :</b> Employer can host test for his company. He can add various type of question and can choose from question bank provided.Contribute to universal question bank hosted on TestLO portal. Check statistic in his dashboard and get candidate details to contact them. </p>
 
 <h3> Test </h3>
 <ol>
