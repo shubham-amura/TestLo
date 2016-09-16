@@ -24,5 +24,23 @@ Things you may want to cover:
 * ...
 
 
+MVP Feature List : 
+
+1.Test Listing.
+2.Employer Login
+3.User Login(Student/JobSeeker)
+4.Variable Test Pattern
+	- Single choice question.
+	- Multiple choice question.
+	- Numerical Type question.
+5.Dashboard
+6.Discussion Portal 
+
+
+Future Scope:
+1.Online Compiler.
+2.Google/Facebook Login.
+
+
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
