@@ -35,6 +35,7 @@ MVP Feature List :
 	- Numerical Type question.
 5.Dashboard
 6.Discussion Portal 
+7.LeaderBoard.
 
 
 Future Scope:
