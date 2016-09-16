@@ -14,8 +14,8 @@
 	<li> - Numerical Type question.<li>
 	</ul>
 <li>Dashboard</li>
-<li>Discussion Portal<li> 
-<li>LeaderBoard<li>
+<li>Discussion Portal</li> 
+<li>LeaderBoard</li>
 </ol>
 
 Future Scope:
