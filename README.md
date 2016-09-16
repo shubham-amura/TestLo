@@ -14,7 +14,7 @@
 	<li> - Numerical Type question.</li>
 	</ul>
 <li>Dashboard</li>
-<li>Discussion Portal</li> 
+<li>Discussion Portal</li>
 <li>LeaderBoard</li>
 </ol>
 
