@@ -1,5 +1,5 @@
-<h1> Documentation and Features <h1>
-<h2> MVP Feature List : <h2>
+<h1> Documentation and Features </h1>
+<h2> MVP Feature List : </h2>
 <ol>
 <li>Test Listing.</li>
 <li>Employer Login</li>
