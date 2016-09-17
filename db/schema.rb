@@ -11,9 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160916130623) do
+ActiveRecord::Schema.define(version: 20160917042256) do
 
-  create_table "question_banks", force: :cascade do |t|
+  create_table "questions", force: :cascade do |t|
     t.integer  "question_type"
     t.string   "question"
     t.string   "options"
