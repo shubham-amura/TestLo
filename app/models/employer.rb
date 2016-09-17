@@ -1,2 +1,3 @@
 class Employer < User
-end
+  has_one :employer_detail
+ end

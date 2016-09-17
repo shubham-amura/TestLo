@@ -1,6 +1,6 @@
-class CreateEmployers < ActiveRecord::Migration
+class CreateEmployerDetails < ActiveRecord::Migration
   def change
-    create_table :employers do |t|
+    create_table :employer_details do |t|
       t.string :company
       t.string :company_address
       t.string :contact
