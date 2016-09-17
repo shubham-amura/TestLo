@@ -36,6 +36,6 @@ end
 #     end
 #   end
 #
-#   q=QuestionBank.new(question_type:question_type,question:question,options:options.join('###'),correct_answer:correct_answer.join('###'))
+#   q=Question.new(question_type:question_type,question:question,options:options.join('###'),correct_answer:correct_answer.join('###'))
 #   q.save
 # end
