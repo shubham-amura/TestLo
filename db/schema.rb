@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160917070345) do
+ActiveRecord::Schema.define(version: 20160917085253) do
 
   create_table "employer_details", force: :cascade do |t|
     t.string   "company"
@@ -21,7 +21,10 @@ ActiveRecord::Schema.define(version: 20160917070345) do
     t.integer  "active_tests"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.integer  "employer_id"
   end
+
+  add_index "employer_details", ["employer_id"], name: "index_employer_details_on_employer_id"
 
   create_table "student_details", force: :cascade do |t|
     t.integer  "age"
@@ -31,7 +34,10 @@ ActiveRecord::Schema.define(version: 20160917070345) do
     t.string   "skills"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "student_id"
   end
+
+  add_index "student_details", ["student_id"], name: "index_student_details_on_student_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
