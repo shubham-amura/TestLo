@@ -30,7 +30,9 @@ ActiveRecord::Schema.define(version: 20160917053357) do
     t.datetime "updated_at",              null: false
   end
 
+  add_index "test_questions", ["question_id"], name: "index_test_questions_on_question_id"
   add_index "test_questions", ["test_id", "question_id"], name: "index_test_questions_on_test_id_and_question_id", unique: true
+  add_index "test_questions", ["test_id"], name: "index_test_questions_on_test_id"
 
   create_table "tests", force: :cascade do |t|
     t.integer  "category"
