@@ -4,5 +4,5 @@ class Student < User
 
 	#with tests
 	has_many :enrollments
-	has_many :tests,:through :enrollments
+	has_many :tests,through: :enrollments
 end
