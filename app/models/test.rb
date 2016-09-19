@@ -5,4 +5,8 @@ class Test < ActiveRecord::Base
 
   #with Employer
   belongs_to :employer
+
+  #with student
+  has_many :enrollments
+  has_many :students ,:through :enrollments
 end

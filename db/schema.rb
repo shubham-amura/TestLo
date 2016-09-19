@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160917085253) do
+ActiveRecord::Schema.define(version: 20160919063009) do
 
   create_table "employer_details", force: :cascade do |t|
     t.string   "company"
@@ -58,8 +58,6 @@ ActiveRecord::Schema.define(version: 20160917085253) do
 
   add_index "test_questions", ["question_id"], name: "index_test_questions_on_question_id"
   add_index "test_questions", ["test_id", "question_id"], name: "index_test_questions_on_test_id_and_question_id", unique: true
-  #because one question can be in one test only once.
-
   add_index "test_questions", ["test_id"], name: "index_test_questions_on_test_id"
 
   create_table "tests", force: :cascade do |t|
@@ -71,7 +69,10 @@ ActiveRecord::Schema.define(version: 20160917085253) do
     t.integer  "marks"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.integer  "employer_id"
   end
+
+  add_index "tests", ["employer_id"], name: "index_tests_on_employer_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
