@@ -58,6 +58,8 @@ ActiveRecord::Schema.define(version: 20160917085253) do
 
   add_index "test_questions", ["question_id"], name: "index_test_questions_on_question_id"
   add_index "test_questions", ["test_id", "question_id"], name: "index_test_questions_on_test_id_and_question_id", unique: true
+  #because one question can be in one test only once.
+
   add_index "test_questions", ["test_id"], name: "index_test_questions_on_test_id"
 
   create_table "tests", force: :cascade do |t|
