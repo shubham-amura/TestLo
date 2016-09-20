@@ -1,0 +1,44 @@
+
+<h1>Create Question</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+
+    <%= form_for(@question) do |f| %>
+      <%= render 'shared/error_messages',object: f.object %>
+    <div class="field" id="qtype">
+      <%= f.label :question_type %><br />
+        <%= f.label :question_type, "Single Answer Correct"%>
+        <%= f.radio_button :question_type,1,:checked => true%>
+
+        <%= f.label :question_type, "Multiple Answer Correct" %>
+        <%= f.radio_button :question_type,2%>
+
+        <%= f.label :question_type, "Integer Answer" %>
+        <%= f.radio_button :question_type,0%>
+    </div>
+
+    <div class="field">
+          <%= f.label :question %><br />
+          <%= f.text_area :question,autofocus: true %>
+    </div>
+
+    <div class="field">
+          <%= f.label :a %><br />
+          <%= f.text_field :options, autofocus: true,name: 'question[:q][]' %>
+    </div>
+    <div class="field">
+          <%= f.label :b %><br />
+          <%= f.text_field :options, autofocus: true,name: 'question[:q][]' %>
+    </div>
+    <div class="field">
+          <%= f.label :c %><br />
+          <%= f.text_field :options, autofocus: true,name: 'question[:q][]' %>
+    </div>
+    <div class="field">
+          <%= f.label :d %><br />
+          <%= f.text_field  :options, autofocus: true,name: 'question[:q][]' %>
+    </div>
+      <%= f.submit "Add Question", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
