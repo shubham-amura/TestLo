@@ -5,7 +5,10 @@
 
   <div class="field">
     <%= f.label :type %><br />
-    <%= f.text_field :type, autofocus: true %>
+    <%= f.label :type, "Student", :value => "Student"  %>
+    <%= f.radio_button :type,'Student'%>
+    <%= f.label :type, "Employer", :value => "Employer" %>
+    <%= f.radio_button :type,'Employer', :checked => true %>
   </div>
 
   <div class="field">
