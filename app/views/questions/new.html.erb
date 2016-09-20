@@ -18,11 +18,11 @@
         </div>
 
         <div class="qcategory">
-          <%= f.label :category, "Select Category"%>
-          <%= f.collection_select :category_id,Category.all,:id,:name%>
+            <%= f.label :category, "Select Category"%>
+            <%= f.collection_select :category_id,Category.all,:id,:name%>
         </div>
 
-        <div class="field" id="question">
+        <div id="question">
             <%= f.label :question %><br/>
             <%= f.text_area :question,autofocus: true %>
         </div>
@@ -50,43 +50,43 @@
             </div>
         </div>
 
-        <!--
-    <div class="correct_answers_1">
-        <%= f.label :correct_answer %><br />
-          <%= f.label :correct_answer,"A"%>
-          <%= f.radio_button :correct_answer,'A',:checked => true%>
+        <div id="correct_answer">
 
-          <%= f.label :correct_answer, "B" %>
-          <%= f.radio_button :correct_answer,'B'%>
+            <div id="correct_answers_1">
+                <%= f.label :correct_answer %><br/>
+                <%= f.label :correct_answer,"A"%>
+                <%= f.radio_button :correct_answer,'A',:checked => true%>
 
-          <%= f.label :correct_answer, "C" %>
-          <%= f.radio_button :correct_answer,'C'%>
+                <%= f.label :correct_answer, "B" %>
+                <%= f.radio_button :correct_answer,'B'%>
 
-          <%= f.label :correct_answer, "D" %>
-          <%= f.radio_button :correct_answer,'D'%>
-    </div>
-  -->
+                <%= f.label :correct_answer, "C" %>
+                <%= f.radio_button :correct_answer,'C'%>
 
-        <div class="correct_answers_2">
-            <%= f.label :correct_answer %><br/>
-            <%= f.label :correct_answer,"A"%>
-            <%= f.check_box :correct_answer,{:multiple => true },'A',nil%>
+                <%= f.label :correct_answer, "D" %>
+                <%= f.radio_button :correct_answer,'D'%>
+            </div>
 
-            <%= f.label :correct_answer, "B" %>
-            <%= f.check_box :correct_answer,{:multiple => true },'B',nil%>
+            <div id="correct_answers_2" class="hidden">
+                <%= f.label :correct_answer %><br/>
+                <%= f.label :correct_answer,"A"%>
+                <%= f.check_box :correct_answer,{:multiple => true },'A',nil%>
 
-            <%= f.label :correct_answer, "C" %>
-            <%= f.check_box :correct_answer,{:multiple => true },'C',nil%>
+                <%= f.label :correct_answer, "B" %>
+                <%= f.check_box :correct_answer,{:multiple => true },'B',nil%>
 
-            <%= f.label :correct_answer, "D" %>
-            <%= f.check_box :correct_answer,{:multiple => true },'D',nil%>
+                <%= f.label :correct_answer, "C" %>
+                <%= f.check_box :correct_answer,{:multiple => true },'C',nil%>
+
+                <%= f.label :correct_answer, "D" %>
+                <%= f.check_box :correct_answer,{:multiple => true },'D',nil%>
+            </div>
+
+            <div id="correct_answers_0" class="hidden">
+                <%= f.label :correct_answer,"correct answer"%>
+                <%= f.text_field :correct_answer%>
+            </div>
         </div>
-          <!--
-        <div class="correct_answers_3">
-            <%= f.label :correct_answer,"correct answer"%>
-            <%= f.text_field :correct_answer%>
-        </div>
-      -->
         <%= f.submit "Add Question", class: "btn btn-primary" %>
         <% end %>
     </div>
