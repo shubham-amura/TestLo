@@ -17,6 +17,11 @@
             <%= f.radio_button :question_type,0%>
         </div>
 
+        <div class="qcategory">
+          <%= f.label :category, "Select Category"%>
+          <%= f.collection_select :category_id,Category.all,:id,:name%>
+        </div>
+
         <div class="field" id="question">
             <%= f.label :question %><br/>
             <%= f.text_area :question,autofocus: true %>
