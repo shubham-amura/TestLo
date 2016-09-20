@@ -16,6 +16,8 @@ gem 'coffee-rails', '~> 4.1.0'
 #For bootstrap integration
 gem 'bootstrap-sass'
 
+gem 'autoprefixer-rails'
+
 #devise for authentication
 gem 'devise'
 # See https://github.com/rails/execjs#readme for more supported runtimes
