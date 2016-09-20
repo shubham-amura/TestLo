@@ -6,9 +6,9 @@
   <div class="field">
     <%= f.label :type %><br />
     <%= f.label :type, "Student", :value => "Student"  %>
-    <%= f.radio_button :type,'Student'%>
+    <%= f.radio_button :type,'Student',:checked => true%>
     <%= f.label :type, "Employer", :value => "Employer" %>
-    <%= f.radio_button :type,'Employer', :checked => true %>
+    <%= f.radio_button :type,'Employer'%>
   </div>
 
   <div class="field">

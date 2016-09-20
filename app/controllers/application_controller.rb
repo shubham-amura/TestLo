@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
     profile_path(resource)
   end
 
+  def after_sign_out_path_for(resource_or_scope)
+    new_user_session_path
+  end
+
 
   def authorize_user!
     redirect_to profile_path(current_user) unless current_user.id.to_i == params[:id].to_i
