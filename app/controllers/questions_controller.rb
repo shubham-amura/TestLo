@@ -6,21 +6,25 @@ class QuestionsController < ApplicationController
   end
 
   def index
-    #@questions=Question.all
+    @questions=Question.all
   end
 
   def create
     #options=params[:question][:temp_options].join('#####')
     #@user=Question.new(question_params)
     @question=Question.new(question_params)
-    render plain: params
-    # if @question.save
-    #   flash[:success]="Question added to Bank successfully"
-    #   redirect_to questions_path
-    # else
-    #   render 'new'
-    # end
 
+    if @question.save
+      flash[:success]="Question added to Bank successfully"
+      redirect_to questions_path
+    else
+      #form options doesnt read from single serialized column
+      @question.a=@question.options[0]
+      @question.b=@question.options[1]
+      @question.c=@question.options[2]
+      @question.d=@question.options[3]
+      render 'new'
+    end
   end
 
   private

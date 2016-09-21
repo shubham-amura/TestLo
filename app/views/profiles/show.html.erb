@@ -1,11 +1,11 @@
 <h1><%= @user.name %>'s Dashboard </h1>
 <p>  <%= @user.name %></p>
 <% if @user.type=='Employer'%>
-  <%= link_to "Create",new_test_path%>
-  <%= link_to "View Created",tests_path%>
-  <%= link_to "View all",tests_path%>
+  <%= link_to "Create Test",new_test_path%>
+  <%= link_to "View Created Tests",tests_path%>
+  <%= link_to "View all Tests",tests_path%>
   <%= link_to "View Question Bank",questions_path%>
 <%else%>
-  <%= link_to "View All",tests_path%>
+  <%= link_to "View All Tests",tests_path%>
 <%end%>
 <%= link_to "Logout", destroy_user_session_path%>

@@ -25,29 +25,29 @@
 
             <div class="option_1">
                 <%= f.label :a %><br/>
-                <%= f.text_field :options, autofocus: true,name: 'question[options][]' %>
+                <%= f.text_field :a, autofocus: true,name: 'question[options][]' %>
             </div>
 
             <div class="option_2">
                 <%= f.label :b %><br/>
-                <%= f.text_field :options, autofocus: true,name: 'question[options][]' %>
+                <%= f.text_field :b, autofocus: true,name: 'question[options][]' %>
             </div>
 
             <div class="option_3">
                 <%= f.label :c %><br/>
-                <%= f.text_field :options, autofocus: true,name: 'question[options][]' %>
+                <%= f.text_field :c, autofocus: true,name: 'question[options][]' %>
             </div>
 
             <div class="option_4">
                 <%= f.label :d %><br/>
-                <%= f.text_field  :options, autofocus: true,name: 'question[options][]' %>
+                <%= f.text_field  :d, autofocus: true,name: 'question[options][]' %>
             </div>
         </div>
 
         <div id="correct_answer">
             <div id="correct_answers_1">
                 <%= f.label :correct_answer %><br/>
-                <%= f.label :correct_answer,"A"%>
+                <%= f.label :correct_answe,"A"%>
                 <%= f.radio_button :correct_answer,'A',:checked => true%>
 
                 <%= f.label :correct_answer, "B" %>
