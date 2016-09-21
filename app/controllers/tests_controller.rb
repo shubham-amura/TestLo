@@ -10,19 +10,27 @@ class TestsController < ApplicationController
   end
 
   def create
-    @test=current_user.tests.build(test_params)
-    render 'add_questions'
-    
-    # @test=current_user.tests.create(test_params)
+    @test=current_user.tests.create(test_params)
     # render plain: @test.inspect
     # #@test=current_user.tests.build(test_params)
     # render plain: params
-    # if current_user.tests.create(test_params)
-    #   flash[:success]="Test created Successfully"
-    #   redirect_to profile_path(current_user)
-    # else
-    #   render 'new'
-    # end
+    if @test
+      flash[:success]="Test created Successfully"
+      redirect_to add_questions_test_path(@test)
+    else
+      render 'new'
+    end
+  end
+
+  def add_questions
+      #this will add qestions to test.
+      @questions=Question.all
+      @selected_questions=Enrollment.all.where(test_id:params[:id])
+      #@selected_questions=Question.all
+  end
+
+  def push_questions
+    
   end
   private
   def test_params

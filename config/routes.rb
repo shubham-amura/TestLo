@@ -6,7 +6,12 @@ Rails.application.routes.draw do
 
     get 'profile/:id' => 'profiles#show' , as: :profile
 
-  resources :tests
+  resources :tests do
+    member do
+      get :add_questions
+      post :push_questions
+    end
+  end
   resources :questions
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
