@@ -1,0 +1,28 @@
+    <span>
+        <h1 class=" white-text"><%= @user.name %>'s Dashboard
+        </h1>
+
+        <table class="table white-text">
+            <tr>
+                <th class = "white-text" >Name</th>
+                <th>Duration</th>
+                <th>Date</th>
+                <th></th>
+                <th></th>
+            </tr>
+
+            <% @tests.each do |test| %>
+            <tr>
+                <td><%= test.name %></td>
+                <td><%= test.duration %></td>
+                <% if @enrolled_test.include? test.id%>
+                <td class = "loginBtn enrollbtn centered">
+                    Enroll</td>
+                <%else%>
+                <td class = "loginBtn taketestBtn center">
+                    Take Test</td>
+                <% end %>
+
+            </tr>
+            <% end %>
+        </table>

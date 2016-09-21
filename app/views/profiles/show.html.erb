@@ -1,4 +1,6 @@
-<h1><%= @user.name %>'s Dashboard </h1>
-<p>  <%= @user.name %></p>
-
-<%= link_to "Logout", destroy_user_session_path%>
+<span class="LogoutButton white-text"><%= link_to "Logout", destroy_user_session_path %>
+    <span>
+        <h1 class=" white-text"><%= @user.name %>'s Dashboard
+        </h1>
+        <p>
+            <%= @user.name %></p>

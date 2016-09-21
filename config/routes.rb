@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
+
+
+root 'static_pages#home'
+
   #devise_for :users
 
   devise_for :users,controllers: { sessions: 'users/sessions' ,passwords: 'users/passwords',
                                     registrations:'users/registrations',confirmations:'users/confirmations'}
 
+    get 'profile/dashboard' => 'profiles#student_dashboard', as: :student_dashboard
     get 'profile/:id' => 'profiles#show' , as: :profile
+
 
   resources :tests
   # The priority is based upon order of creation: first created -> highest priority.
