@@ -31,22 +31,22 @@
 
             <div class="option_1">
                 <%= f.label :a %><br/>
-                <%= f.text_field :options, autofocus: true,name: 'question[temp_options][]' %>
+                <%= f.text_field :options, autofocus: true,name: 'question[options][]' %>
             </div>
 
             <div class="option_2">
                 <%= f.label :b %><br/>
-                <%= f.text_field :options, autofocus: true,name: 'question[temp_options][]' %>
+                <%= f.text_field :options, autofocus: true,name: 'question[options][]' %>
             </div>
 
             <div class="option_3">
                 <%= f.label :c %><br/>
-                <%= f.text_field :options, autofocus: true,name: 'question[temp_options][]' %>
+                <%= f.text_field :options, autofocus: true,name: 'question[options][]' %>
             </div>
 
             <div class="option_4">
                 <%= f.label :d %><br/>
-                <%= f.text_field  :options, autofocus: true,name: 'question[temp_options][]' %>
+                <%= f.text_field  :options, autofocus: true,name: 'question[options][]' %>
             </div>
         </div>
 
@@ -66,8 +66,8 @@
                 <%= f.label :correct_answer, "D" %>
                 <%= f.radio_button :correct_answer,'D'%>
             </div>
-
-            <div id="correct_answers_2" class="hidden">
+            
+            <div id="correct_answers_2">
                 <%= f.label :correct_answer %><br/>
                 <%= f.label :correct_answer,"A"%>
                 <%= f.check_box :correct_answer,{:multiple => true },'A',nil%>
@@ -82,7 +82,7 @@
                 <%= f.check_box :correct_answer,{:multiple => true },'D',nil%>
             </div>
 
-            <div id="correct_answers_0" class="hidden">
+            <div id="correct_answers_0">
                 <%= f.label :correct_answer,"correct answer"%>
                 <%= f.text_field :correct_answer%>
             </div>
