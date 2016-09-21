@@ -1,0 +1,27 @@
+<span>
+
+    <h1 class = "white-text">
+        Test Created
+    </h1>
+    <h2 class="loginBtn enrollbtn pull-left center"><%= link_to "Create Test",new_test_path %></h2>
+
+    <table class="table white-text">
+        <tr>
+            <th class="white-text">Name</th>
+            <th>Duration</th>
+            <th>Date</th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        <% @created_tests.each do |test| %>
+        <tr>
+            <td><%= test.name %></td>
+            <td><%= test.duration %></td>
+
+            <td class="loginBtn taketestBtn center">
+                Remove Test</td>
+
+        </tr>
+        <% end %>
+    </table>
