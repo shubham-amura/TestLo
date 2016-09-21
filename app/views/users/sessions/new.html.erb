@@ -1,6 +1,6 @@
-<h2 class="white-text" align = "center">Sign In</h2>
+<h2 class="white-text center">Sign In</h2>
 
-<div class ="sign_in_form center_alignment">
+<div class ="center white-text">
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
     <%= f.label :email %><br />
@@ -19,7 +19,7 @@
     </div>
   <% end -%>
 
-  <div class="actions">
+  <div class="actions " style = "color: #000;">
     <%= f.submit "Log in" %>
   </div>
 <% end %>
