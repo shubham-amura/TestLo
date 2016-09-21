@@ -30,8 +30,16 @@ class TestsController < ApplicationController
   end
 
   def push_questions
-    
+
   end
+
+  def destroy
+      @test = Test.find(params[:id])
+      @test.destroy
+      redirect_to employer_dashboard_path
+
+  end
+
   private
   def test_params
     params.require(:test).permit(:name,:date,:duration)

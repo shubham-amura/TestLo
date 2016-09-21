@@ -22,6 +22,7 @@ class QuestionsController < ApplicationController
 
     if @question.save
       flash[:success]="Question added to Bank successfully"
+      #TestQuestion.create(test_id:)
       redirect_to questions_path
     else
       #form options doesnt read from single serialized column

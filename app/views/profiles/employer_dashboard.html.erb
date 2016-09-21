@@ -20,7 +20,7 @@
             <td><%= test.duration %></td>
 
             <td class="loginBtn taketestBtn center">
-                Remove Test</td>
+                <%= link_to "Remove Test",test_path(test),method:"DELETE"%></td>
 
         </tr>
         <% end %>

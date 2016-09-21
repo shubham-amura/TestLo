@@ -1,6 +1,14 @@
+<div class="col-lg-5">
+    Questions
+   <%=  link_to "Add Question", new_question_path %>
+    <%=render @selected_questions %>
 
-All Questions
-<%=render @questions %>
+</div>
 
-Added To Test
-<%=render @selected_questions %>
+<div class="modal" style="display:none;">
+</div>
+
+<div class="col-lg-5">
+  Question  Bank
+    <%=render @questions %>
+</div>
