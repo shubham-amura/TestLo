@@ -14,6 +14,7 @@
  *= require_self
  */
 
+
  body {
    background: url('/assets/banner.png');
  }
@@ -98,3 +99,8 @@
  {
    background: #0f0;
  }
+
+div.hidden
+{
+  display: none;
+}

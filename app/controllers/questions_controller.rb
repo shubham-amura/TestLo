@@ -6,6 +6,12 @@ class QuestionsController < ApplicationController
   end
 
   def index
+    #add filter later
+    # if params.has_key?(:filter)
+    #   @questions=Question.all.where(category_id:params[:filter])
+    # else
+    #   @questions=Question.all
+    # end
     @questions=Question.all
   end
 
@@ -28,7 +34,6 @@ class QuestionsController < ApplicationController
   end
 
   private
-
   def question_params
     p params.require(:question).permit(:category_id,:question_type,:question,:correct_answer,options:[])
   end
