@@ -17,7 +17,7 @@
         <% @created_tests.each do |test| %>
         <tr>
             <td><%= test.name %></td>
-            <td><%= test.duration %></td>
+            <td><%= test.duration.strftime('%H:%M')%></td>
 
             <td class="loginBtn taketestBtn center">
                 <%= link_to "Remove Test",test_path(test),method:"DELETE"%></td>

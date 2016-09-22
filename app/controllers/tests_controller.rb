@@ -11,13 +11,15 @@ class TestsController < ApplicationController
   def create
     @test=current_user.tests.create(test_params)
       if @test
-        byebug
+
       flash[:success]="Test created Successfully"
-      redirect_to new_test_question_path(@test.id)
-    else
+
+      redirect_to new_test_question_path(@test)
+  else
       render 'new'
     end
   end
+
 
   def destroy
       @test = Test.find(params[:id])
@@ -27,11 +29,18 @@ class TestsController < ApplicationController
   end
 
 
-  def show
 
-    @questions = Question.all
-    @selected_questions = TestQuestion.all.where(test_id:params[:id])
+  def show
+    @test=Test.find(params[:id])
+    @questions=Question.all
+    @temp=TestQuestion.all.where(test_id:params[:id]).pluck(:question_id)
+    @test_questions=[]
+    @temp.each do |t|
+      @test_questions << Question.find(t.to_i)
+    end
   end
+
+
   private
   def test_params
     params.require(:test).permit(:name,:date,:duration)

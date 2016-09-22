@@ -19,12 +19,18 @@ root 'static_pages#home'
     #   get :add_questions
     #   post :push_questions
     # end
+<<<<<<< HEAD
     #
     resources :questions
   end
 
   #resources :questions
 
+=======
+    resources :questions
+  end
+
+>>>>>>> c46654c0677f32d78af5a34c36fb7a43ec879d29
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

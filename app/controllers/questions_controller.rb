@@ -1,7 +1,9 @@
 class QuestionsController < ApplicationController
 
   def new
-  @question=Question.new
+    @test=Test.find(params[:test_id])
+    @question=Question.new
+
   end
 
   def index
@@ -10,12 +12,12 @@ class QuestionsController < ApplicationController
 
   def create
     @question=Question.new(question_params)
-
+    @test=Test.find(params[:test_id])
     if @question.save
       flash[:success]="Question added to Bank successfully"
-      TestQuestion.create(test_id: params[:id],question_id: @question.id)
-      @test = Test.find(params[:id])
-      redirect_to add_questions_test_path(@test)
+
+      TestQuestion.create(test_id:@test.id,question_id:@question.id)
+      redirect_to test_path(@test)
     else
       @question.a=@question.options[0]
       @question.b=@question.options[1]
@@ -24,6 +26,8 @@ class QuestionsController < ApplicationController
       render 'new'
     end
   end
+
+
 
   private
   def question_params
