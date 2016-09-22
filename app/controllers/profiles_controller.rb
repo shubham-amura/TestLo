@@ -8,22 +8,16 @@ class ProfilesController < ApplicationController
     if @user.type == "Student"
       redirect_to student_dashboard_path
     else
-        redirect_to employer_dashboard_path
+      redirect_to employer_dashboard_path
     end
   end
 
-
   def employer_dashboard
     @user = current_user
-
     @created_tests = Test.all.where(employer_id: current_user.id)
-
-
-
   end
 
   def student_dashboard
-
     @user = current_user
     @tests = Test.all
     @enrolled_test = Enrollment.all.where(student_id: current_user.id).pluck(:test_id)

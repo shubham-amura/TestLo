@@ -2,6 +2,7 @@ class QuestionsController < ApplicationController
   #before_action :array_to_string,only:[:create]
   #to check params are valid depending on
   def new
+    @test=Test.find(params[:test_id])
     @question=Question.new
   end
 
@@ -19,10 +20,11 @@ class QuestionsController < ApplicationController
     #options=params[:question][:temp_options].join('#####')
     #@user=Question.new(question_params)
     @question=Question.new(question_params)
-
+    @test=Test.find(params[:test_id])
     if @question.save
       flash[:success]="Question added to Bank successfully"
-      redirect_to questions_path
+      TestQuestion.create(test_id:@test.id,question_id:@question.id)
+      redirect_to test_path(@test)
     else
       #form options doesnt read from single serialized column
       @question.a=@question.options[0]
@@ -32,6 +34,8 @@ class QuestionsController < ApplicationController
       render 'new'
     end
   end
+
+
 
   private
   def question_params

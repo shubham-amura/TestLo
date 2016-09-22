@@ -14,13 +14,14 @@ root 'static_pages#home'
     get 'profile/:id' => 'profiles#show' , as: :profile
 
   resources :tests do
-    member do
-      get :add_questions
-      post :push_questions
-    end
+    # member do
+    #   get :add_questions
+    #   post :push_questions
+    # end
+    resources :questions
   end
-  resources :questions
-  
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
