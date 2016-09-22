@@ -5,6 +5,7 @@ root 'static_pages#home'
 
   #devise_for :users
 
+
   devise_for :users,controllers: { sessions: 'users/sessions' ,passwords: 'users/passwords',
                                     registrations:'users/registrations',confirmations:'users/confirmations'}
 
@@ -19,18 +20,12 @@ root 'static_pages#home'
     #   get :add_questions
     #   post :push_questions
     # end
-<<<<<<< HEAD
-    #
+
     resources :questions
   end
-
+  get 'add_question_to_current_test/:test_id/:question_id' , to: 'tests#add_question_to_current_test' ,as: :add_question_to_current_test
   #resources :questions
 
-=======
-    resources :questions
-  end
-
->>>>>>> c46654c0677f32d78af5a34c36fb7a43ec879d29
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

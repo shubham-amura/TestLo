@@ -16,7 +16,7 @@
 
         <% @created_tests.each do |test| %>
         <tr>
-            <td><%= test.name %></td>
+            <td><%= link_to test.name , test_path(test) %></td>
             <td><%= test.duration.strftime('%H:%M')%></td>
 
             <td class="loginBtn taketestBtn center">
