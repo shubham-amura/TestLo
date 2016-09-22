@@ -1,6 +1,6 @@
-<div class="col-lg-5">
+<div class="col-lg-5 white-text">
     Questions
-   <%=  link_to "Add Question", new_question_path %>
+   <%=  link_to "Add Question", new_test_question_path(params[:id]) %>
     <%=render @selected_questions %>
 
 </div>
@@ -8,7 +8,7 @@
 <div class="modal" style="display:none;">
 </div>
 
-<div class="col-lg-5">
+<div class="col-lg-5 white-text">
   Question  Bank
     <%=render @questions %>
 </div>

@@ -15,13 +15,17 @@ root 'static_pages#home'
 
 
   resources :tests do
-    member do
-      get :add_questions
-      post :push_questions
-    end
+    # member do
+    #   get :add_questions
+    #   post :push_questions
+    # end
+    #
+    resources :questions
   end
 
-  resources :questions
+  #resources :questions
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
