@@ -16,7 +16,7 @@
                 <strong><%=question.question%></strong>
             </td>
 
-            <td><%= link_to "Remove", add_question_to_current_test_path(@test,question) , remote: true, class: 'btn btn-danger'%></td>
+            <td><%= link_to "Remove", remove_question_from_current_test_path(@test,question) , remote: true, class: 'btn btn-danger'%></td>
         </tr>
         <%- end %>
       </tbody>
