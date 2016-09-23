@@ -47,7 +47,7 @@ class TestsController < ApplicationController
 
   def remove_question_from_current_test
 
-    q = TestQuestion.where(test_id:params[:test_id],question_id:params[:question_id])
+    q = TestQuestion.find_by(test_id:params[:test_id],question_id:params[:question_id])
     unless q.nil?
       q.destroy
     end
