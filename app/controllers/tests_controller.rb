@@ -45,6 +45,25 @@ class TestsController < ApplicationController
 
     end
 
+  def remove_question_from_current_test
+
+    TestQuestion.delete(test_id:params[:test_id],question_id:params[:question_id])
+    temp=TestQuestion.all.where(test_id:params[:test_id]).pluck(:question_id)
+    @test_questions=[]
+    temp.each do |t|
+      @test_questions << Question.find(t.to_i)
+    end
+    @test = Test.find(params[:test_id])
+    @questions = Question.where.not(id:temp)
+
+  respond_to do |format|
+    format.js
+  end
+
+
+  end
+
+
 
   def show
     @test=Test.find(params[:id])
