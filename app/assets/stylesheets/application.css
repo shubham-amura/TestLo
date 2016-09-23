@@ -14,7 +14,13 @@
  *= require_self
  */
 
- 
+.clear{
+  clear: both;
+}
+ .banner {
+   background-color: #000;
+   min-height: 55rem;
+ }
 
 .center {
   text-align: center;

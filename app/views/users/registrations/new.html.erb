@@ -1,5 +1,13 @@
-<h2 >Sign up</h2>
-<div class="form">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Sign Up</h3>
+  </div>
+
+  <div class="panel-body">
+
+
+
+<div class="form" style="center">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= devise_error_messages! %>
 
@@ -57,3 +65,7 @@
     <% end %>
 </div>
 <%= render "users/shared/links" %>
+
+
+</div>
+</div>
