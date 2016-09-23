@@ -3,7 +3,7 @@
     <h1 class = "white-text">
         Test Created
     </h1>
-    <h2 class="loginBtn enrollbtn pull-left center" ><%= link_to "Create Test",new_test_path %></h2>
+    <h2 class="btn btn-success pull-left center" style="text-decoration:none;"><%= link_to "Create Test",new_test_path %></h2>
 
     <table class="table white-text">
         <tr>
@@ -19,7 +19,7 @@
             <td><%= link_to test.name , test_path(test) %></td>
             <td><%= test.duration.strftime('%H:%M')%></td>
 
-            <td class="loginBtn taketestBtn center">
+            <td class="btn btn-danger" style="margin:10px;text-decoration:none;">
                 <%= link_to "Remove Test",test_path(test),method:"DELETE"%></td>
 
         </tr>

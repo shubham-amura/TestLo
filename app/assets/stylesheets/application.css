@@ -14,9 +14,7 @@
  *= require_self
  */
 
- body {
-   background: url('/assets/banner.png');
- }
+ 
 
 .center {
   text-align: center;

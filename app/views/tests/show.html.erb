@@ -1,18 +1,18 @@
 <div class="page-header row">
-    <h1 class="white-text col-sm-11">Questions</h1>
+    <h1 class="col-sm-11">Questions</h1>
     <div class="col-sm-1">
         <%=  link_to "Add Question", new_test_question_path(params[:id]), class: 'btn btn-success pull-right' %>
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-5 col-sm-12 center white-text">
+    <div class="col-lg-5 col-sm-12 center ">
         <strong>Test Question</strong>
         <div id="test_question_list">
             <%=  render 'test_question', temp: @test_questions %>
         </div>
     </div>
 
-    <div class="col-lg-5 white-text center col-sm-12">
+    <div class="col-lg-5 center col-sm-12">
         Question Bank
         <div id="question_bank_list">
             <%=render 'questions/question' %>
