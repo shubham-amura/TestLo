@@ -47,7 +47,10 @@ class TestsController < ApplicationController
 
   def remove_question_from_current_test
 
-    TestQuestion.delete(test_id:params[:test_id],question_id:params[:question_id])
+    q = TestQuestion.where(test_id:params[:test_id],question_id:params[:question_id])
+    unless q.nil?
+      q.destroy
+    end
     temp=TestQuestion.all.where(test_id:params[:test_id]).pluck(:question_id)
     @test_questions=[]
     temp.each do |t|
