@@ -1,12 +1,12 @@
 <span>
-    <h1 class=" white-text"><%= @user.name %>'s Dashboard
+    <h1 class=""><%= @user.name %>'s Dashboard
     </h1>
 
-    <table class="table white-text">
+    <table class="table">
         <tr>
-            <th class="white-text">Name</th>
+            <th class="">Name</th>
             <th>Duration</th>
-            <th>Date</th>
+            <th>Status</th>
             <th></th>
             <th></th>
         </tr>
@@ -14,12 +14,12 @@
         <% @tests.each do |test| %>
         <tr>
             <td><%= test.name %></td>
-            <td><%= test.duration.strftime('%H:%M')%></td>
+            <td><%= test.duration%></td>
             <% if @enrolled_test.include? test.id%>
-            <td class="loginBtn taketestBtn center">
+            <td  style="margin:10px;" class="btn btn-danger">
                 Take Test</td>
             <%else%>
-            <td class="loginBtn enrollbtn centered">
+            <td   style="margin:10px;" class="btn btn-success">
                 Enroll</td>
             <% end %>
         </tr>

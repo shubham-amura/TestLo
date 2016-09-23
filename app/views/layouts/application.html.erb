@@ -48,7 +48,7 @@
                     <ul class="nav navbar-nav pull-right">
                         <%- if signed_in? %>
                         <li><%= link_to "Log Out", destroy_user_session_path  %></li>
-                        <%- else %>
+                    <%- else %>
                         <li><%= link_to "Sign In", new_user_session_path  %></li>
 
                         <%- end %>
@@ -71,7 +71,12 @@
                         <ul class="nav nav-list">
                             <!-- <li class="nav-header">Sidebar</li> -->
                             <li><%= link_to "Edit Profile", "/path1"  %></li>
-                            <li><%= link_to "Enrolled", "/path2"  %></li>
+                            <%- if current_user.type == "Employer" %>
+                            <li><%= link_to "My Tests", employer_dashboard_path  %></li>
+                        <%-  else %>
+                            <li><%= link_to "Dashboard", student_dashboard_path  %></li>
+                            <%- end %>
+
                             <li><%= link_to "Link3", "/path3"  %></li>
                         </ul>
                     </div>
@@ -81,17 +86,18 @@
                 <%- end %>
                 <%- if !signed_in? %>
                 <div>
-                  <%- else %>
-                  <div class="col-lg-9" >
-                    <%- end %>
-                    <%= bootstrap_flash %>
-                    <%= yield %>
+                <%- else %>
+                    <div class="col-lg-9">
+                        <%- end %>
+                        <%= bootstrap_flash %>
+                        <%= yield %>
+                    </div>
                 </div>
-            </div>
-            <!--/row-->
+                <!--/row-->
 
-            <footer>
-                <!-->><p>&copy; Company 2016</p></!-->
+                <footer>
+                    <!-->><p>&copy; Company 2016</p>
+                </!-->
             </footer>
 
         </div>

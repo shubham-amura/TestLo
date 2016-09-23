@@ -5,6 +5,7 @@ root 'static_pages#home'
 
   #devise_for :users
 
+
   devise_for :users,controllers: { sessions: 'users/sessions' ,passwords: 'users/passwords',
                                     registrations:'users/registrations',confirmations:'users/confirmations'}
 
@@ -13,13 +14,17 @@ root 'static_pages#home'
 
     get 'profile/:id' => 'profiles#show' , as: :profile
 
+
   resources :tests do
     # member do
     #   get :add_questions
     #   post :push_questions
     # end
+
     resources :questions
   end
+  get 'add_question_to_current_test/:test_id/:question_id' , to: 'tests#add_question_to_current_test' ,as: :add_question_to_current_test
+  #resources :questions
 
 
   # The priority is based upon order of creation: first created -> highest priority.

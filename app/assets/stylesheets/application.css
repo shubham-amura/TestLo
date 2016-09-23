@@ -14,10 +14,7 @@
  *= require_self
  */
 
-
- body {
-   background: url('/assets/banner.png');
- }
+ 
 
 .center {
   text-align: center;
@@ -99,8 +96,3 @@
  {
    background: #0f0;
  }
-
-div.hidden
-{
-  display: none;
-}

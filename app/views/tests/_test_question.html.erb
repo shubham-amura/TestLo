@@ -1,3 +1,5 @@
+
+
 <div>
     <table class="table">
       <thead>
@@ -7,14 +9,14 @@
         </tr>
       </thead>
       <tbody>
-        <% @questions.each do |question| %>
+        <% temp.each do |question| %>
 
         <tr>
             <td>
                 <strong><%=question.question%></strong>
             </td>
 
-            <td><%= link_to "Add", add_question_to_current_test_path(@test,question) , remote: true, class: 'btn btn-success'%></td>
+            <td><%= link_to "Remove", add_question_to_current_test_path(@test,question) , remote: true, class: 'btn btn-danger'%></td>
         </tr>
         <%- end %>
       </tbody>
