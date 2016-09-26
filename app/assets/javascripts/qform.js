@@ -5,7 +5,7 @@ $(document).ready(function(){
 
 function toggleOptions()
 {
-  $('#correct_answer').children(":hidden").prop("disabled", true);
+  
   var options=$('#options');
   var a0=$('#correct_answers_0');
   var a1=$('#correct_answers_1');
