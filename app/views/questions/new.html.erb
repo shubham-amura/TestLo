@@ -54,12 +54,12 @@
                       <%= f.text_field  :d, autofocus: true,name: 'question[options][]' %>
                   </div>
                 </div>
-                
+
             </div>
 
 
             <div id="correct_answer">
-                <div id="correct_answers_1">
+                <!-- <div id="correct_answers_1">
                     <%= f.label :correct_answer %><br/>
                     <%= f.label :correct_answer,"A"%>
                     <%= f.radio_button :correct_answer,'A',:checked => true%>
@@ -72,9 +72,9 @@
 
                     <%= f.label :correct_answer, "D" %>
                     <%= f.radio_button :correct_answer,'D'%>
-                </div>
+                </div> -->
 
-                <!-- <div id="correct_answers_2">
+                <div id="correct_answers_2">
                     <%= f.label :correct_answer %><br/>
                     <%= f.label :correct_answe,"A"%>
                     <%= f.check_box :correct_answer,{ :multiple => true },'A',nil%>
@@ -87,12 +87,12 @@
 
                     <%= f.label :correct_answer, "D" %>
                     <%= f.check_box :correct_answer,{ :multiple => true },'D',nil%>
-                </div> -->
+                </div>
 
-                <div id="correct_answers_3">
+                <!-- <div id="correct_answers_3">
                     <%= f.label :correct_answer%>
                     <%= f.text_field :correct_answer%>
-                </div>
+                </div> -->
 
             </div>
             <%= f.submit "Add Question", class: "btn btn-primary" %>

@@ -32,7 +32,7 @@ class QuestionsController < ApplicationController
 
   private
   def question_params
-    p params.require(:question).permit(:category_id,:question_type,:question,:correct_answer,options:[])
+    p params.require(:question).permit(:category_id,:question_type,:question,options:[],correct_answer:[])
   end
 
 end

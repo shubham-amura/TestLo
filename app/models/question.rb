@@ -1,7 +1,7 @@
 class Question < ActiveRecord::Base
   attr_accessor :a,:b,:c,:d
   serialize :options,Array
-  
+  serialize :correct_answer,Array
   #with test
 
   has_many :test_questions
