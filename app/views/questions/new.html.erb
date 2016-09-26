@@ -13,6 +13,12 @@
                 <%= f.label :question_type %><br/>
                 <%= f.label :question_type, "Single Answer Correct"%>
                 <%= f.radio_button :question_type,1,:checked => true%>
+
+                <%= f.label :question_type, "Multiple Correct Answer"%>
+                <%= f.radio_button :question_type,2%>
+
+                <%= f.label :question_type, "Integer Answer"%>
+                <%= f.radio_button :question_type,0%>
             </div>
 
             <div class="qcategory  form-group">
@@ -27,32 +33,35 @@
 
             <div id="options" class="form-group">
 
-                <div class="option_1">
-                    <%= f.label :a %><br/>
-                    <%= f.text_field :a, autofocus: true,name: 'question[options][]' %>
-                </div>
+                <div>
+                  <div class="option_1">
+                      <%= f.label :a %><br/>
+                      <%= f.text_field :a, autofocus: true,name: 'question[options][]' %>
+                  </div>
 
-                <div class="option_2">
-                    <%= f.label :b %><br/>
-                    <%= f.text_field :b, autofocus: true,name: 'question[options][]' %>
-                </div>
+                  <div class="option_2">
+                      <%= f.label :b %><br/>
+                      <%= f.text_field :b, autofocus: true,name: 'question[options][]' %>
+                  </div>
 
-                <div class="option_3">
-                    <%= f.label :c %><br/>
-                    <%= f.text_field :c, autofocus: true,name: 'question[options][]' %>
-                </div>
+                  <div class="option_3">
+                      <%= f.label :c %><br/>
+                      <%= f.text_field :c, autofocus: true,name: 'question[options][]' %>
+                  </div>
 
-                <div class="option_4">
-                    <%= f.label :d %><br/>
-                    <%= f.text_field  :d, autofocus: true,name: 'question[options][]' %>
+                  <div class="option_4">
+                      <%= f.label :d %><br/>
+                      <%= f.text_field  :d, autofocus: true,name: 'question[options][]' %>
+                  </div>
                 </div>
+                
             </div>
 
-            <div id="correct_answer">
 
+            <div id="correct_answer">
                 <div id="correct_answers_1">
                     <%= f.label :correct_answer %><br/>
-                    <%= f.label :correct_answe,"A"%>
+                    <%= f.label :correct_answer,"A"%>
                     <%= f.radio_button :correct_answer,'A',:checked => true%>
 
                     <%= f.label :correct_answer, "B" %>
@@ -63,6 +72,26 @@
 
                     <%= f.label :correct_answer, "D" %>
                     <%= f.radio_button :correct_answer,'D'%>
+                </div>
+
+                <!-- <div id="correct_answers_2">
+                    <%= f.label :correct_answer %><br/>
+                    <%= f.label :correct_answe,"A"%>
+                    <%= f.check_box :correct_answer,{ :multiple => true },'A',nil%>
+
+                    <%= f.label :correct_answer, "B" %>
+                    <%= f.check_box :correct_answer,{ :multiple => true },'B',nil%>
+
+                    <%= f.label :correct_answer, "C" %>
+                    <%= f.check_box :correct_answer,{ :multiple => true },'C',nil%>
+
+                    <%= f.label :correct_answer, "D" %>
+                    <%= f.check_box :correct_answer,{ :multiple => true },'D',nil%>
+                </div> -->
+
+                <div id="correct_answers_3">
+                    <%= f.label :correct_answer%>
+                    <%= f.text_field :correct_answer%>
                 </div>
 
             </div>

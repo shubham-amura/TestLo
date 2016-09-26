@@ -1,42 +1,32 @@
 $(document).ready(function(){
 
     toggleOptions();
+
 });
 
 function toggleOptions()
 {
+    //alert('Hello');
+    $('#correct_answers_3').hide();
+    $('#question_question_type_0').change(hideOptions);
+    $('#question_question_type_1').change(showOptions);
+    //$('#question_question_type_2').change(showOptions);
 
-  var options=$('#options');
-  var a0=$('#correct_answers_0');
-  var a1=$('#correct_answers_1');
-  var a2=$('#correct_answers_2');
-  a0.hide();
-  a2.hide();
-  $('#question_question_type_0').change(function(){
-    options.toggle(!options.is(':visible'));
-    a0.show();
-    a1.hide();
-    a2.hide();
-  });
+}
 
-  $('#question_question_type_1').change(function(){
-      if(options.is(':hidden'))
-      {
-        options.show();
-      }
-      a1.show();
-      a0.hide();
-      a2.hide();
-  });
+function hideOptions()
+{
+    $('#options').hide();
+    $('#correct_answers_3').show();
+    $('#correct_answers_1').hide();
+    //$('#options').children().remove();
+}
+
+function showOptions()
+{
+    $('#options').show();
+    $('#correct_answers_3').hide();
+    $('#correct_answers_1').show();
 
 
-  $('#question_question_type_2').change(function(){
-      if(options.is(':hidden'))
-      {
-        options.show();
-      }
-      a2.show();
-      a0.hide();
-      a1.hide();
-  });
 }
