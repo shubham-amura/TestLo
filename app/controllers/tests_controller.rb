@@ -30,13 +30,20 @@ class TestsController < ApplicationController
 
     def add_question_to_current_test
 
+        #create entry
         TestQuestion.create(test_id:params[:test_id],question_id:params[:question_id])
+
+        #get new list
         temp=TestQuestion.all.where(test_id:params[:test_id]).pluck(:question_id)
         @test_questions=[]
         temp.each do |t|
           @test_questions << Question.find(t.to_i)
         end
+
+        #test required in view to redirect
         @test = Test.find(params[:test_id])
+
+        #Dont show questions added in test ,so not.
         @questions = Question.where.not(id:temp)
 
       respond_to do |format|
@@ -45,28 +52,27 @@ class TestsController < ApplicationController
 
     end
 
-  def remove_question_from_current_test
+    def remove_question_from_current_test
+        q=TestQuestion.find_by(test_id:params[:test_id],question_id:params[:question_id])
+        unless q.nil?
+          q.destroy
+        end
+        temp=TestQuestion.all.where(test_id:params[:test_id]).pluck(:question_id)
+        @test_questions=[]
+        temp.each do |t|
+          @test_questions << Question.find(t.to_i)
+        end
 
-    q = TestQuestion.find_by(test_id:params[:test_id],question_id:params[:question_id])
-    unless q.nil?
-      q.destroy
+        #test required in view to redirect
+        @test = Test.find(params[:test_id])
+
+        #Dont show questions added in test ,so not.
+        @questions = Question.where.not(id:temp)
+
+      respond_to do |format|
+        format.js
+      end
     end
-    temp=TestQuestion.all.where(test_id:params[:test_id]).pluck(:question_id)
-    @test_questions=[]
-    temp.each do |t|
-      @test_questions << Question.find(t.to_i)
-    end
-    @test = Test.find(params[:test_id])
-    @questions = Question.where.not(id:temp)
-
-  respond_to do |format|
-    format.js
-  end
-
-
-  end
-
-
 
   def show
     @test=Test.find(params[:id])

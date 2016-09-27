@@ -11,17 +11,21 @@
             <th></th>
         </tr>
 
-        <% @tests.each do |test| %>
-        <tr>
-            <td><%= test.name %></td>
-            <td><%= test.duration%></td>
-            <% if @enrolled_test.include? test.id%>
-            <td  style="margin:10px;" class="btn btn-danger">
-                Take Test</td>
-            <%else%>
-            <td   style="margin:10px;" class="btn btn-success">
-                Enroll</td>
+        <div id="test_listing_for_student">
+            <% @tests.each do |test| %>
+            <tr>
+                <td><%= test.name %></td>
+                <td><%= test.duration%></td>
+                <% if @enrolled_test.include? test.id%>
+                <td style="margin:10px;" class="btn btn-success">
+                    Take Test</td>
+                <%else%>
+                <td style="margin:10px;">
+                    <%= link_to "Enroll", enroll_for_test_path(test, page: params[:page]) ,remote: true,:class => "btn btn-primary" %>
+                </td>
+                <% end %>
+            </tr>
             <% end %>
-        </tr>
-        <% end %>
+        </div>
     </table>
+    <%= paginate @tests , :params => {:controller => 'profiles', :action => 'student_dashboard'} %>
