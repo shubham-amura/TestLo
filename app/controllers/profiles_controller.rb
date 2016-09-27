@@ -19,8 +19,21 @@ class ProfilesController < ApplicationController
 
   def student_dashboard
     @user = current_user
-    @tests = Test.all
+    @tests = Test.all.page(params[:page])
     @enrolled_test = Enrollment.all.where(student_id: current_user.id).pluck(:test_id)
+ end
+
+
+
+ def enroll_for_test
+   @user = current_user
+   @tests = Test.all.page params[:page]
+   Enrollment.create(student_id: current_user.id,test_id:params[:test_id])
+   @enrolled_test = Enrollment.all.where(student_id: current_user.id).pluck(:test_id)
+
+  respond_to do |format|
+    format.js
+  end
  end
 
   def

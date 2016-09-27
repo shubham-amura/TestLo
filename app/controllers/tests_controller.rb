@@ -57,7 +57,6 @@ class TestsController < ApplicationController
         unless q.nil?
           q.destroy
         end
-
         temp=TestQuestion.all.where(test_id:params[:test_id]).pluck(:question_id)
         @test_questions=[]
         temp.each do |t|
