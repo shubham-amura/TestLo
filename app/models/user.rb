@@ -13,7 +13,7 @@ validates :username,
                     format:{with:/\A[a-zA-Z0-9]+\z/,message:"Allows only alphanumeric characters without spaces"}
 
 validates :name,
-                format: { with: /\A[a-zA-Z\s]+\z/,message: "only allows letters" }
+                format: { with: /\A[a-zA-Z\s]+\z/,message: "only allows letters" },
                 presence:true,
                 length:{maximum:25,message:"Name length exceeds limit"}
 
