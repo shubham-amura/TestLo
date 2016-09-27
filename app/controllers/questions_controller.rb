@@ -11,6 +11,7 @@ class QuestionsController < ApplicationController
   end
 
   def create
+    byebug
     @question=Question.new(question_params)
     @test=Test.find(params[:test_id])
     if @question.save
@@ -27,11 +28,8 @@ class QuestionsController < ApplicationController
     end
   end
 
-
-
   private
   def question_params
-    p params.require(:question).permit(:category_id,:question_type,:question,:correct_answer,options:[])
+    p params.require(:question).permit(:category_id,:question_type,:question,options:[],correct_answer:[])
   end
-
 end

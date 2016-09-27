@@ -2,7 +2,7 @@
     <div class="panel-heading">
         <h3 class="panel-title">Create Question</h3>
     </div>
-      
+
     <div class="panel-body">
         <div class="form-horizontal">
 
@@ -63,36 +63,36 @@
                 <div id="correct_answers_1">
                     <%= f.label :correct_answer %><br/>
                     <%= f.label :correct_answer,"A"%>
-                    <%= f.radio_button :correct_answer,'A',:checked => true,name:'question[correct_answer][]'%>
+                    <%= f.radio_button :correct_answer,'A',:checked => true%>
 
                     <%= f.label :correct_answer, "B" %>
-                    <%= f.radio_button :correct_answer,'B',name:'question[correct_answer][]'%>
+                    <%= f.radio_button :correct_answer,'B'%>
 
                     <%= f.label :correct_answer, "C" %>
-                    <%= f.radio_button :correct_answer,'C',name:'question[correct_answer][]'%>
+                    <%= f.radio_button :correct_answer,'C'%>
 
                     <%= f.label :correct_answer, "D" %>
-                    <%= f.radio_button :correct_answer,'D',name:'question[correct_answer][]'%>
+                    <%= f.radio_button :correct_answer,'D'%>
                 </div>
 
-                <div id="correct_answers_2">
+                <!-- <div id="correct_answers_2">
                     <%= f.label :correct_answer %><br/>
-                    <%= f.label :correct_answer,"A"%>
-                    <%= f.check_box :correct_answer,{ multiple:true ,checked:true},'A',nil%>
+                    <%= f.label :correct_answe,"A"%>
+                    <%= f.check_box :correct_answer,{ :multiple => true },'A',nil%>
 
                     <%= f.label :correct_answer, "B" %>
-                    <%= f.check_box :correct_answer,{ multiple:true },'B',nil%>
+                    <%= f.check_box :correct_answer,{ :multiple => true },'B',nil%>
 
                     <%= f.label :correct_answer, "C" %>
-                    <%= f.check_box :correct_answer,{ multiple:true },'C',nil%>
+                    <%= f.check_box :correct_answer,{ :multiple => true },'C',nil%>
 
                     <%= f.label :correct_answer, "D" %>
-                    <%= f.check_box :correct_answer,{ multiple:true },'D',nil%>
-                </div>
+                    <%= f.check_box :correct_answer,{ :multiple => true },'D',nil%>
+                </div> -->
 
-                <div id="correct_answers_0">
+                <div id="correct_answers_3">
                     <%= f.label :correct_answer%>
-                    <%= f.text_field :correct_answer,name:'question[correct_answer][]'%>
+                    <%= f.text_field :correct_answer%>
                 </div>
 
             </div>
