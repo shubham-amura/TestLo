@@ -70,7 +70,7 @@
                         <h3><%= current_user.name %></h3>
                         <ul class="nav nav-list">
                             <!-- <li class="nav-header">Sidebar</li> -->
-                            <li><%= link_to "Edit Profile",edit_profile_path,:class => "btn " %></li>
+                            <li><%= link_to "Edit Profile",edit_details_path,:class => "btn " %></li>
                             <%- if current_user.type == "Employer" %>
                             <li style="link-style-type:none;"><%= link_to "My Tests", employer_dashboard_path,:class => "btn "  %></li>
                         <%-  else %>

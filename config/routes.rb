@@ -29,12 +29,19 @@ root 'static_pages#home'
 
   get 'profiles/edit',to:'profiles#edit',as: :edit_profile
 
+  resource :details
 
-  get 'profiles/student_details',to: 'profiles#student_details'
-  get 'profiles/employer_details',to: 'profiles#employer_details'
+  get '/details/edit_student_details',to:'details#edit_student_details',as: :edit_student_details
+  get '/details/new_student_details',to:'details#new_student_details',as: :new_student_details
 
-  post 'profiles/student_details',to: 'profiles#student_update'
-  post 'profiles/employer_details',to: 'profiles#employer_update'
+  post '/student_details',to:'details#create_student_details'
+  put '/student_details',to:'details#update_student_details'
+  patch '/student_details',to:'details#update_student_details'
+  # get 'profiles/student_details',to: 'profiles#student_details'
+  # get 'profiles/employer_details',to: 'profiles#employer_details'
+  #
+  # post 'profiles/student_details',to: 'profiles#student_update'
+  # post 'profiles/employer_details',to: 'profiles#employer_update'
   #resources :questions
   #get 'remove_question_from_current_test/:test_id/:question_id' , to: 'tests#remove_question_from_current_test' ,as: :remove_question_from_current_test
 

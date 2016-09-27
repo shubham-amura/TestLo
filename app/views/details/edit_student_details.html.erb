@@ -1,5 +1,5 @@
 
-<%= form_for @student_details,url: profiles_student_details_path,method:'POST' do |f| %>
+<%= form_for @student.student_detail ,url:student_details_path do |f| %>
     <div class="col-lg-4">
         <%= f.label :age %>
         <%= f.number_field :age %>
