@@ -76,11 +76,8 @@ class TestsController < ApplicationController
 
   def show
     @test=Test.find(params[:id])
-
     temp=TestQuestion.all.where(test_id:params[:id]).pluck(:question_id)
-
     @questions = Question.where.not(id:temp)
-
     @test_questions=[]
     temp.each do |t|
       @test_questions << Question.find(t.to_i)

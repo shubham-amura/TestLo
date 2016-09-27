@@ -20,13 +20,21 @@ root 'static_pages#home'
     #   get :add_questions
     #   post :push_questions
     # end
-
     resources :questions
   end
+
   get 'add_question_to_current_test/:test_id/:question_id' , to: 'tests#add_question_to_current_test' ,as: :add_question_to_current_test
   get 'remove_question_from_current_test/:test_id/:question_id' , to: 'tests#remove_question_from_current_test' ,as: :remove_question_from_current_test
-get   'enroll_for_test/:test_id' , to: 'profiles#enroll_for_test',as: :enroll_for_test
+  get 'enroll_for_test/:test_id' , to: 'profiles#enroll_for_test',as: :enroll_for_test
 
+  get 'profiles/edit',to:'profiles#edit',as: :edit_profile
+
+
+  get 'profiles/student_details',to: 'profiles#student_details'
+  get 'profiles/employer_details',to: 'profiles#employer_details'
+
+  post 'profiles/student_details',to: 'profiles#student_update'
+  post 'profiles/employer_details',to: 'profiles#employer_update'
   #resources :questions
   #get 'remove_question_from_current_test/:test_id/:question_id' , to: 'tests#remove_question_from_current_test' ,as: :remove_question_from_current_test
 
