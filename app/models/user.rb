@@ -6,6 +6,9 @@ class User < ActiveRecord::Base
 #email
 #pass
 
+
+#validations
+
 validates :username,
                     uniqueness: true,
                     presence:true,

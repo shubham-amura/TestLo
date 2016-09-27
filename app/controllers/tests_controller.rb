@@ -5,6 +5,8 @@ class TestsController < ApplicationController
   end
 
   def new
+    #add filter to test wheather profile is complete or not
+    #allow only if he has completed details
     @test=Test.new
   end
 
@@ -25,11 +27,9 @@ class TestsController < ApplicationController
       @test = Test.find(params[:id])
       @test.destroy
       redirect_to employer_dashboard_path
-
   end
 
     def add_question_to_current_test
-
         #create entry
         TestQuestion.create(test_id:params[:test_id],question_id:params[:question_id])
 
