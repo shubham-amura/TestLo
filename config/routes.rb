@@ -1,13 +1,36 @@
 Rails.application.routes.draw do
+
+
+root 'static_pages#home'
+
   #devise_for :users
+
 
   devise_for :users,controllers: { sessions: 'users/sessions' ,passwords: 'users/passwords',
                                     registrations:'users/registrations',confirmations:'users/confirmations'}
 
+    get 'profile/student_dashboard' => 'profiles#student_dashboard', as: :student_dashboard
+    get 'profile/employer_dashboard' => 'profiles#employer_dashboard', as: :employer_dashboard
+
     get 'profile/:id' => 'profiles#show' , as: :profile
 
-  resources :tests
-  resources :questions
+
+  resources :tests do
+    # member do
+    #   get :add_questions
+    #   post :push_questions
+    # end
+
+    resources :questions
+  end
+  get 'add_question_to_current_test/:test_id/:question_id' , to: 'tests#add_question_to_current_test' ,as: :add_question_to_current_test
+  get 'remove_question_from_current_test/:test_id/:question_id' , to: 'tests#remove_question_from_current_test' ,as: :remove_question_from_current_test
+get   'enroll_for_test/:test_id' , to: 'profiles#enroll_for_test',as: :enroll_for_test
+
+  #resources :questions
+  #get 'remove_question_from_current_test/:test_id/:question_id' , to: 'tests#remove_question_from_current_test' ,as: :remove_question_from_current_test
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

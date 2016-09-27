@@ -1,0 +1,31 @@
+<span>
+    <h1 class=""><%= @user.name %>'s Dashboard
+    </h1>
+
+    <table class="table">
+        <tr>
+            <th class="">Name</th>
+            <th>Duration</th>
+            <th>Status</th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        <div id="test_listing_for_student">
+            <% @tests.each do |test| %>
+            <tr>
+                <td><%= test.name %></td>
+                <td><%= test.duration%></td>
+                <% if @enrolled_test.include? test.id%>
+                <td style="margin:10px;" class="btn btn-success">
+                    Take Test</td>
+                <%else%>
+                <td style="margin:10px;">
+                    <%= link_to "Enroll", enroll_for_test_path(test, page: params[:page]) ,remote: true,:class => "btn btn-primary" %>
+                </td>
+                <% end %>
+            </tr>
+            <% end %>
+        </div>
+    </table>
+    <%= paginate @tests , :params => {:controller => 'profiles', :action => 'student_dashboard'} %>

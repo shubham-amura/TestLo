@@ -1,0 +1,25 @@
+
+
+<div>
+    <table class="table">
+      <thead>
+        <tr>
+            <th>Name</th>
+            <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% temp.each do |question| %>
+
+        <tr>
+            <td>
+                <strong><%=question.question%></strong>
+            </td>
+
+            <td><%= link_to "Remove", remove_question_from_current_test_path(@test,question) , remote: true, class: 'btn btn-danger'%></td>
+        </tr>
+        <%- end %>
+      </tbody>
+
+    </table>
+</div>

@@ -1,0 +1,23 @@
+<div>
+    <table class="table">
+      <thead>
+        <tr>
+            <th>Name</th>
+            <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @questions.each do |question| %>
+
+        <tr>
+            <td>
+                <strong><%=question.question%></strong>
+            </td>
+
+            <td><%= link_to "Add", add_question_to_current_test_path(@test,question) , remote: true, class: 'btn btn-success'%></td>
+        </tr>
+        <%- end %>
+      </tbody>
+
+    </table>
+</div>

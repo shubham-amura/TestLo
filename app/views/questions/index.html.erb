@@ -1,1 +1,10 @@
+<div class="qcategory">
+    <%= label_tag :filter, "Select Category"%>
+    <%= collection_select :filter,:category_id,Category.all,:id,:name%>
+</div>
+
+<ul class="questions">
+  <%= render @questions %>
+</ul>
+
 <%= link_to "Create New",new_question_path%>

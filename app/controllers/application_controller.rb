@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
 
 
   def authorize_user!
-    redirect_to profile_path(current_user) unless current_user.id.to_i == params[:id].to_i
+    # redirect_to profile_path(current_user) unless current_user.id.to_i == params[:id].to_i
   end
 
 end

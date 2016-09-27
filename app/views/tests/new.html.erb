@@ -1,23 +1,33 @@
 
-<h1>Create Test</h1>
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title">Create Test</h3>
+  </div>
+  <div class="panel-body">
 
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@test) do |f| %>
-      <%= render 'shared/error_messages',object: f.object %>
-      <%= f.label :name %>
-      <%= f.text_field :name %>
+    <div class="row form-horizontal">
+        <div class="col-md-6 col-md-offset-3 form-group" style="margin-left:30px;">
+            <%= form_for(@test) do |f| %>
+            <%= render 'shared/error_messages',object: f.object %>
 
-      <%= f.label :email %>
-      <%= f.email_field :email %>
+            <div id="test_name">
+                <%= f.label :name %>
+                <%= f.text_field :name %>
+            </div>
 
-      <%= f.label :password %>
-      <%= f.password_field :password %>
+            <div id="test_date">
+                <%= f.label :date %>
+                <%= f.date_select :date %>
+            </div>
 
-      <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation %>
+            <div id="test_duration">
+                <%= f.label :duration %>
+                <%= f.time_select :duration %>
+            </div>
 
-      <%= f.submit "Create my account", class: "btn btn-primary" %>
-    <% end %>
+            <%= f.submit "Create Test", class: "btn btn-primary" %>
+            <% end %>
+        </div>
+    </div>
   </div>
 </div>

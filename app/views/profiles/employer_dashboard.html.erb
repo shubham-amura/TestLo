@@ -1,0 +1,27 @@
+<span>
+
+    <h1 class = "white-text">
+        Test Created
+    </h1>
+    <h2 class="pull-left center"><%= link_to "Create Test",new_test_path ,:class => "btn btn-success" %></h2>
+
+    <table class="table white-text">
+        <tr>
+            <th class="white-text">Name</th>
+            <th>Duration</th>
+            <th>Date</th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        <% @created_tests.each do |test| %>
+        <tr>
+            <td><%= link_to test.name , test_path(test) %></td>
+            <td><%= test.duration.strftime('%H:%M')%></td>
+
+            <td class="" style="margin:10px;text-decoration:none;">
+                <%= link_to "Remove Test",test_path(test),method:"DELETE",:class => "btn btn-danger"%></td>
+
+        </tr>
+        <% end %>
+    </table>
