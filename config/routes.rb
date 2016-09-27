@@ -27,9 +27,7 @@ root 'static_pages#home'
   get 'remove_question_from_current_test/:test_id/:question_id' , to: 'tests#remove_question_from_current_test' ,as: :remove_question_from_current_test
   get 'enroll_for_test/:test_id' , to: 'profiles#enroll_for_test',as: :enroll_for_test
 
-  get 'profiles/edit',to:'profiles#edit',as: :edit_profile
-
-  resource :details
+  get 'details/edit',to:'details#edit',as: :edit_details
 
   #student_details
   get '/details/edit_student_details',to:'details#edit_student_details',as: :edit_student_details
