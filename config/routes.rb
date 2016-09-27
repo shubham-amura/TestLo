@@ -31,12 +31,20 @@ root 'static_pages#home'
 
   resource :details
 
+  #student_details
   get '/details/edit_student_details',to:'details#edit_student_details',as: :edit_student_details
   get '/details/new_student_details',to:'details#new_student_details',as: :new_student_details
-
   post '/student_details',to:'details#create_student_details'
   put '/student_details',to:'details#update_student_details'
   patch '/student_details',to:'details#update_student_details'
+
+  #employer_details
+  get '/details/edit_employer_details',to:'details#edit_employer_details',as: :edit_employer_details
+  get '/details/new_employer_details',to:'details#new_employer_details',as: :new_employer_details
+  post '/employer_details',to:'details#create_employer_details'
+  put '/employer_details',to:'details#update_employer_details'
+  patch '/employer_details',to:'details#update_employer_details'
+
   # get 'profiles/student_details',to: 'profiles#student_details'
   # get 'profiles/employer_details',to: 'profiles#employer_details'
   #

@@ -2,19 +2,17 @@ class DetailsController < ApplicationController
 
   def edit
       @user=User.find(current_user.id)
-
       if @user.type=="Student"
             redirect_to edit_student_details_path
       else
-            redirect_to new_employer_details_path
+            redirect_to edit_employer_details_path
       end
-
   end
 
-  def edit_student_details
-      #byebug
-      @student=Student.find(current_user.id)
+##students
 
+  def edit_student_details
+      @student=Student.find(current_user.id)
       if @student.student_detail.nil?
             redirect_to new_student_details_path
       end
@@ -44,8 +42,45 @@ class DetailsController < ApplicationController
     end
   end
 
+  ##Employer
+
+  def edit_employer_details
+      @employer=Employer.find(current_user.id)
+      if @employer.employer_detail.nil?
+            redirect_to new_employer_details_path
+      end
+  end
+
+  def new_employer_details
+      @employer=Employer.find(current_user.id)
+  end
+
+  def create_employer_details
+      @employer=Employer.find(current_user.id)
+      if @employer.create_employer_detail(employer_details_params)
+        flash[:success]="Profile Updated Successfully"
+        redirect_to employer_dashboard_path
+      else
+        render 'new_employer_details'
+      end
+  end
+
+  def update_employer_details
+    @employer=Employer.find(current_user.id)
+    if @employer.employer_detail.update_attributes(employer_details_params)
+      flash[:success]="Profile Updated Successfully"
+      redirect_to employer_dashboard_path
+    else
+      render 'edit_employer_details'
+    end
+  end
+
   private
     def student_details_params
       params.require(:student_detail).permit(:age,:college,:resume,:experience,:skills)
+    end
+
+    def employer_details_params
+      params.require(:employer_detail).permit(:company,:company_address,:contact)
     end
 end
