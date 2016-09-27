@@ -1,5 +1,8 @@
 
 <%= form_for @employer.employer_detail ,url:employer_details_path do |f| %>
+
+    <%= render 'shared/error_messages',object: f.object %>
+
     <div class="col-lg-4">
         <%= f.label :company %>
         <%= f.text_field :company %>

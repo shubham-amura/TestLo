@@ -1,5 +1,7 @@
 class DetailsController < ApplicationController
 
+#fork
+
   def edit
       @user=User.find(current_user.id)
       if @user.type=="Student"

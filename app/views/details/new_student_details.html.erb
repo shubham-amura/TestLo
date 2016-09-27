@@ -1,5 +1,7 @@
 
 <%= form_for @student.build_student_detail ,url:student_details_path do |f| %>
+
+    <%= render 'shared/error_messages',object: f.object %>
     <div class="col-lg-4">
         <%= f.label :age %>
         <%= f.number_field :age %>

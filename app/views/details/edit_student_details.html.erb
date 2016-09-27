@@ -1,5 +1,7 @@
 
 <%= form_for @student.student_detail ,url:student_details_path do |f| %>
+
+    <%= render 'shared/error_messages',object: f.object %>
     <div class="col-lg-4">
         <%= f.label :age %>
         <%= f.number_field :age %>
@@ -23,5 +25,11 @@
     <div class="actions" style="margin-top:5px;">
         <%= f.submit "Update",:class => "btn btn-success" %>
     </div>
+
+    <div class="col-lg-4">
+        <%= f.label :resume %>
+        <%= f.text_field :resume %>
+    </div>
+
 
 <%end%>
