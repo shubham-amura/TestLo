@@ -31,17 +31,22 @@ class TestsController < ApplicationController
 
     def add_question_to_current_test
         #create entry
+        #byebug
         TestQuestion.create(test_id:params[:test_id],question_id:params[:question_id])
-
-        #get new list
-        temp=TestQuestion.all.where(test_id:params[:test_id]).pluck(:question_id)
-        @test_questions=[]
-        temp.each do |t|
-          @test_questions << Question.find(t.to_i)
-        end
 
         #test required in view to redirect
         @test = Test.find(params[:test_id])
+
+        #get new list
+        temp=TestQuestion.all.where(test_id:params[:test_id]).pluck(:question_id,:marks)
+        @test_questions=[]
+        temp.each do |q,m|
+          @temp_question={}
+          @temp_question[:question]=Question.find(q.to_i)
+          @temp_question[:marks]=m
+          @test_questions << @temp_question
+        end
+
 
         #Dont show questions added in test ,so not.
         @questions = Question.where.not(id:temp)
@@ -57,14 +62,18 @@ class TestsController < ApplicationController
         unless q.nil?
           q.destroy
         end
-        temp=TestQuestion.all.where(test_id:params[:test_id]).pluck(:question_id)
-        @test_questions=[]
-        temp.each do |t|
-          @test_questions << Question.find(t.to_i)
-        end
 
         #test required in view to redirect
         @test = Test.find(params[:test_id])
+
+        temp=TestQuestion.all.where(test_id:params[:test_id]).pluck(:question_id,:marks)
+        @test_questions=[]
+        temp.each do |q,m|
+          @temp_question={}
+          @temp_question[:question]=Question.find(q.to_i)
+          @temp_question[:marks]=m
+          @test_questions << @temp_question
+        end
 
         #Dont show questions added in test ,so not.
         @questions = Question.where.not(id:temp)
@@ -76,12 +85,19 @@ class TestsController < ApplicationController
 
   def show
     @test=Test.find(params[:id])
-    temp=TestQuestion.all.where(test_id:params[:id]).pluck(:question_id)
-    @questions = Question.where.not(id:temp)
+
+    temp=TestQuestion.all.where(test_id:params[:id]).pluck(:question_id,:marks)
     @test_questions=[]
-    temp.each do |t|
-      @test_questions << Question.find(t.to_i)
+    temp.each do |q,m|
+      @temp_question={}
+      @temp_question[:question]=Question.find(q.to_i)
+      @temp_question[:marks]=m
+      @test_questions << @temp_question
+      #@test_questions[:marks] << m
     end
+    @questions = Question.where.not(id:temp)
+
+    #byebug
   end
 
 

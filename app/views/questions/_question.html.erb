@@ -3,6 +3,7 @@
       <thead>
         <tr>
             <th>Name</th>
+            <th>Marks</th>
             <th>Action</th>
         </tr>
       </thead>
@@ -14,7 +15,11 @@
                 <strong><%=question.question%></strong>
             </td>
 
-            <td><%= link_to "Add", add_question_to_current_test_path(@test,question) , remote: true, class: 'btn btn-success'%></td>
+            <td>
+                <%=number_field_tag "marks_#{@test.id}_#{question.id}", '1',min:'1'%>
+            </td>
+              <!-- <td><%= link_to "Tets",'javascript:hello()'%></td> -->
+            <td><%= link_to "Add",add_question_to_current_test_path(test_id:@test.id,question_id:question.id),remote: true, class: 'btn btn-success'%></td>
         </tr>
         <%- end %>
       </tbody>
