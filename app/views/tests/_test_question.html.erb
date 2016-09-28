@@ -21,8 +21,11 @@
                 <strong><%=question[:marks]%></strong>
             </td>
 
-            <td><%= link_to "Remove", remove_question_from_current_test_path(@test,question[:question]) , remote: true, class: 'btn btn-danger'%></td>
-            
+            <!-- This is ajax request -->
+            <!-- <td><%= link_to "Remove", remove_question_from_current_test_path(@test,question[:question]) , remote: true,class: 'btn btn-danger'%></td> -->
+
+            <!--This is normal request  -->
+            <td><%= link_to "Remove", remove_question_from_current_test_path(@test,question[:question]) ,method:"GET",class: 'btn btn-danger'%></td>
 
         </tr>
         <%- end %>
