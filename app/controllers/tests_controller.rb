@@ -73,10 +73,10 @@ class TestsController < ApplicationController
         #Dont show questions added in test ,so not.
         @questions = Question.where.not(id:temp)
 
-      redirect_to test_path(@test)
-      # respond_to do |format|
-      #   format.js
-      # end
+      #redirect_to test_path(@test)
+      respond_to do |format|
+        format.js
+      end
 
     end
 

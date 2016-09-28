@@ -1,5 +1,5 @@
 <div>
-    <table class="table">
+    <!-- <table class="table">
       <thead>
         <tr>
             <th>Name</th>
@@ -7,24 +7,24 @@
             <th>Action</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody> -->
         <% @questions.each do |question| %>
-              <%= form_tag(add_question_to_current_test_path(test_id:@test.id,question_id:question.id)) do %>
-              <tr>
-                  <td>
-                      <strong><%=question.question%></strong>
-                  </td>
+          <!-- <tr> -->
+                <strong><%=question.question%></strong>
+                <!-- <td> -->
+              <!-- </td> -->
 
-                  <td>
-                      <%=number_field_tag "marks",'1',min:'1'%>
-                  </td>
-        <!--Converted from link_to  form to passs marks to add_  -->
-        <!-- <td><%= link_to "Add",add_question_to_current_test_path(test_id:@test.id,question_id:question.id),remote: true, class: 'btn btn-success'%></td> -->
-                  <td><%= submit_tag("Add",class:'btn btn-success')%></td>
-              </tr>
-              <%- end %>
+              <!-- <td> -->
+                <%= form_for(:obj, url:add_question_to_current_test_path(test_id:@test.id,question_id:question.id),remote:true,method:"GET") do |f| %>
+                  <%= f.number_field :marks, value: '1'%>
+                  <%= f.submit("Add",class:'btn btn-success')%>
+                <%- end %>
+              <!-- </td> -->
+              <!--Converted from link_to  form to passs marks to add_  -->
+              <!-- <td><%= link_to "Add",add_question_to_current_test_path(test_id:@test.id,question_id:question.id),remote: true, class: 'btn btn-success'%></td> -->
+          <!-- </tr> -->
         <%- end %>
-      </tbody>
+      <!-- </tbody> -->
 
-    </table>
+    <!-- </table> -->
 </div>
