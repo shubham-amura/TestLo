@@ -9,18 +9,18 @@
       </thead>
       <tbody>
         <% @questions.each do |question| %>
-              <%= form_tag(add_question_to_current_test_path(test_id:@test.id,question_id:question.id)) do %>
               <tr>
                   <td>
                       <strong><%=question.question%></strong>
                   </td>
 
                   <td>
+                      <%= form_tag(add_question_to_current_test_path(test_id:@test.id,question_id:question.id)) do %>
                       <%=number_field_tag "marks",'1',min:'1'%>
+                      <%= submit_tag("Add",class:'btn btn-success')%>
                   </td>
         <!--Converted from link_to  form to passs marks to add_  -->
         <!-- <td><%= link_to "Add",add_question_to_current_test_path(test_id:@test.id,question_id:question.id),remote: true, class: 'btn btn-success'%></td> -->
-                  <td><%= submit_tag("Add",class:'btn btn-success')%></td>
               </tr>
               <%- end %>
         <%- end %>
