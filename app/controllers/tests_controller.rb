@@ -29,6 +29,28 @@ class TestsController < ApplicationController
       redirect_to employer_dashboard_path
   end
 
+
+    def save
+      #byebug
+      @test=Test.find(params[:id])
+
+      # No of questions
+      noq=TestQuestion.where(:test_id=>@test.id).count
+      @test.number_of_questions=noq
+
+      # marks logic here
+      total_marks=TestQuestion.where(:test_id=>@test.id).inject(0){|sum,test| sum+test.marks}
+      @test.marks=total_marks
+
+      #@test.marks=50
+      if @test.save
+        redirect_to employer_dashboard_path
+      else
+        render 'show'
+      end
+    end
+
+
     def add_question_to_current_test
         #create entry
         #byebug

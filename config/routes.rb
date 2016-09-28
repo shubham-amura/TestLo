@@ -16,10 +16,10 @@ root 'static_pages#home'
 
 
   resources :tests do
-    # member do
-    #   get :add_questions
-    #   post :push_questions
-    # end
+    member do
+     get :save
+     post :save
+    end
     resources :questions
   end
 
