@@ -9,18 +9,20 @@
       </thead>
       <tbody>
         <% @questions.each do |question| %>
+              <%= form_tag(add_question_to_current_test_path(test_id:@test.id,question_id:question.id),remote: true) do %>
+              <tr>
+                  <td>
+                      <strong><%=question.question%></strong>
+                  </td>
 
-        <tr>
-            <td>
-                <strong><%=question.question%></strong>
-            </td>
-
-            <td>
-                <%=number_field_tag "marks_#{@test.id}_#{question.id}", '1',min:'1'%>
-            </td>
-              <!-- <td><%= link_to "Tets",'javascript:hello()'%></td> -->
-            <td><%= link_to "Add",add_question_to_current_test_path(test_id:@test.id,question_id:question.id),remote: true, class: 'btn btn-success'%></td>
-        </tr>
+                  <td>
+                      <%=number_field_tag "marks",'1',min:'1'%>
+                  </td>
+                    <!-- <td><%= link_to "Tets",'javascript:hello()'%></td> -->
+                  <!-- <td><%= link_to "Add",add_question_to_current_test_path(test_id:@test.id,question_id:question.id),remote: true, class: 'btn btn-success'%></td> -->
+                  <td><%= submit_tag("Add",class:'btn btn-success')%></td>
+              </tr>
+              <%- end %>
         <%- end %>
       </tbody>
 

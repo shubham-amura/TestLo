@@ -32,7 +32,7 @@ class TestsController < ApplicationController
     def add_question_to_current_test
         #create entry
         #byebug
-        TestQuestion.create(test_id:params[:test_id],question_id:params[:question_id])
+        TestQuestion.create(test_id:params[:test_id],question_id:params[:question_id],marks:params[:marks])
 
         #test required in view to redirect
         @test = Test.find(params[:test_id])
