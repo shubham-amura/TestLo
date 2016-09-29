@@ -1,5 +1,7 @@
 class TestsController < ApplicationController
 
+  #before_action :check only:[:show]
+
   def index
     @tests=Test.all
   end
@@ -13,9 +15,7 @@ class TestsController < ApplicationController
   def create
     @test=current_user.tests.create(test_params)
       if @test
-
       flash[:success]="Test created Successfully"
-
       redirect_to test_path(@test)
   else
       render 'new'
