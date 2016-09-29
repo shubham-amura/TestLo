@@ -22,7 +22,7 @@
             <td><%= test.number_of_questions%></td>
             <td><%= test.marks%></td>
             <td class="" style="margin:10px;text-decoration:none;">
-                <%= link_to "Remove Test",test_path(test),method:"DELETE",:class => "btn btn-danger"%></td>
+                <%= link_to "Remove Test",test_path(test),method:"DELETE",data: {confirm: "Are you sure?"},:class => "btn btn-danger"%></td>
 
         </tr>
         <% end %>

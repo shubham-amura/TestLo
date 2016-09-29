@@ -26,8 +26,14 @@ class TestsController < ApplicationController
 
   def destroy
       @test = Test.find(params[:id])
-      @test.destroy
-      redirect_to employer_dashboard_path
+      if(@test.employer_id==current_user.id)
+        @test.destroy
+        flash[:success]="Deleted Successfully"
+        redirect_to employer_dashboard_path
+      else
+        flash[:danger]="Can delete your own tests"
+        redirect_to employer_dashboard_path
+      end
   end
 
 
@@ -43,11 +49,11 @@ class TestsController < ApplicationController
 
     def add_question_to_current_test
         #create entry in test question
-        TestQuestion.create(test_id:params[:test_id],question_id:params[:question_id],marks:params[:marks])
+        tq=TestQuestion.create(test_id:params[:test_id],question_id:params[:question_id],marks:params[:marks])
 
         #test required in view to redirect and change the marks and noq after addition
         @test = Test.find(params[:test_id])
-        @test.marks+=(params[:marks]).to_i
+        @test.marks+=(tq.marks).to_i
         @test.number_of_questions+=1
         @test.save
 
