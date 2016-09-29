@@ -69,7 +69,6 @@
                         <%= image_tag("profile_image.png") %>
                         <h3><%= current_user.name %></h3>
                         <ul class="nav nav-list">
-
                             <li>
                               <%= link_to "Edit Profile",edit_details_path,:class => "btn " %>
                             </li>
@@ -77,14 +76,17 @@
                             <%- if current_user.type == "Employer" %>
                               <li style="link-style-type:none;">
                                 <%= link_to "My Tests", employer_dashboard_path,:class => "btn"%>
+                                <%= link_to "Active Tests", employer_dashboard_path(:q=>"active"),:class => "btn"%>
+                                <%= link_to "Inactive Tests", employer_dashboard_path(:q=>"inactive"),:class => "btn"%>
+                                <%= link_to "Public Tests", employer_dashboard_path(:q=>"public"),:class => "btn"%>
                               </li>
                             <%-  else %>
                               <li>
-                                <%= link_to "Dashboard",student_dashboard_path  %>
+                                <%= link_to "All Active Tests",student_dashboard_path  %>
+                                <%= link_to "Enrolled",student_dashboard_path  %>
+                                <%= link_to "Not Enrolled",student_dashboard_path  %>
                               </li>
                             <%- end %>
-
-                            <li><%= link_to "Link3", "/path3",:class => "btn "  %></li>
                         </ul>
                     </div>
                     <!--/.well -->

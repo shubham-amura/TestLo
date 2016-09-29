@@ -16,15 +16,16 @@ class TestsController < ApplicationController
   def create
     @test=current_user.tests.create(test_params)
       if @test
-      flash[:success]="Test created Successfully"
-      redirect_to test_path(@test)
-  else
-      render 'new'
-    end
+        flash[:success]="Test created Successfully"
+        redirect_to test_path(@test)
+      else
+        render 'new'
+      end
   end
 
 
   def destroy
+      #check if this test belongs to employee
       @test = Test.find(params[:id])
       if(@test.employer_id==current_user.id)
         @test.destroy
@@ -37,17 +38,38 @@ class TestsController < ApplicationController
   end
 
 
-    def save
-      redirect_to employer_dashboard_path
-      # if @test.save
-      #   redirect_to employer_dashboard_path
-      # else
-      #   render 'show'
-      # end
+
+    def activate
+      #check if this test belongs to employee
+      @test=Test.find(params[:id])
+      if @test.active
+        @test.active=false
+          if @test.save
+            flash[:success]="Test is Not Active now"
+            redirect_to employer_dashboard_path
+          else
+            flash[:danger]="Unable to deactivate,Try later"
+            redirect_to employer_dashboard_path
+          end
+      else
+          if @test.marks > 10             #condition
+            @test.active=true
+            if @test.save
+              flash[:success]="Test is Active now"
+              redirect_to employer_dashboard_path
+            else
+              flash[:danger]="Unable to Activate ,try later"
+              redirect_to employer_dashboard_path
+            end
+          else
+            flash[:danger]="Minimum marks for test is 10"
+            redirect_to test_path(@test)
+          end
+      end
     end
 
-
     def add_question_to_current_test
+
         #create entry in test question
         tq=TestQuestion.create(test_id:params[:test_id],question_id:params[:question_id],marks:params[:marks])
 
@@ -82,13 +104,21 @@ class TestsController < ApplicationController
     end
 
     def remove_question_from_current_test
+        #check if this test belongs to employer
+        @test = Test.find(params[:test_id])
+
+        if @test.active
+            flash[:danger]="Deactivate test first"
+            return redirect_to test_path(@test)
+        end
+
         q=TestQuestion.find_by(test_id:params[:test_id],question_id:params[:question_id])
         unless q.nil?
           q.destroy
         end
 
         #test required in view to redirect
-        @test = Test.find(params[:test_id])
+        #@test = Test.find(params[:test_id])
         @test.marks-=(q.marks).to_i
         @test.number_of_questions-=1
         @test.save
@@ -113,6 +143,8 @@ class TestsController < ApplicationController
     end
 
   def show
+    #check if this test belongs to employer
+
     @test=Test.find(params[:id])
 
     temp=TestQuestion.all.where(test_id:params[:id]).pluck(:question_id,:marks)

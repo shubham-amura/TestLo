@@ -10,8 +10,10 @@
             <th class="">Name</th>
             <th>Duration</th>
             <th>Date</th>
-            <th>Number Of Questions</th>
+            <th>Questions</th>
             <th>Marks</th>
+            <th>Status</th>
+            <th>Privacy</th>
         </tr>
 
         <% @created_tests.each do |test| %>
@@ -21,6 +23,8 @@
             <td><%= test.date%></td>
             <td><%= test.number_of_questions%></td>
             <td><%= test.marks%></td>
+            <td><%= test.active? ? "Active" : "Inactive"%></td>
+            <td><%= test.private? ? "Private" : "Public"%></td>
             <td class="" style="margin:10px;text-decoration:none;">
                 <%= link_to "Remove Test",test_path(test),method:"DELETE",data: {confirm: "Are you sure?"},:class => "btn btn-danger"%></td>
 

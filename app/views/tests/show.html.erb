@@ -5,8 +5,13 @@
     </div>
 
     <div class="btn btn-default pull-left white-text">
-        <%= link_to "Save",save_test_path(@test)%>
+        <%if @test.active %>
+          <%= link_to "Deactivate",activate_test_path(@test)%>
+        <%else%>
+          <%= link_to "Activate",activate_test_path(@test)%>
+        <%end%>
     </div>
+
 </div>
 <div class="row">
     <div class="col-sm-5 center ">

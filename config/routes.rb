@@ -17,8 +17,7 @@ root 'static_pages#home'
 
   resources :tests do
     member do
-     get :save
-     post :save
+     get :activate
     end
     resources :questions
   end
@@ -47,7 +46,7 @@ root 'static_pages#home'
 #   resources :details
 # end
 #
-# 
+#
 #   resources :details
 
   # get 'profiles/student_details',to: 'profiles#student_details'
