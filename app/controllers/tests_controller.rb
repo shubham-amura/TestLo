@@ -68,6 +68,31 @@ class TestsController < ApplicationController
       end
     end
 
+    def privacy
+      @test=Test.find(params[:id])
+
+      if @test.private
+        @test.private=false
+        if @test.save
+          flash[:success]="This Test is public now"
+          redirect_to employer_dashboard_path
+        else
+          flash[:danger]="Unable to change privacy,Try later"
+          redirect_to test_path(@test)
+        end
+      else
+        @test.private=true
+        if @test.save
+          flash[:success]="This Test is private now"
+          redirect_to employer_dashboard_path
+        else
+          flash[:danger]="Unable to change privacy,Try later"
+          redirect_to test_path(@test)
+        end
+      end
+
+    end
+
     def add_question_to_current_test
 
         #create entry in test question

@@ -18,6 +18,7 @@ root 'static_pages#home'
   resources :tests do
     member do
      get :activate
+     get :privacy
     end
     resources :questions
   end

@@ -22,7 +22,7 @@ class ProfilesController < ApplicationController
     elsif q=="inactive"
       @created_tests = Test.all.where(employer_id: current_user.id,active:false)
     elsif q=="public"
-      @created_tests = Test.all.where(private:false)
+      @created_tests = Test.all.where(active:true,private:false)
     else
       @created_tests = Test.all.where(employer_id: current_user.id)
     end

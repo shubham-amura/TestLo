@@ -4,13 +4,22 @@
         <%=  link_to "Add Question", new_test_question_path(params[:id]), class: 'btn btn-success pull-right' %>
     </div>
 
-    <div class="btn btn-default pull-left white-text">
+    <div class="btn btn-default pull-left">
         <%if @test.active %>
           <%= link_to "Deactivate",activate_test_path(@test)%>
         <%else%>
           <%= link_to "Activate",activate_test_path(@test)%>
         <%end%>
     </div>
+
+    <div class="btn btn-default pull-left">
+        <%if @test.private %>
+          <%= link_to "Make Public",privacy_test_path(@test)%>
+        <%else%>
+          <%= link_to "Keep Private",privacy_test_path(@test)%>
+        <%end%>
+    </div>
+
 
 </div>
 <div class="row">
