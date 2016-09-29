@@ -1,6 +1,7 @@
 class TestsController < ApplicationController
 
-  #before_action :check only:[:show]
+  before_action :check_employer_profile,only:[:create,:new]
+  #check if user profile is complete
 
   def index
     @tests=Test.all
@@ -31,35 +32,28 @@ class TestsController < ApplicationController
 
 
     def save
-      #byebug
-      @test=Test.find(params[:id])
-
-      # No of questions
-      noq=TestQuestion.where(:test_id=>@test.id).count
-      @test.number_of_questions=noq
-
-      # marks logic here
-      total_marks=TestQuestion.where(:test_id=>@test.id).inject(0){|sum,test| sum+test.marks}
-      @test.marks=total_marks
-
-      #@test.marks=50
-      if @test.save
-        redirect_to employer_dashboard_path
-      else
-        render 'show'
-      end
+      redirect_to employer_dashboard_path
+      # if @test.save
+      #   redirect_to employer_dashboard_path
+      # else
+      #   render 'show'
+      # end
     end
 
 
     def add_question_to_current_test
-        #create entry
-      
+        #create entry in test question
         TestQuestion.create(test_id:params[:test_id],question_id:params[:question_id],marks:params[:marks])
 
-        #test required in view to redirect
+        #test required in view to redirect and change the marks and noq after addition
         @test = Test.find(params[:test_id])
+        @test.marks+=(params[:marks]).to_i
+        @test.number_of_questions+=1
+        @test.save
 
-        #get new list
+        #View data logic
+
+        #left partial , all test questions and their assigned marks
         temp=TestQuestion.all.where(test_id:params[:test_id]).pluck(:question_id,:marks)
         @test_questions=[]
         temp.each do |q,m|
@@ -69,11 +63,12 @@ class TestsController < ApplicationController
           @test_questions << @temp_question
         end
 
-
         #Dont show questions added in test ,so not.
         @questions = Question.where.not(id:temp)
 
       #redirect_to test_path(@test)
+
+      #ajax ,remote true
       respond_to do |format|
         format.js
       end
@@ -88,7 +83,11 @@ class TestsController < ApplicationController
 
         #test required in view to redirect
         @test = Test.find(params[:test_id])
+        @test.marks-=(q.marks).to_i
+        @test.number_of_questions-=1
+        @test.save
 
+        #view logic
         temp=TestQuestion.all.where(test_id:params[:test_id]).pluck(:question_id,:marks)
         @test_questions=[]
         temp.each do |q,m|
@@ -101,10 +100,10 @@ class TestsController < ApplicationController
         #Dont show questions added in test ,so not.
         @questions = Question.where.not(id:temp)
 
-      #redirect_to test_path(@test)
-      respond_to do |format|
-        format.js
-      end
+        #redirect_to test_path(@test)
+        respond_to do |format|
+          format.js
+        end
     end
 
   def show
@@ -120,13 +119,19 @@ class TestsController < ApplicationController
       #@test_questions[:marks] << m
     end
     @questions = Question.where.not(id:temp)
-
-    #byebug
   end
 
 
   private
   def test_params
     params.require(:test).permit(:name,:date,:duration)
+  end
+
+  def check_employer_profile
+    #byebug
+    if current_user.employer_detail.nil?
+        flash[:danger]="Complete profile first"
+        redirect_to new_employer_details_path
+    end
   end
 end

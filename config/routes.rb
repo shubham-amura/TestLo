@@ -43,6 +43,13 @@ root 'static_pages#home'
   put '/employer_details',to:'details#update_employer_details'
   patch '/employer_details',to:'details#update_employer_details'
 
+# namespace :employer do
+#   resources :details
+# end
+#
+# 
+#   resources :details
+
   # get 'profiles/student_details',to: 'profiles#student_details'
   # get 'profiles/employer_details',to: 'profiles#employer_details'
   #
