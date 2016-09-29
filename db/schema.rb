@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160929045905) do
+ActiveRecord::Schema.define(version: 20160929050706) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -86,9 +86,10 @@ ActiveRecord::Schema.define(version: 20160929045905) do
     t.time     "duration"
     t.integer  "number_of_questions", default: 0
     t.integer  "marks",               default: 0
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.integer  "employer_id"
+    t.boolean  "private",             default: true
   end
 
   add_index "tests", ["employer_id"], name: "index_tests_on_employer_id"
