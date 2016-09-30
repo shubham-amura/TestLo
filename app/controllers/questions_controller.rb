@@ -11,13 +11,17 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    #byebug
+    #should logged and should be employer
     @question=Question.new(question_params)
     @test=Test.find(params[:test_id])
     if @question.save
       flash[:success]="Question added to Bank successfully"
 
-      TestQuestion.create(test_id:@test.id,question_id:@question.id)
+      tq=TestQuestion.create(test_id:@test.id,question_id:@question.id)
+      @test.marks+=tq.marks
+      @test.number_of_questions+=1
+      @test.save
+
       redirect_to test_path(@test)
     else
       @question.a=@question.options[0]

@@ -1,35 +1,38 @@
-
-
 <div>
     <table class="table">
-      <thead>
-        <tr>
-            <th>Name</th>
-              <th>Marks</th>
-            <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% temp.each do |question| %>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Marks</th>
+                <% if @test.employer_id==current_user.id%>
+                <th>Action</th>
+                <%end%>
+            </tr>
+        </thead>
+        <tbody>
+            <% temp.each do |question| %>
 
-        <tr>
-            <td>
-                <strong><%=question[:question].question%></strong>
-            </td>
+            <tr>
+                <td>
+                    <strong><%=question[:question].question%></strong>
+                </td>
 
-            <td>
-                <strong><%=question[:marks]%></strong>
-            </td>
+                <td>
+                    <strong><%=question[:marks]%></strong>
+                </td>
 
-            <!-- This is ajax request -->
-            <!-- <td><%= link_to "Remove", remove_question_from_current_test_path(@test,question[:question]) , remote: true,class: 'btn btn-danger'%></td> -->
+                <!-- This is ajax request -->
+                <!-- <td><%= link_to "Remove", remove_question_from_current_test_path(@test,question[:question]) , remote: true,class: 'btn btn-danger'%></td> -->
 
-            <!--This is normal request  -->
-            <td><%= link_to "Remove", remove_question_from_current_test_path(@test,question[:question]),remote:true,method:"DELETE",class: 'btn btn-danger'%></td>
-
-        </tr>
-        <%- end %>
-      </tbody>
+                <!--This is normal request  -->
+                <%if current_user.id==@test.employer_id%>
+                <td>
+                    <%=link_to "Remove", remove_question_from_current_test_path(@test,question[:question]),remote:true,method:"DELETE",class: 'btn btn-danger'%>
+                </td>
+                <%end%>
+            </tr>
+            <%- end %>
+        </tbody>
 
     </table>
 </div>

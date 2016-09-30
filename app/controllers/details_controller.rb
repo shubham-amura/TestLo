@@ -50,6 +50,7 @@ class DetailsController < ApplicationController
       @employer=Employer.find(current_user.id)
       if @employer.employer_detail.nil?
             redirect_to new_employer_details_path
+            #if doesnt exist to edit redirect to create one
       end
   end
 
@@ -59,8 +60,11 @@ class DetailsController < ApplicationController
 
   def create_employer_details
       @employer=Employer.find(current_user.id)
-      if @employer.create_employer_detail(employer_details_params)
-        flash[:success]="Profile Updated Successfully"
+
+      @detail=@employer.build_employer_detail(employer_details_params)
+      if @detail.save
+        flash[:success]="Profile Created Successfully"
+        byebug
         redirect_to employer_dashboard_path
       else
         render 'new_employer_details'
@@ -75,6 +79,11 @@ class DetailsController < ApplicationController
     else
       render 'edit_employer_details'
     end
+  end
+
+
+  def test
+    render plain: "test"
   end
 
   private

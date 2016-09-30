@@ -17,8 +17,8 @@ root 'static_pages#home'
 
   resources :tests do
     member do
-     get :save
-     post :save
+     get :activate
+     get :privacy
     end
     resources :questions
   end
@@ -50,6 +50,13 @@ root 'static_pages#home'
   post '/employer_details',to:'details#create_employer_details'
   put '/employer_details',to:'details#update_employer_details'
   patch '/employer_details',to:'details#update_employer_details'
+
+# namespace :employer do
+#   resources :details
+# end
+#
+#
+#   resources :details
 
   # get 'profiles/student_details',to: 'profiles#student_details'
   # get 'profiles/employer_details',to: 'profiles#employer_details'
