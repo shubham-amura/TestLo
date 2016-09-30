@@ -165,7 +165,7 @@ class TestsController < ApplicationController
     # Filters
 
     def check_employer_profile
-        # byebug
+
         if current_user.employer_detail.nil?
             flash[:danger] = 'Complete profile first'
             redirect_to new_employer_details_path
@@ -181,7 +181,7 @@ class TestsController < ApplicationController
     end
 
     def check_test_owner
-      #byebug
+
       unless @test.employer_id==current_user.id
         flash[:danger]="You are not owner of this test"
         redirect_to employer_dashboard_path
