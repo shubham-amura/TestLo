@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20160929051244) do
     t.integer  "test_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "score"
   end
 
   add_index "enrollments", ["student_id"], name: "index_enrollments_on_student_id"

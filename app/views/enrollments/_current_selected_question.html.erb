@@ -1,0 +1,56 @@
+<div class="">
+  <%= current_que.question %>
+  <%- if current_que.question_type.to_i == 0 %>
+          <div class="">
+            <input type="text_field" name="name" value="">
+          </div>
+
+  <%- elsif current_que.question_type.to_i == 1 %>
+
+  <div class="radio">
+    <label>
+      <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+      <%= current_que.options[0] %>
+    </label>
+
+  </div>
+
+  <div class="radio">
+    <label>
+      <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+      <%= current_que.options[1] %>
+    </label>
+  </div>
+
+  <div class="radio">
+    <label>
+      <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">
+      <%= current_que.options[2] %>
+    </label>
+  </div>
+
+  <div class="radio">
+    <label>
+      <input type="radio" name="optionsRadios" id="optionsRadios4" value="option4">
+      <%= current_que.options[3] %>
+    </label>
+  </div>
+
+
+
+
+
+  <%- else %>
+
+          <div class="">
+
+          </div>
+<%- end %>
+<br>
+  <div class="btn btn-primary pull-left">
+
+    <h6>Submit</h6>
+
+  </div>
+
+</div>

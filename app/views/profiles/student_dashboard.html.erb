@@ -24,10 +24,10 @@
                 <td><%= test.marks%></td>
                 <% if @enrolled_test.include? test.id%>
                 <td style="margin:10px;" class="btn btn-success">
-                    Take Test</td>
+                    <%= link_to "Take Test", taketest_path(test),:class => "no-link" %></td>
                 <%else%>
                 <td style="margin:10px;">
-                    <%= link_to "Enroll", enroll_for_test_path(test, page: params[:page]) ,remote: true,:class => "btn btn-primary" %>
+                    <%= link_to "Enroll", enroll_for_test_path(test, page: params[:page]) ,remote: true,:class => "btn btn-primary no-link" %>
                 </td>
                 <% end %>
             </tr>

@@ -22,6 +22,8 @@ gem "less-rails"
 #pagination
 gem 'kaminari'
 
+
+
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git', :branch => 'bootstrap3'
 
 gem 'autoprefixer-rails'

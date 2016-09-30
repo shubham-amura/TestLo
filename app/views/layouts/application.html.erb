@@ -64,6 +64,8 @@
             <div class="row">
 
                 <%- if signed_in? %>
+                <%- byebug %>
+                <%- if controller_name != "enrollments" %>
                 <div class="col-lg-3">
                     <div class="well sidebar-nav">
                         <%= image_tag("profile_image.png") %>
@@ -93,24 +95,28 @@
                 </div>
                 <!--/span-->
                 <%- end %>
+                <%- end %>
+
                 <%- if !signed_in? %>
                 <div>
                 <%- else %>
-                    <div class="col-lg-9">
-                        <%- end %>
-                        <%= bootstrap_flash %>
-                        <div id ="yeild_div">
-                          <%= yield %>
+                    <%- if controller_name == "enrollments" %>
+                    <div class="col-lg-12">
+                    <%- else %>
+                        <div class="col-lg-9">
+                            <%- end %>
+                            <%- end %>
+                            <%= bootstrap_flash %>
+                            <div id="yeild_div">
+                                <%= yield %>
+                            </div>
+
                         </div>
-
                     </div>
+                    <!--/row-->
+
                 </div>
-                <!--/row-->
+                <!-- /container -->
 
-
-
-        </div>
-        <!-- /container -->
-
-    </body>
-</html>
+            </body>
+        </html>
