@@ -60,8 +60,8 @@ class TestsController < ApplicationController
     end
 
     def add_question_to_current_test
-        # check test belongs to employee
-        # create entry in test question
+        #get_test_by_test_id
+        # check_test_owner
         tq = TestQuestion.create(test_id: params[:test_id], question_id: params[:question_id], marks: params[:marks])
 
         # test required in view to redirect and change the marks and noq after addition
@@ -133,6 +133,7 @@ class TestsController < ApplicationController
     def show
         #get test
         #check_test_owner
+        #for left partial
         temp = TestQuestion.all.where(test_id: params[:id]).pluck(:question_id, :marks)
         @test_questions = []
         temp.each do |q, m|
@@ -142,7 +143,9 @@ class TestsController < ApplicationController
             @test_questions << @temp_question
             # @test_questions[:marks] << m
         end
-        @questions = Question.where.not(id: temp)
+        #for right partial
+        byebug
+        @questions = Question.where.not(id:temp)
     end
 
     private
