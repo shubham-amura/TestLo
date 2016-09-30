@@ -11,7 +11,7 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    #byebug
+    #should logged and should be employer
     @question=Question.new(question_params)
     @test=Test.find(params[:test_id])
     if @question.save

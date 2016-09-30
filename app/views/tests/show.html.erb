@@ -1,5 +1,6 @@
 <div class="page-header row">
     <h1 class="col-sm-11"><%=@test.name%></h1>
+  <% if @test.employer_id==current_user.id%>
     <div class="col-sm-1">
         <%=  link_to "Add Question", new_test_question_path(params[:id]), class: 'btn btn-success pull-right' %>
     </div>
@@ -19,7 +20,7 @@
           <%= link_to "Keep Private",privacy_test_path(@test)%>
         <%end%>
     </div>
-
+  <%end%>
 </div>
 
 <div class="row">
@@ -30,10 +31,12 @@
         </div>
     </div>
 
+      <% if @test.employer_id==current_user.id%>
     <div class="col-sm-5 center ">
         Question Bank
         <div id="question_bank_list">
             <%=render 'questions/question' %>
         </div>
     </div>
+    <%end%>
 </div>
