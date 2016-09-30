@@ -42,9 +42,39 @@
 
   <%- else %>
 
-          <div class="">
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" value="">
+      <%= current_que.options[0] %>
 
-          </div>
+    </label>
+  </div>
+
+
+  <div class="checkbox">
+
+  <label>
+    <input type="checkbox" value="">
+    <%= current_que.options[1] %>
+  </label>
+</div>
+
+<div class="checkbox">
+  <label>
+    <input type="checkbox" value="">
+    <%= current_que.options[2] %>
+
+  </label>
+</div>
+
+<div class="checkbox">
+  <label>
+    <input type="checkbox" value="">
+    <%= current_que.options[3] %>
+
+  </label>
+</div>
+
 <%- end %>
 <br>
   <div class="btn btn-primary pull-left">

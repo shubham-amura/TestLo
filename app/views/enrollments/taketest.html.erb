@@ -11,17 +11,22 @@
                 <thead>
                     <tr>
                         <th>Question</th>
-
+                        <th>Marks</th>
+                        <th>Attempted</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <% @questions.each do |question| %>
+                    <% @temp.each do |question_id,marks| %>
 
                     <tr>
                         <td>
-                            <strong><%= link_to question.question ,show_current_question_path(question),remote: true %></strong>
+                            <strong><%= link_to @questions.find(question_id).question ,show_current_question_path(@questions.find(question_id)),remote: true %></strong>
+                        </td>
+                        <td>
+                          <%=  marks %>
                         </td>
                     </tr>
+
                     <%- end %>
                 </tbody>
 
