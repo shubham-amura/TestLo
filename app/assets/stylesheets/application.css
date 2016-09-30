@@ -13,7 +13,15 @@
  *= require_tree .
  *= require_self
  */
+.no-link{
+  text-decoration:none;
+  color:#fff;
 
+}
+.no-link:hover {
+  text-decoration:none;
+  color:#fff;
+}
 .clear{
   clear: both;
 }
