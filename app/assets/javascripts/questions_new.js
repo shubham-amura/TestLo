@@ -18,6 +18,14 @@ $(document).ready(function() {
 
 });
 
+function hello()
+{
+
+  var person = prompt("Please enter your name"+this, "Harry Potter");
+
+  $.ajax('/add_question_to_current_test/50/36?marks=3')
+}
+
 function freez()
 {
   $('#correct_answer :hidden :input').each(function(index){

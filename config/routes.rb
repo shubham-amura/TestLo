@@ -16,12 +16,13 @@ root 'static_pages#home'
 
 
   resources :tests do
-    # member do
-    #   get :add_questions
-    #   post :push_questions
-    # end
+    member do
+     get :save
+     post :save
+    end
     resources :questions
   end
+
 
 #test simulation
   get 'taketest/:test_id' , to: 'enrollments#taketest' , as: :taketest
@@ -29,8 +30,9 @@ root 'static_pages#home'
 
 
 
-  get 'add_question_to_current_test/:test_id/:question_id' , to: 'tests#add_question_to_current_test' ,as: :add_question_to_current_test
-  get 'remove_question_from_current_test/:test_id/:question_id' , to: 'tests#remove_question_from_current_test' ,as: :remove_question_from_current_test
+  post 'add_question_to_current_test/:test_id/:question_id' , to: 'tests#add_question_to_current_test' ,as: :add_question_to_current_test
+  delete 'remove_question_from_current_test/:test_id/:question_id' , to: 'tests#remove_question_from_current_test' ,as: :remove_question_from_current_test
+
   get 'enroll_for_test/:test_id' , to: 'profiles#enroll_for_test',as: :enroll_for_test
 
   get 'details/edit',to:'details#edit',as: :edit_details

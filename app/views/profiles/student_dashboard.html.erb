@@ -6,6 +6,9 @@
         <tr>
             <th class="">Name</th>
             <th>Duration</th>
+            <th>Date</th>
+            <th>Number Of Questions</th>
+            <th>Marks</th>
             <th>Status</th>
             <th></th>
             <th></th>
@@ -15,7 +18,10 @@
             <% @tests.each do |test| %>
             <tr>
                 <td><%= test.name %></td>
-                <td><%= test.duration%></td>
+                <td><%= test.duration.strftime('%H:%M')%></td>
+                <td><%= test.date%></td>
+                <td><%= test.number_of_questions%></td>
+                <td><%= test.marks%></td>
                 <% if @enrolled_test.include? test.id%>
                 <td style="margin:10px;" class="btn btn-success">
                     <%= link_to "Take Test", taketest_path(test),:class => "no-link" %></td>

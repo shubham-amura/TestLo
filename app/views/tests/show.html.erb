@@ -3,6 +3,10 @@
     <div class="col-sm-1">
         <%=  link_to "Add Question", new_test_question_path(params[:id]), class: 'btn btn-success pull-right' %>
     </div>
+
+    <div class="btn btn-default pull-left white-text">
+        <%= link_to "Save",save_test_path(@test)%>
+    </div>
 </div>
 <div class="row">
     <div class="col-sm-5 center ">
@@ -18,7 +22,4 @@
             <%=render 'questions/question' %>
         </div>
     </div>
-</div>
-<div class="btn btn-default center pull-right white-text">
-    <%= link_to "Save",employer_dashboard_path %>
 </div>
