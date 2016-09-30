@@ -1,8 +1,9 @@
 class TestsController < ApplicationController
     before_action :check_employer_profile, only: [:create, :new]
-    before_action :get_test ,only:[:destroy,:activate,:privacy,:show]
+    before_action :get_test_by_id ,only:[:destroy,:activate,:privacy,:show]
     before_action :check_test_owner,only:[:destroy,:activate,:privacy]
-    # check if user profile is complete
+    before_action :get_test_by_test_id,only:[:add_question_to_current_test,:remove_question_from_current_test]
+
     def index
         @tests = Test.all
     end
@@ -24,69 +25,37 @@ class TestsController < ApplicationController
 
     def destroy
         #get test
-        # check if this test belongs to employee
-        @test = Test.find(params[:id])
-        if @test.employer_id == current_user.id
-            @test.destroy
-            flash[:success] = 'Deleted Successfully'
-            redirect_to employer_dashboard_path
-        else
-            flash[:danger] = 'Can delete your own tests'
-            redirect_to employer_dashboard_path
-        end
+        #check_test_owner
+        @test.destroy
+        flash[:success] = 'Deleted Successfully'
+        redirect_to employer_dashboard_path
     end
 
     def activate
         #get test
-        # check if this test belongs to employee
+        #check_test_owner
         if @test.active
-            @test.active = false
-            if @test.save
-                flash[:success] = 'Test is Not Active now'
-                redirect_to employer_dashboard_path
-            else
-                flash[:danger] = 'Unable to deactivate,Try later'
-                redirect_to employer_dashboard_path
-            end
+            activate_and_flash
         else
-            if @test.marks > 10 # condition
-                @test.active = true
-                if @test.save
-                    flash[:success] = 'Test is Active now'
-                    redirect_to employer_dashboard_path
-                else
-                    flash[:danger] = 'Unable to Activate ,try later'
-                    redirect_to employer_dashboard_path
-                end
-            else
-                flash[:danger] = 'Minimum marks for test is 10'
-                redirect_to test_path(@test)
-            end
+          if @test.marks > 10 # condition
+            activate_and_flash
+          else
+            flash[:danger] = 'Minimum marks for test is 10'
+          end
         end
+        redirect_to test_path(@test)
     end
 
     def privacy
         #get test
-        @test = Test.find(params[:id])
-
-        if @test.private
-            @test.private = false
-            if @test.save
-                flash[:success] = 'This Test is public now'
-                redirect_to employer_dashboard_path
-            else
-                flash[:danger] = 'Unable to change privacy,Try later'
-                redirect_to test_path(@test)
-            end
+        #check_test_owner
+        @test.toggle(:private)
+        if @test.save
+          flash[:success] ="This test is #{@test.private? ? 'Private' : 'Public'} now"
+          redirect_to test_path(@test)
         else
-            @test.private = true
-            if @test.save
-                flash[:success] = 'This Test is private now'
-                redirect_to employer_dashboard_path
-            else
-                flash[:danger] = 'Unable to change privacy,Try later'
-                redirect_to test_path(@test)
-            end
+          flash[:danger] = 'Unable to change privacy,Try later'
+          redirect_to test_path(@test)
         end
     end
 
@@ -163,8 +132,7 @@ class TestsController < ApplicationController
 
     def show
         #get test
-        # check if this test belongs to employer
-        @test = Test.find(params[:id])
+        #check_test_owner
         temp = TestQuestion.all.where(test_id: params[:id]).pluck(:question_id, :marks)
         @test_questions = []
         temp.each do |q, m|
@@ -183,6 +151,15 @@ class TestsController < ApplicationController
         params.require(:test).permit(:name, :date, :duration)
     end
 
+    def activate_and_flash
+      #toggles test activation and displays appropriate flash
+      @test.toggle(:active)
+      if @test.save
+          flash[:success] = "Test is #{@test.active? ? 'Active' : 'Inactive'} now"
+      else
+          flash[:danger] = 'Unable to deactivate,Try later'
+      end
+    end
     # Filters
 
     def check_employer_profile
@@ -193,8 +170,12 @@ class TestsController < ApplicationController
         end
     end
 
-    def get_test
+    def get_test_by_id
       @test=Test.find(params[:id])
+    end
+
+    def get_test_by_test_id
+      @test=Test.find(params[:test_id])
     end
 
     def check_test_owner
