@@ -144,7 +144,6 @@ class TestsController < ApplicationController
             # @test_questions[:marks] << m
         end
         #for right partial
-        byebug
         @questions = Question.where.not(id:temp)
     end
 
