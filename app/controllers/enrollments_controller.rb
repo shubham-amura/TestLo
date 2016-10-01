@@ -12,15 +12,9 @@ class EnrollmentsController < ApplicationController
 
 
   def show_current_question
-
     @current_question = Question.find(params[:id])
-
-
     respond_to do |format|
-
     format.js
-
     end
-
   end
 end

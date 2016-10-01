@@ -64,8 +64,6 @@ GEM
     coffee-script-source (1.10.0)
     commonjs (0.2.7)
     concurrent-ruby (1.0.2)
-    countdown (0.1.0)
-      json
     debug_inspector (0.0.2)
     devise (4.2.0)
       bcrypt (~> 3.0)
@@ -194,7 +192,6 @@ DEPENDENCIES
   autoprefixer-rails
   byebug
   coffee-rails (~> 4.1.0)
-  countdown
   devise
   faker
   jbuilder (~> 2.0)
