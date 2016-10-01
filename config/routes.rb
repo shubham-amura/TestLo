@@ -27,6 +27,8 @@ root 'static_pages#home'
 #test simulation
   get 'taketest/:test_id' , to: 'enrollments#taketest' , as: :taketest
   get 'show_current_question/:id', to: 'enrollments#show_current_question' ,as: :show_current_question
+  post 'submit_clicked' ,to: 'enrollments#submit_clicked', as: :submit_clicked
+
 
 
 
