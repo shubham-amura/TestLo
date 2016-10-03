@@ -1,10 +1,11 @@
 <div class="">
+
   <%= current_que.question %>
-
-
-  <%= form_tag(submit_clicked_path(), remote: true) %>
+  <%= params[:test_id]%>
+  <%= form_tag(submit_clicked_path(:test_id=>params[:test_id]),remote:true) %>
+  <%= hidden_field(:question,:id,:value=>current_que[:id])%>
   <%- if current_que.question_type.to_i == 0 %>
-          <%=number_field_tag "integer_type_answer" %>
+          <%=number_field_tag "response" %>
 
   <%- elsif current_que.question_type.to_i == 1 %>
 

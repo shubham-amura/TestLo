@@ -6,28 +6,33 @@ class EnrollmentsController < ApplicationController
   def taketest
     #check_student_profile
     @current_test = Test.find(params[:test_id])
-    temp=TestQuestion.all.where(test_id:params[:test_id]).pluck(:question_id)
-    @questions = Question.where(id:temp)
+    @temp=TestQuestion.all.where(test_id:params[:test_id]).pluck(:question_id,:marks)
+    @questions = Question.where(id:@temp.map{|a,b| a})
     @current_question = @questions.first
   end
 
 
   def show_current_question
     @current_question = Question.find(params[:id])
+    @current_test=Test.find(params[:test_id])
+    @current_enrollment = Enrollment.find_by(test_id:params[:test_id].to_i,student_id:current_user.id)
+
     respond_to do |format|
     format.js
     end
   end
 
   def submit_clicked
-
-    byebug
-    current_enrollment = Enrollment.find_by(test_id:params[:test_id],student_id:current_user.id)
-
-    current_enrollment.response[:question_id] =
-
+    #byebug
+    @current_enrollment = Enrollment.find_by(test_id:params[:test_id].to_i,student_id:current_user.id)
+    @question_id=params[:question][:id]
+    @response=params[:response]
+    @current_enrollment.response[@question_id]=@response
+    @current_enrollment.save
+    #byebug
+    #redirect_to taketest_path(test_id:params[:test_id])
     respond_to do |format|
-    format.js
+      format.js
     end
   end
 
@@ -38,9 +43,9 @@ class EnrollmentsController < ApplicationController
     Enrollment.create(student_id: current_user.id,test_id:params[:test_id])
     @enrolled_test = Enrollment.all.where(student_id: current_user.id).pluck(:test_id)
 
-   respond_to do |format|
-     format.js
-   end
+    respond_to do |format|
+      format.js
+    end
   end
 
   private

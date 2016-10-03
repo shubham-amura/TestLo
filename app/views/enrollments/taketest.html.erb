@@ -11,17 +11,21 @@
                 <thead>
                     <tr>
                         <th>Question</th>
-
+                        <th>Marks</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <% @questions.each do |question| %>
+                    <% @temp.each do |question_id,marks| %>
 
                     <tr>
                         <td>
-                            <strong><%= link_to question.question ,show_current_question_path(question),remote: true %></strong>
+                            <strong><%= link_to @questions.find(question_id).question ,show_current_question_path(@questions.find(question_id),:test_id=>@current_test),remote: true %></strong>
+                        </td>
+                        <td>
+                          <%=marks %>
                         </td>
                     </tr>
+
                     <%- end %>
                 </tbody>
 
@@ -36,6 +40,10 @@
 
         </div>
 
+    </div>
+
+    <div class="panel-footer">
+      <h3 class ="btn btn-success pull-right"> Finish Test</h3>
     </div>
 
 </div>
