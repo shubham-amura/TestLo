@@ -33,6 +33,8 @@ class ProfilesController < ApplicationController
     @enrolled_test = Enrollment.all.where(student_id: current_user.id).pluck(:test_id)
  end
 
+
+#move this to enrollments
  def enroll_for_test
    #Add filter to complete profile of student
    #redirect to edit profile if profile is not completed.

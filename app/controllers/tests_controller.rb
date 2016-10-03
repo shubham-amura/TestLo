@@ -131,7 +131,7 @@ class TestsController < ApplicationController
 
     def check_employer_profile
         # byebug
-        if current_user.employer_detail.nil?
+        if current_user.employer_detail.nil? and current_user.type="Employer"
             flash[:danger] = 'Complete profile first'
             redirect_to new_employer_details_path
         end
