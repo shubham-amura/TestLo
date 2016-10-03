@@ -29,23 +29,33 @@ class ProfilesController < ApplicationController
 
   def student_dashboard
     @user = current_user
-    @tests = Test.all.page(params[:page])
-    @enrolled_test = Enrollment.all.where(student_id: current_user.id).pluck(:test_id)
- end
+    @enrolled_test = Enrollment.all.where(student_id:current_user.id).pluck(:test_id)
 
+    q=params[:q]
+    if q=="enrolled"
+      @tests = Test.all.where(active:true,id:@enrolled_test).where("date >= ?",Date.today).page(params[:page])
+    elsif q=="not enrolled"
+      #not enrolled and not expired yet
+      @tests = Test.all.where.not(id:@enrolled_test).where(active:true).where("date >= ?",Date.today).page(params[:page])
+    elsif q=="expired"
+      @tests = Test.all.where.not(id:@enrolled_test).where(active:true).where("date < ?",Date.today).page(params[:page])
+    else
+      @tests = Test.all.where(active:true).page(params[:page])
+    end
+ end
 
 #move this to enrollments
- def enroll_for_test
-   #Add filter to complete profile of student
-   #redirect to edit profile if profile is not completed.
-   @user = current_user
-   @tests = Test.all.page params[:page]
-   Enrollment.create(student_id: current_user.id,test_id:params[:test_id])
-   @enrolled_test = Enrollment.all.where(student_id: current_user.id).pluck(:test_id)
-
-  respond_to do |format|
-    format.js
-  end
- end
+ # def enroll_for_test
+ #   #Add filter to complete profile of student
+ #   #redirect to edit profile if profile is not completed.
+ #   @user = current_user
+ #   @tests = Test.all.page params[:page]
+ #   Enrollment.create(student_id: current_user.id,test_id:params[:test_id])
+ #   @enrolled_test = Enrollment.all.where(student_id: current_user.id).pluck(:test_id)
+ #
+ #  respond_to do |format|
+ #    format.js
+ #  end
+ # end
 
 end
