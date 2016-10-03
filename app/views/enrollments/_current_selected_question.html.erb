@@ -1,17 +1,30 @@
 <div class="">
   <%= current_que.question %>
+
+
+  <%= form_tag(submit_clicked_path(), remote: true) %>
   <%- if current_que.question_type.to_i == 0 %>
-          <div class="">
-            <input type="text_field" name="name" value="">
-          </div>
+          <%=number_field_tag "integer_type_answer" %>
 
   <%- elsif current_que.question_type.to_i == 1 %>
 
-  <div class="radio">
-    <label>
-      <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-      <%= current_que.options[0] %>
-    </label>
+      <%= radio_button_tag("response","A") %>
+      <label for=""><%= current_que.options[0] %> </label>
+      <br>
+      <%= radio_button_tag("response","B") %>
+      <label for=""><%= current_que.options[1] %> </label>
+      <br>
+
+      <%= radio_button_tag("response","C") %>
+      <label for=""><%= current_que.options[2] %> </label>
+      <br>
+
+      <%= radio_button_tag("response","D") %>
+      <label for=""><%= current_que.options[3] %> </label>
+      <br>
+
+
+  <!-- <div class="radio">
 
   </div>
 
@@ -34,7 +47,7 @@
       <input type="radio" name="optionsRadios" id="optionsRadios4" value="option4">
       <%= current_que.options[3] %>
     </label>
-  </div>
+  </div> -->
 
 
 
@@ -42,15 +55,41 @@
 
   <%- else %>
 
-          <div class="">
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" value="">
+      <%= current_que.options[0] %>
 
-          </div>
+    </label>
+  </div>
+
+
+  <div class="checkbox">
+
+  <label>
+    <input type="checkbox" value="">
+    <%= current_que.options[1] %>
+  </label>
+</div>
+
+<div class="checkbox">
+  <label>
+    <input type="checkbox" value="">
+    <%= current_que.options[2] %>
+
+  </label>
+</div>
+
+<div class="checkbox">
+  <label>
+    <input type="checkbox" value="">
+    <%= current_que.options[3] %>
+
+  </label>
+</div>
+
 <%- end %>
 <br>
-  <div class="btn btn-primary pull-left">
-
-    <h6>Submit</h6>
-
-  </div>
+  <%= submit_tag("Submit",class:"btn btn-primary") %>
 
 </div>

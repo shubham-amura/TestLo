@@ -19,6 +19,18 @@ class EnrollmentsController < ApplicationController
     end
   end
 
+  def submit_clicked
+
+    byebug
+    current_enrollment = Enrollment.find_by(test_id:params[:test_id],student_id:current_user.id)
+
+    current_enrollment.response[:question_id] =
+
+    respond_to do |format|
+    format.js
+    end
+  end
+
   def enroll_for_test
     #check_student_profile
     @user = current_user
