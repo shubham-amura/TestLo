@@ -82,11 +82,12 @@
                                 <%= link_to "Inactive Tests", employer_dashboard_path(:q=>"inactive"),:class => "btn"%>
                                 <%= link_to "Public Tests", employer_dashboard_path(:q=>"public"),:class => "btn"%>
                               </li>
-                            <%-  else %>
+                            <%- else %>
                               <li>
-                                <%= link_to "All Active Tests",student_dashboard_path  %>
-                                <%= link_to "Enrolled",student_dashboard_path  %>
-                                <%= link_to "Not Enrolled",student_dashboard_path  %>
+                                <%= link_to "All Active Tests",student_dashboard_path %>
+                                <%= link_to "Enrolled",student_dashboard_path(:q=>"enrolled")%>
+                                <%= link_to "Not Enrolled",student_dashboard_path(:q=>"not enrolled")%>
+                                <%= link_to "Expired",student_dashboard_path(:q=>"expired")%>
                               </li>
                             <%- end %>
                         </ul>

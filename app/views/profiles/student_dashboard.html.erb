@@ -22,16 +22,34 @@
                 <td><%= test.date%></td>
                 <td><%= test.number_of_questions%></td>
                 <td><%= test.marks%></td>
-                <% if @enrolled_test.include? test.id%>
-                <td style="margin:10px;" class="btn btn-success">
-                    <%= link_to "Take Test", taketest_path(test),:class => "no-link" %></td>
+
+                <%if Date.today < test.date%>
+                  <% if @enrolled_test.include? test.id%>
+                  <td style="margin:10px;" class="btn btn-success">
+                      <%= link_to "Enrolled",'#',:class => "no-link" %></td>
+                  <%else%>
+                  <td style="margin:10px;">
+                      <%= link_to "Enroll",enroll_for_test_path(test, page: params[:page]),remote:true,:class => "btn btn-primary no-link" %>
+                  </td>
+                  <% end %>
+
+                <%elsif Date.today==test.date%>
+                  <% if @enrolled_test.include? test.id%>
+                    <td style="margin:10px;" class="btn btn-success">
+                      <%= link_to "Take Test",taketest_path(test),:class => "no-link" %></td>
+                    <%else%>
+                    <td style="margin:10px;">
+                        <%= link_to "Enroll",enroll_for_test_path(test, page: params[:page]),remote:true,:class => "btn btn-primary no-link" %>
+                    </td>
+                    <%end%>
+
                 <%else%>
-                <td style="margin:10px;">
-                    <%= link_to "Enroll", enroll_for_test_path(test, page: params[:page]) ,remote: true,:class => "btn btn-primary no-link" %>
-                </td>
-                <% end %>
+                  <td style="margin:10px;">
+                      <%= link_to "Practice",enroll_for_test_path(test, page: params[:page]),:class => "btn btn-primary no-link" %>
+                  </td>
+                <%end%>
             </tr>
             <% end %>
         </div>
     </table>
-    <%= paginate @tests , :params => {:controller => 'profiles', :action => 'student_dashboard'} %>
+    <%= paginate @tests , :params => {:controller => 'profiles',:action => 'student_dashboard'} %>
