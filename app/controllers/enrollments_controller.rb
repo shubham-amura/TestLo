@@ -54,7 +54,7 @@ class EnrollmentsController < ApplicationController
           flash[:danger] = 'Complete profile first'
           return redirect_to new_student_details_path
       end
->>>>>>> 9b78ab2abb711b8f4d97fa14cd011abc23c25086
+
   end
 
 
