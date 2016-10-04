@@ -1,96 +1,63 @@
 <div class="">
 
-  <%= current_que.question %>
-  <%= params[:test_id]%>
-  <%= form_tag(submit_clicked_path(:test_id=>params[:test_id]),remote:true) %>
-  <%= hidden_field(:question,:id,:value=>current_que[:id])%>
-  <%- if current_que.question_type.to_i == 0 %>
+  <%= current_question.question %>
+  <!-- <%= params[:test_id]%> -->
+  <%= form_tag(submit_clicked_path,remote:true) %>
+  <%= hidden_field(:question,:id,:value=>current_question[:id])%>
+  <%= hidden_field(:test,:id,:value=>@current_test.id)%>
+  <%- if current_question.question_type.to_i == 0 %>
           <%=number_field_tag "response" %>
 
-  <%- elsif current_que.question_type.to_i == 1 %>
+  <%- elsif current_question.question_type.to_i == 1 %>
 
       <%= radio_button_tag("response","A") %>
-      <label for=""><%= current_que.options[0] %> </label>
+      <label for="">
+        <%= current_question.options[0] %>
+      </label>
       <br>
+
       <%= radio_button_tag("response","B") %>
-      <label for=""><%= current_que.options[1] %> </label>
+      <label for="">
+        <%= current_question.options[1] %>
+      </label>
       <br>
 
       <%= radio_button_tag("response","C") %>
-      <label for=""><%= current_que.options[2] %> </label>
+      <label for="">
+        <%= current_question.options[2] %>
+      </label>
       <br>
 
       <%= radio_button_tag("response","D") %>
-      <label for=""><%= current_que.options[3] %> </label>
+      <label for="">
+        <%= current_question.options[3] %>
+      </label>
       <br>
 
-
-  <!-- <div class="radio">
-
-  </div>
-
-  <div class="radio">
-    <label>
-      <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-      <%= current_que.options[1] %>
-    </label>
-  </div>
-
-  <div class="radio">
-    <label>
-      <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">
-      <%= current_que.options[2] %>
-    </label>
-  </div>
-
-  <div class="radio">
-    <label>
-      <input type="radio" name="optionsRadios" id="optionsRadios4" value="option4">
-      <%= current_que.options[3] %>
-    </label>
-  </div> -->
-
-
-
-
-
   <%- else %>
+      <%=check_box_tag("response[]","A")%>
+      <label for="">
+        <%= current_question.options[0] %>
+      </label>
+      <br>
 
-  <div class="checkbox">
-    <label>
-      <input type="checkbox" value="">
-      <%= current_que.options[0] %>
+      <%=check_box_tag("response[]","B")%>
+      <label for="">
+        <%= current_question.options[1] %>
+      </label>
+      <br>
 
-    </label>
-  </div>
+      <%=check_box_tag("response[]","C")%>
+      <label for="">
+        <%= current_question.options[2] %>
+      </label>
+      <br>
 
+      <%=check_box_tag("response[]","D")%>
+      <label for="">
+        <%= current_question.options[3] %>
+      </label>
 
-  <div class="checkbox">
-
-  <label>
-    <input type="checkbox" value="">
-    <%= current_que.options[1] %>
-  </label>
-</div>
-
-<div class="checkbox">
-  <label>
-    <input type="checkbox" value="">
-    <%= current_que.options[2] %>
-
-  </label>
-</div>
-
-<div class="checkbox">
-  <label>
-    <input type="checkbox" value="">
-    <%= current_que.options[3] %>
-
-  </label>
-</div>
-
-<%- end %>
-<br>
   <%= submit_tag("Submit",class:"btn btn-primary") %>
-
+<%end%>
 </div>

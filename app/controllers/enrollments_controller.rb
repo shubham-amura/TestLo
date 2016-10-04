@@ -6,8 +6,11 @@ class EnrollmentsController < ApplicationController
   def taketest
     #check_student_profile
     @current_test = Test.find(params[:test_id])
+
     @temp=TestQuestion.all.where(test_id:params[:test_id]).pluck(:question_id,:marks)
     @questions = Question.where(id:@temp.map{|a,b| a})
+
+    #todisplay first question ,right side partial
     @current_question = @questions.first
   end
 
@@ -16,20 +19,19 @@ class EnrollmentsController < ApplicationController
     @current_question = Question.find(params[:id])
     @current_test=Test.find(params[:test_id])
     @current_enrollment = Enrollment.find_by(test_id:params[:test_id].to_i,student_id:current_user.id)
-
     respond_to do |format|
     format.js
     end
   end
 
   def submit_clicked
-    #byebug
+    byebug
     @current_enrollment = Enrollment.find_by(test_id:params[:test_id].to_i,student_id:current_user.id)
     @question_id=params[:question][:id]
     @response=params[:response]
     @current_enrollment.response[@question_id]=@response
     @current_enrollment.save
-    #byebug
+
     #redirect_to taketest_path(test_id:params[:test_id])
     respond_to do |format|
       format.js
