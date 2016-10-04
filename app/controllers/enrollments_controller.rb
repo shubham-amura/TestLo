@@ -9,7 +9,8 @@ class EnrollmentsController < ApplicationController
 
     @temp=TestQuestion.all.where(test_id:params[:test_id]).pluck(:question_id,:marks)
     @questions = Question.where(id:@temp.map{|a,b| a})
-    
+
+    @en=Enrollment.find_by(test_id:params[:test_id],student_id:current_user.id)
     #todisplay first question ,right side partial
     @current_question = @questions.first
   end

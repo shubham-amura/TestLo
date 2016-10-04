@@ -112,6 +112,9 @@ class TestsController < ApplicationController
         join_data
     end
 
+    def reuslt
+      
+    end
     private
 
     def test_params

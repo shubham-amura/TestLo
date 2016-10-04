@@ -19,6 +19,7 @@ root 'static_pages#home'
     member do
      get :activate
      get :privacy
+     get :result
     end
     resources :questions
   end

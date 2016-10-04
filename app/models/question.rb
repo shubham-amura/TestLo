@@ -12,7 +12,7 @@ class Question < ActiveRecord::Base
 
 
   #with test
-  has_many :test_questions
+  has_many :test_questions,dependent: :destroy
   has_many :tests ,through: :test_questions
 
   #with category
@@ -27,5 +27,5 @@ class Question < ActiveRecord::Base
 
   #options
   #correct_answers
-  
+
 end
