@@ -25,8 +25,8 @@ class EnrollmentsController < ApplicationController
   end
 
   def submit_clicked
-    byebug
-    @current_enrollment = Enrollment.find_by(test_id:params[:test_id].to_i,student_id:current_user.id)
+    #byebug
+    @current_enrollment = Enrollment.find_by(test_id:params[:test][:id].to_i,student_id:current_user.id)
     @question_id=params[:question][:id]
     @response=params[:response]
     @current_enrollment.response[@question_id]=@response
