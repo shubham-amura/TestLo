@@ -1,1 +1,18 @@
-Score is <%=@score%>
+<div>
+  <h1>
+    Score is <%=@score%> out of <%=@test.marks%>
+  </h1>
+</div>
+
+<div>
+  <h1>
+    percentage is <%=(@score/@test.marks.to_f)*100%> %
+  </h1>
+</div>
+
+<div>
+  <h1>
+
+  </h1>
+    <%=link_to "See Leaderboard",result_test_path(@test)%>
+</div>

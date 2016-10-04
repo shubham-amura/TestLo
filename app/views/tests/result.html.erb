@@ -4,6 +4,7 @@
         <th>Username</th>
         <th>Email</th>
         <th>Score</th>
+        <th>Percentage</th>
     </tr>
 
     <%@result.each do |student|%>
@@ -12,5 +13,6 @@
         <td><%=student[1]%></td>
         <td><%=student[2]%></td>
         <td><%=student[3]%></td>
+        <td><%=(student[3]/@test.marks.to_f)*100%> %</td>
       </tr>
     <%end%>

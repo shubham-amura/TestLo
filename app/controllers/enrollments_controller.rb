@@ -54,6 +54,7 @@ class EnrollmentsController < ApplicationController
 
 
   def finish
+    @test=Test.find(params[:test_id])
     @score=0
     en=Enrollment.find_by(test_id:params[:test_id],student_id:current_user.id)
     user_response_hash=en.response
@@ -72,12 +73,9 @@ class EnrollmentsController < ApplicationController
           @score+=correct_response_hash[t][:marks]
         end
     end
-
     en.score=@score
     en.attempted=true
     en.save
-
-    byebug
   end
 
   private
@@ -90,6 +88,6 @@ class EnrollmentsController < ApplicationController
   end
 
   def check_test_attempted
-    
+
   end
 end

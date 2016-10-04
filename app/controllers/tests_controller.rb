@@ -68,7 +68,7 @@ class TestsController < ApplicationController
             flash[:danger] = 'Deactivate test first'
             return redirect_to test_path(@test)
         end
-        
+
         tq = TestQuestion.new(test_id: params[:test_id], question_id: params[:question_id], marks: params[:marks])
 
         # test required in view to redirect and change the marks and noq after addition
@@ -119,6 +119,7 @@ class TestsController < ApplicationController
 
     def result
         #get result of tests
+        @test=Test.find(params[:id])
         @result=Enrollment.where(test_id:params[:id],attempted:true).order(score: :desc).joins(:student).pluck(:name,:username,:email,:score)
     end
 
