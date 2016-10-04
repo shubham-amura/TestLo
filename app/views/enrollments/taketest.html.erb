@@ -14,9 +14,18 @@
                 <tbody>
                     <% @temp.each do |question_id,marks| %>
                     <tr>
-                        <td>
-                            <strong><%= link_to get_question(question_id).question ,show_current_question_path(@questions.find(question_id),:test_id=>@current_test),remote: true %></strong>
+                      <td>
+                          <%if question_attempted(question_id,@current_test.id)%>
+                          <strong>
+                            <%= link_to get_question(question_id).question ,show_current_question_path(get_question(question_id),:test_id=>@current_test),remote: true,style:"color:green;"%>
+                          </strong>
+                          <%else%>
+                            <strong>
+                              <%= link_to get_question(question_id).question ,show_current_question_path(get_question(question_id),:test_id=>@current_test),remote: true %>
+                            </strong>
+                        <%end%>
                         </td>
+
                         <td>
                           <%=marks %>
                         </td>

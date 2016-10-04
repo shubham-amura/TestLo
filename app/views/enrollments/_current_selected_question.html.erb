@@ -1,6 +1,8 @@
 <div class="">
 
-  <%= current_question.question %>
+  <strong>
+    <%= current_question.question %>
+  </strong>
   <!-- <%= params%> -->
   <%= form_tag(submit_clicked_path,remote:true) %>
   <%= hidden_field(:question,:id,:value=>current_question[:id])%>

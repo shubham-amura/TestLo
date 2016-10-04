@@ -20,5 +20,10 @@ module EnrollmentsHelper
   def get_question(id)
     return Question.find(id)
   end
-  
+
+  def question_attempted(q_id,test_id)
+    en=Enrollment.find_by(test_id:test_id,student_id:current_user.id)
+    en.response.key?("#{q_id}")
+  end
+
 end

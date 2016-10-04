@@ -1,19 +1,26 @@
 class EnrollmentsController < ApplicationController
+  include EnrollmentsHelper
 
   before_action :check_student_profile,only:[:enroll_for_test,:taketest]
-
 
   def taketest
     #check_student_profile
     #check if test is attempted or not
+    #check enrolled or not
     @current_test = Test.find(params[:test_id])
 
     @temp=TestQuestion.all.where(test_id:params[:test_id]).pluck(:question_id,:marks)
-    @questions = Question.where(id:@temp.map{|a,b| a})
+    @q_ids=@temp.map{|a,b| a}
 
+    @unattempted=@q_ids.select{|t| question_attempted(t,@current_test.id)==false}
 
+    @questions = Question.where(id:@unattempted)
     #todisplay first question ,right side partial
     @current_question = @questions.first
+
+    if @current_question.nil?
+      @current_question=Question.find(@temp[0][0])
+    end
   end
 
 
@@ -34,10 +41,10 @@ class EnrollmentsController < ApplicationController
     @current_enrollment.response[@question_id]=@response.is_a?(Array) ? @response:[@response]
     @current_enrollment.save
 
-    #redirect_to taketest_path(test_id:params[:test_id])
-    respond_to do |format|
-      format.js
-    end
+    redirect_to taketest_path(test_id:params[:test][:id])
+    # respond_to do |format|
+    #   format.js
+    # end
   end
 
   def enroll_for_test
@@ -67,7 +74,6 @@ class EnrollmentsController < ApplicationController
       correct_response_hash[id]={:cr=>question.correct_answer,:marks=>marks}
     end
 
-
     temp.map{|a,b| a}.each do |t|
         if user_response_hash["#{t}"]==correct_response_hash[t][:cr]
           @score+=correct_response_hash[t][:marks]
@@ -85,9 +91,5 @@ class EnrollmentsController < ApplicationController
           flash[:danger] = 'Complete profile first'
           return redirect_to new_student_details_path
       end
-  end
-
-  def check_test_attempted
-
   end
 end
