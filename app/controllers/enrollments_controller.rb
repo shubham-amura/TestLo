@@ -29,7 +29,7 @@ class EnrollmentsController < ApplicationController
     @current_enrollment = Enrollment.find_by(test_id:params[:test][:id].to_i,student_id:current_user.id)
     @question_id=params[:question][:id]
     @response=params[:response]
-    @current_enrollment.response[@question_id]=@response
+    @current_enrollment.response[@question_id]=@response.is_a?(Array) ? @response:[@response]
     @current_enrollment.save
 
     #redirect_to taketest_path(test_id:params[:test_id])
@@ -48,6 +48,29 @@ class EnrollmentsController < ApplicationController
     respond_to do |format|
       format.js
     end
+  end
+
+
+  def finish
+    @score=0
+    en=Enrollment.find_by(test_id:params[:test_id],student_id:current_user.id)
+    user_response_hash=en.response
+
+    temp=TestQuestion.all.where(test_id:params[:test_id]).pluck(:question_id,:marks)
+    correct_response_hash={}
+
+    temp.each do |id,marks|
+      question=Question.find(id)
+      correct_response_hash[id]={:cr=>question.correct_answer,:marks=>marks}
+    end
+
+
+    temp.map{|a,b| a}.each do |t|
+        if user_response_hash["#{t}"]==correct_response_hash[t][:cr]
+          @score+=correct_response_hash[t][:marks]
+        end
+    end
+    byebug
   end
 
   private
