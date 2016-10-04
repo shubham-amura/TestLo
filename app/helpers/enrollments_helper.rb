@@ -5,6 +5,7 @@ module EnrollmentsHelper
     en=Enrollment.find_by(test_id:test.id,student_id:current_user.id)
     en.response["#{question.id}"]
   end
+
   def check_marked(test,question,mark)
     en=Enrollment.find_by(test_id:test.id,student_id:current_user.id)
     en.response["#{question.id}"]==[mark]
@@ -12,6 +13,12 @@ module EnrollmentsHelper
 
   def check_marked_2(test,question,mark)
     en=Enrollment.find_by(test_id:test.id,student_id:current_user.id)
-    en.response["#{question.id}"].include?mark
+    en.response["#{question.id}"].include?mark if en.response["#{question.id}"]!=nil
   end
+
+
+  def get_question(id)
+    return Question.find(id)
+  end
+  
 end

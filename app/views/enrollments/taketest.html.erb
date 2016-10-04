@@ -19,7 +19,7 @@
 
                     <tr>
                         <td>
-                            <strong><%= link_to @questions.find(question_id).question ,show_current_question_path(@questions.find(question_id),:test_id=>@current_test),remote: true %></strong>
+                            <strong><%= link_to get_question(question_id).question ,show_current_question_path(@questions.find(question_id),:test_id=>@current_test),remote: true %></strong>
                         </td>
                         <td>
                           <%=marks %>
@@ -33,6 +33,7 @@
 
         </div>
 
+        <!-- Right -->
         <div class="col-lg-8">
             <div id="div_with_current_question">
                 <%= render 'current_selected_question', current_question: @current_question %>
@@ -42,6 +43,7 @@
 
     </div>
 
+      <!--footer  -->
     <div class="panel-footer">
       <%=link_to "Finish Test",finish_path,class:"btn btn-success pull-right"%>
     </div>

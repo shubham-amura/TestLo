@@ -50,10 +50,8 @@
                         <li><%= link_to "Log Out", destroy_user_session_path  %></li>
                     <%- else %>
                         <li><%= link_to "Sign In", new_user_session_path  %></li>
-
-                        <%- end %>
                         <li><%= link_to "Sign Up", new_user_registration_path  %></li>
-                        <li><%= link_to "Contact", "/path3"  %></li>
+                        <%- end %>
                     </ul>
 
                 </div>
@@ -71,23 +69,23 @@
                         <h3><%= current_user.name %></h3>
                         <ul class="nav nav-list">
                             <li>
-                              <%= link_to "Edit Profile",edit_details_path,:class => "btn " %>
+                                <%= link_to "Edit Profile",edit_details_path,:class => "btn " %>
                             </li>
 
                             <%- if current_user.type == "Employer" %>
-                              <li style="link-style-type:none;">
+                            <li style="link-style-type:none;">
                                 <%= link_to "My Tests", employer_dashboard_path,:class => "btn"%>
                                 <%= link_to "Active Tests", employer_dashboard_path(:q=>"active"),:class => "btn"%>
                                 <%= link_to "Inactive Tests", employer_dashboard_path(:q=>"inactive"),:class => "btn"%>
                                 <%= link_to "Public Tests", employer_dashboard_path(:q=>"public"),:class => "btn"%>
-                              </li>
-                            <%- else %>
-                              <li>
+                            </li>
+                        <%- else %>
+                            <li>
                                 <%= link_to "All Active Tests",student_dashboard_path %>
                                 <%= link_to "Enrolled",student_dashboard_path(:q=>"enrolled")%>
                                 <%= link_to "Not Enrolled",student_dashboard_path(:q=>"not enrolled")%>
                                 <%= link_to "Expired",student_dashboard_path(:q=>"expired")%>
-                              </li>
+                            </li>
                             <%- end %>
                         </ul>
                     </div>

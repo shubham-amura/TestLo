@@ -9,7 +9,7 @@ class EnrollmentsController < ApplicationController
 
     @temp=TestQuestion.all.where(test_id:params[:test_id]).pluck(:question_id,:marks)
     @questions = Question.where(id:@temp.map{|a,b| a})
-
+    
     #todisplay first question ,right side partial
     @current_question = @questions.first
   end
@@ -70,6 +70,10 @@ class EnrollmentsController < ApplicationController
           @score+=correct_response_hash[t][:marks]
         end
     end
+
+    en.score=@score
+    en.save
+
     byebug
   end
 
