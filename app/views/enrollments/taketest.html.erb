@@ -1,11 +1,8 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3><%= @current_test.name %></h3>
-
     </div>
-
     <div class="panel-body">
-
         <div class="col-lg-4 col-sm-4">
             <table class="table border-right">
                 <thead>
@@ -16,7 +13,6 @@
                 </thead>
                 <tbody>
                     <% @temp.each do |question_id,marks| %>
-
                     <tr>
                         <td>
                             <strong><%= link_to get_question(question_id).question ,show_current_question_path(@questions.find(question_id),:test_id=>@current_test),remote: true %></strong>
@@ -25,7 +21,6 @@
                           <%=marks %>
                         </td>
                     </tr>
-
                     <%- end %>
                 </tbody>
 
