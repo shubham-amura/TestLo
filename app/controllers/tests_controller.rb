@@ -64,6 +64,11 @@ class TestsController < ApplicationController
     def add_question_to_current_test
         #get_test_by_test_id
         #check_test_owner
+        if @test.active
+            flash[:danger] = 'Deactivate test first'
+            return redirect_to test_path(@test)
+        end
+        
         tq = TestQuestion.new(test_id: params[:test_id], question_id: params[:question_id], marks: params[:marks])
 
         # test required in view to redirect and change the marks and noq after addition
@@ -112,9 +117,11 @@ class TestsController < ApplicationController
         join_data
     end
 
-    def reuslt
-      
+    def result
+        #get result of tests
+        @result=Enrollment.where(test_id:params[:id],attempted:true).order(score: :desc).joins(:student).pluck(:name,:username,:email,:score)
     end
+
     private
 
     def test_params
