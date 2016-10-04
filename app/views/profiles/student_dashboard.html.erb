@@ -25,8 +25,9 @@
 
                 <%if Date.today < test.date%>
                   <% if @enrolled_test.include? test.id%>
-                  <td style="margin:10px;" class="btn btn-success">
-                      <%= link_to "Enrolled",'#',:class => "no-link" %></td>
+                    <td style="margin:10px;" class="btn btn-success">
+                      <%= link_to "Enrolled",'#',:class => "no-link" %>
+                    </td>
                   <%else%>
                   <td style="margin:10px;">
                       <%= link_to "Enroll",enroll_for_test_path(test, page: params[:page]),remote:true,:class => "btn btn-primary no-link" %>
@@ -34,18 +35,24 @@
                   <% end %>
 
                 <%elsif Date.today==test.date%>
-                  <% if @enrolled_test.include? test.id%>
-                    <td style="margin:10px;" class="btn btn-success">
-                      <%= link_to "Take Test",taketest_path(test),:class => "no-link" %></td>
-                    <%else%>
+                  <%if @enrolled_test.include? test.id%>
+                      <%if test_attempted(test.id)%>
+                        <td style="margin:10px;" class="btn btn-success">
+                          <%= link_to "Result",result_test_path(test),:class => "no-link" %>
+                        </td>
+                      <%else%>
+                        <td style="margin:10px;" class="btn btn-success">
+                          <%= link_to "Take Test",taketest_path(test),:class => "no-link" %>
+                        </td>
+                      <%end%>
+                  <%else%>
                     <td style="margin:10px;">
                         <%= link_to "Enroll",enroll_for_test_path(test, page: params[:page]),remote:true,:class => "btn btn-primary no-link" %>
                     </td>
-                    <%end%>
-
+                  <%end%>
                 <%else%>
-                  <td style="margin:10px;">
-                      <%= link_to "Practice",enroll_for_test_path(test, page: params[:page]),:class => "btn btn-primary no-link" %>
+                  <td style="margin:10px;" class="btn btn-success">
+                    <%= link_to "Result",result_test_path(test),:class => "no-link" %>
                   </td>
                 <%end%>
             </tr>

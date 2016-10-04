@@ -39,6 +39,9 @@ class ProfilesController < ApplicationController
       @tests = Test.all.where.not(id:@enrolled_test).where(active:true).where("date >= ?",Date.today).page(params[:page])
     elsif q=="expired"
       @tests = Test.all.where.not(id:@enrolled_test).where(active:true).where("date < ?",Date.today).page(params[:page])
+    elsif q=="attempted"
+      @enrolled_test = Enrollment.all.where(student_id:current_user.id,attempted:true).pluck(:test_id)
+      @tests=Test.all.where(id:@enrolled_test).page(params[:page])
     else
       @tests = Test.all.where(active:true).page(params[:page])
     end

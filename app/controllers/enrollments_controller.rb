@@ -5,6 +5,7 @@ class EnrollmentsController < ApplicationController
 
   def taketest
     #check_student_profile
+    #check if test is attempted or not
     @current_test = Test.find(params[:test_id])
 
     @temp=TestQuestion.all.where(test_id:params[:test_id]).pluck(:question_id,:marks)
@@ -86,5 +87,9 @@ class EnrollmentsController < ApplicationController
           flash[:danger] = 'Complete profile first'
           return redirect_to new_student_details_path
       end
+  end
+
+  def check_test_attempted
+    
   end
 end
