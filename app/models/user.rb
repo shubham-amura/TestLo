@@ -6,7 +6,6 @@ class User < ActiveRecord::Base
 #email
 #pass
 
-
 #validations
 
 validates :username,
