@@ -2,6 +2,16 @@
     <div class="panel-heading">
         <h3><%= @current_test.name %></h3>
     </div>
+
+    <div class="countdown panel-heading pull-right">
+      <h3>Countdown</h3>
+    </div>
+
+    <div class="timer hidden">
+          <h3><%=@current_test.duration.hour*60*60 + @current_test.duration.min*60 + @current_test.duration.sec%></h3>
+          <h3><%=@now.hour*60*60 +@now.min*60 + @now.sec %></h3>
+    </div>
+
     <div class="panel-body">
         <div class="col-lg-4 col-sm-4">
             <table class="table border-right">

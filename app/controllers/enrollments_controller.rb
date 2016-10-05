@@ -21,6 +21,7 @@ class EnrollmentsController < ApplicationController
     if @current_question.nil?
       @current_question=Question.find(@temp[0][0])
     end
+    @now=Time.now
   end
 
 
