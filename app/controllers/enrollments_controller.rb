@@ -7,7 +7,24 @@ class EnrollmentsController < ApplicationController
     #check_student_profile
     #check if test is attempted or not
     #check enrolled or not
+
+
     @current_test = Test.find(params[:test_id])
+
+    @en=Enrollment.find_by(test_id:params[:test_id],student_id:current_user.id)
+
+    unless @en.start_time.nil?
+      if Time.now.utc > @en.start_time.plus_with_duration(get_total_seconds(@current_test.duration))
+        flash[:danger]="Time is over"
+
+        #if not attempted and time is over ,call finish action
+        unless @en.attempted
+          redirect_to finish_path
+        else
+        redirect_to student_dashboard_path
+        end
+      end
+    end
 
     @temp=TestQuestion.all.where(test_id:params[:test_id]).pluck(:question_id,:marks)
     @q_ids=@temp.map{|a,b| a}
@@ -21,7 +38,14 @@ class EnrollmentsController < ApplicationController
     if @current_question.nil?
       @current_question=Question.find(@temp[0][0])
     end
-    @now=Time.now
+
+    if @en.start_time.nil?
+      @en.start_time=DateTime.now
+      @en.save
+    end
+
+    @now=@en.start_time.getlocal
+    #because chrome uses local time by defualt
   end
 
 
@@ -92,5 +116,10 @@ class EnrollmentsController < ApplicationController
           flash[:danger] = 'Complete profile first'
           return redirect_to new_student_details_path
       end
+  end
+
+  def get_total_seconds(t)
+    total=t.hour*60*60 + t.min*60 + t.sec
+    return total;
   end
 end

@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20161005064206) do
     t.integer  "score"
     t.string   "response"
     t.boolean  "attempted",  default: false
-    t.time     "start_time"
+    t.datetime "start_time"
   end
 
   add_index "enrollments", ["student_id"], name: "index_enrollments_on_student_id"

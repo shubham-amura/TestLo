@@ -9,16 +9,16 @@ function myTimer()
  {
    var total_time=$('div .timer :first-child').html();
    total_time=parseInt(total_time);
-  //  console.log(total_time);
+  // console.log(total_time);
 
    var start_time=$('div .timer :last-child').html();
    start_time=parseInt(start_time);
-  //  console.log(start_time);
+  // console.log(start_time);
 
    var now=new Date();
 
    var current_time=now.getHours()*60*60 + now.getMinutes()*60 + now.getSeconds()
-
+  //  console.log(current_time);
    var secs=total_time-(current_time-start_time)
 
    $('.countdown :first-child').html(convert(secs));
