@@ -109,6 +109,12 @@ class EnrollmentsController < ApplicationController
     en.save
   end
 
+  def timeup
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def check_student_profile

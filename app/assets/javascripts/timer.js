@@ -34,10 +34,35 @@ function myTimer()
 function convert(totalSec)
 {
 // var totalSec = new Date().getTime() / 1000;
+
+if(totalSec==0)
+{
+  timeUP();
+}
 var hours = parseInt( totalSec / 3600 ) % 24;
 var minutes = parseInt( totalSec / 60 ) % 60;
 var seconds = totalSec % 60;
 
 var result = (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds  < 10 ? "0" + seconds : seconds);
 return result;
+}
+
+
+function timeUP()
+{
+  $.ajax({
+      type: "GET",
+      url: document.URL+"/timeup",
+      success:function(data)
+      {
+          alert('time up');
+      },
+
+       error:function(data){
+           alert('failed');
+       }
+    });
+  //alert("Times Up");
+  //send ajax to finish action here
+
 }

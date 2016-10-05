@@ -28,6 +28,7 @@ root 'static_pages#home'
 #test simulation
   get 'taketest/:test_id' , to: 'enrollments#taketest' , as: :taketest
   get 'taketest/:test_id/finish',to: 'enrollments#finish',as: :finish
+  get 'taketest/:test_id/timeup',to: 'enrollments#timeup'
 
   get 'show_current_question/:id', to: 'enrollments#show_current_question' ,as: :show_current_question
   post 'submit_clicked' ,to: 'enrollments#submit_clicked', as: :submit_clicked
