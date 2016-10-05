@@ -15,14 +15,9 @@ class QuestionsController < ApplicationController
     @question=current_user.questions.build(question_params)
 
     @test=Test.find(params[:test_id])
+
     if @question.save
       flash[:success]="Question added to Bank successfully"
-      tq=TestQuestion.new(test_id:@test.id,question_id:@question.id)
-      if tq.save
-        @test.marks+=tq.marks
-        @test.number_of_questions+=1
-        @test.save
-      end
       redirect_to test_path(@test)
     else
       @question.a=@question.options[0]

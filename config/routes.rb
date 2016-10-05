@@ -14,14 +14,14 @@ root 'static_pages#home'
 
     get 'profile/:id' => 'profiles#show' , as: :profile
 
-    
+
   resources :tests do
     member do
      get :activate
      get :privacy
      get :result
     end
-    resources :questions
+    resources :questions ,:only => [:new, :create]
   end
 
 
