@@ -21,6 +21,7 @@ function myTimer()
   //  console.log(current_time);
    var secs=total_time-(current_time-start_time)
 
+   //countdown timer div
    $('.countdown :first-child').html(convert(secs));
   //  alert(convert(secs));
 
@@ -34,7 +35,7 @@ function myTimer()
 function convert(totalSec)
 {
 // var totalSec = new Date().getTime() / 1000;
-
+//converts seconds to HHMMSS
 if(totalSec==0)
 {
   timeUP();
@@ -55,7 +56,7 @@ function timeUP()
       url: document.URL+"/finish.js",
       success:function(data)
       {
-          alert('time up');
+          alert('Time up');
       },
 
        error:function(data){
