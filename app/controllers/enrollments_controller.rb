@@ -107,10 +107,9 @@ class EnrollmentsController < ApplicationController
     en.score=@score
     en.attempted=true
     en.save
-  end
 
-  def timeup
     respond_to do |format|
+      format.html
       format.js
     end
   end

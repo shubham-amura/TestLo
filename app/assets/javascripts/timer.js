@@ -52,7 +52,7 @@ function timeUP()
 {
   $.ajax({
       type: "GET",
-      url: document.URL+"/timeup",
+      url: document.URL+"/finish.js",
       success:function(data)
       {
           alert('time up');
