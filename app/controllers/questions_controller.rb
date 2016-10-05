@@ -12,7 +12,8 @@ class QuestionsController < ApplicationController
 
   def create
     #should logged and should be employer
-    @question=Question.new(question_params)
+    @question=current_user.questions.build(question_params)
+
     @test=Test.find(params[:test_id])
     if @question.save
       flash[:success]="Question added to Bank successfully"
@@ -29,6 +30,14 @@ class QuestionsController < ApplicationController
       @question.c=@question.options[2]
       @question.d=@question.options[3]
       render 'new'
+    end
+  end
+
+  def destroy
+    @question=Question.find(params[:id])
+    if @question.destroy
+      flash[:success]="Question Removed from Question bank"
+      redirect_to test_path(id:params[:test_id])
     end
   end
 

@@ -16,4 +16,8 @@ class ApplicationController < ActionController::Base
     #redirect_to profile_path(current_user) unless current_user.id.to_i == params[:id].to_i
   end
 
+  def get_user
+    @user=current_user
+  end
+
 end

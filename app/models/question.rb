@@ -18,10 +18,13 @@ class Question < ActiveRecord::Base
   #with category
   belongs_to :category
 
+  #
+  belongs_to :employer
+
   #validations
   validates :question,
                       presence:true
-                      
+
   validates :question_type,
                           presence:true,
                           numericality: { only_integer: true,greater_than_or_equal_to:0,less_than_or_equal_to:2}

@@ -14,7 +14,7 @@ root 'static_pages#home'
 
     get 'profile/:id' => 'profiles#show' , as: :profile
 
-
+    
   resources :tests do
     member do
      get :activate

@@ -4,4 +4,6 @@ class Employer < User
 
   #with tests
   has_many :tests
+
+  has_many :questions
  end
