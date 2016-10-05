@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161004091201) do
+ActiveRecord::Schema.define(version: 20161005064206) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20161004091201) do
     t.integer  "score"
     t.string   "response"
     t.boolean  "attempted",  default: false
+    t.time     "start_time"
   end
 
   add_index "enrollments", ["student_id"], name: "index_enrollments_on_student_id"
