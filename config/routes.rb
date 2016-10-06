@@ -24,6 +24,8 @@ root 'static_pages#home'
     resources :questions ,:only => [:new, :create]
   end
 
+  resources :questions ,:only =>[:show]
+
 #test simulation
   get 'taketest/:test_id' , to: 'enrollments#taketest' , as: :taketest
   get 'taketest/:test_id/finish',to: 'enrollments#finish',as: :finish

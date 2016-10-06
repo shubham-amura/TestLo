@@ -1,0 +1,35 @@
+
+<div>
+  <div>
+      <%if @question.question_type==0%>
+        <h3>Integer Answer Correct</h3>
+      <%elsif @question.question_type==1%>
+        <h3>Single Answer Conrrect</h3>
+      <%else%>
+        <h3>Single Answer Conrrect</h3>
+      <%end%>
+  </div>
+
+  <div>
+    <br>
+      <h1><%=@question.question%></h1>
+  </div>
+
+  <div>
+    <br>
+    <%unless @question.question_type==0%>
+    <h3>Options:</h3>
+    <h3>A=> <%=@question.options[0]%></h3>
+    <h3>B=> <%=@question.options[1]%></h3>
+    <h3>C=> <%=@question.options[2]%></h3>
+    <h3>D=> <%=@question.options[3]%></h3>
+    <%end%>
+  </div>
+
+  <div>
+    <br>
+    <h3>Correct Answer:</h3>
+    <h3><%=@question.correct_answer%></h3>
+  </div>
+
+</div>
