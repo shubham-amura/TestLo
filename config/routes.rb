@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root 'static_pages#home'
 
   get '/error',to:'static_pages#error',as: :error
+  get '/not_found',to:'static_pages#not_found',as: :not_found
   #devise_for :users
 
 
