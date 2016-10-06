@@ -24,6 +24,7 @@
                 <td><%= test.marks%></td>
 
                 <%if Date.today < test.date%>
+                  less
                   <% if @enrolled_test.include? test.id%>
                     <td style="margin:10px;" class="btn btn-success">
                       <%= link_to "Enrolled",'#',:class => "no-link" %>
@@ -35,6 +36,7 @@
                   <% end %>
 
                 <%elsif Date.today==test.date%>
+                  equal
                   <%if @enrolled_test.include? test.id%>
                       <%if test_attempted(test.id)%>
                         <td style="margin:10px;" class="btn btn-success">
@@ -51,6 +53,7 @@
                     </td>
                   <%end%>
                 <%else%>
+                expired
                   <td style="margin:10px;" class="btn btn-success">
                     <%= link_to "Result",result_test_path(test),:class => "no-link" %>
                   </td>
