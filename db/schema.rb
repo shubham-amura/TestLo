@@ -13,7 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20161005115022) do
 
-
   create_table "categories", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -40,7 +39,6 @@ ActiveRecord::Schema.define(version: 20161005115022) do
     t.datetime "updated_at",                 null: false
     t.integer  "score"
     t.string   "response"
-
     t.boolean  "attempted",  default: false
     t.datetime "start_time"
   end
