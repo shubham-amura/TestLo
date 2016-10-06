@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
 
 
-root 'static_pages#home'
+  root 'static_pages#home'
 
+  get '/error',to:'static_pages#error',as: :error
   #devise_for :users
 
 
@@ -13,7 +14,6 @@ root 'static_pages#home'
     get 'profile/employer_dashboard' => 'profiles#employer_dashboard', as: :employer_dashboard
 
     get 'profile/:id' => 'profiles#show' , as: :profile
-
 
   resources :tests do
     member do
@@ -40,8 +40,9 @@ root 'static_pages#home'
 
   get 'enroll_for_test/:test_id' , to: 'enrollments#enroll_for_test',as: :enroll_for_test
 
-  get 'details/edit',to:'details#edit',as: :edit_details
 
+  #common for both student and employer
+  get 'details/edit',to:'details#edit',as: :edit_details
   #student_details
   get '/details/edit_student_details',to:'details#edit_student_details',as: :edit_student_details
   get '/details/new_student_details',to:'details#new_student_details',as: :new_student_details

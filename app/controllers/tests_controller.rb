@@ -1,5 +1,6 @@
 class TestsController < ApplicationController
-    before_action :check_employer_profile, only: [:create, :new]
+    before_action :check_user
+    before_action :check_employer_profile, only: [:create,:new]
 
     before_action :get_test_by_id ,only:[:destroy,:activate,:privacy,:show]
     before_action :get_test_by_test_id,only:[:add_question_to_current_test,:remove_question_from_current_test]
@@ -140,11 +141,17 @@ class TestsController < ApplicationController
     end
     # Filters
 
+    def check_user
+        unless current_user.type=="Employer"
+          flash[:danger]="Authorizaion Error"
+          redirect_to error_path
+        end
+    end
+
     def check_employer_profile
-        # byebug
-        if current_user.employer_detail.nil? and current_user.type="Employer"
-            flash[:danger] = 'Complete profile first'
-            redirect_to new_employer_details_path
+        if current_user.employer_detail.nil?
+          flash[:danger] = 'Complete profile first'
+          redirect_to new_employer_details_path
         end
     end
 

@@ -1,27 +1,24 @@
 class EnrollmentsController < ApplicationController
   include EnrollmentsHelper
-
+  before_action :check_user
   before_action :check_student_profile,only:[:enroll_for_test,:taketest]
+  before_action :get_test_by_id,only:[:taketest]
+  before_action :get_enrollment,only:[:taketest]
 
   def taketest
     #check_student_profile
+    #get test
+    #get enrollment(also check enrolled or not)
     #check if test is attempted or not
-    #check enrolled or not
-
-
-    @current_test = Test.find(params[:test_id])
-
-    @en=Enrollment.find_by(test_id:params[:test_id],student_id:current_user.id)
-
     unless @en.start_time.nil?
+      #if user is trying to take test more than once
       if Time.now.utc > @en.start_time.plus_with_duration(get_total_seconds(@current_test.duration))
         flash[:danger]="Time is over"
-
         #if not attempted and time is over ,call finish action
         unless @en.attempted
           redirect_to finish_path
         else
-        redirect_to student_dashboard_path
+          redirect_to student_dashboard_path
         end
       end
     end
@@ -116,15 +113,39 @@ class EnrollmentsController < ApplicationController
 
   private
 
-  def check_student_profile
-      if current_user.student_detail.nil?
-          flash[:danger] = 'Complete profile first'
-          return redirect_to new_student_details_path
+  def get_enrollment
+    @en=Enrollment.find_by(test_id:params[:test_id],student_id:current_user.id)
+    if @en.nil?
+      flash[:danger]="Enroll First"
+      redirect_to student_dashboard_path
+    end
+  end
+
+  def get_test_by_id
+    @current_test = Test.find_by(id:params[:test_id])
+    if @current_test.nil?
+      flash[:danger]="Test doesnt exist"
+      redirect_to student_dashboard_path
+    end
+  end
+
+  def check_user
+      unless current_user.type=="Student"
+        flash[:danger]="Authorizaion Error"
+        redirect_to error_path
       end
   end
 
-  def get_total_seconds(t)
-    total=t.hour*60*60 + t.min*60 + t.sec
-    return total;
-  end
+  def check_student_profile
+      if current_user.type=="Student"
+        if current_user.student_detail.nil?
+            flash[:danger] = 'Complete profile first'
+            return redirect_to new_student_details_path
+        end
+      else
+        flash[:danger]="Authorizaion Error"
+        redirect_to error_path
+      end
+    end
+
 end
