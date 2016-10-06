@@ -11,6 +11,7 @@ class EnrollmentsController < ApplicationController
 
     @current_test = Test.find(params[:test_id])
 
+
     @en=Enrollment.find_by(test_id:params[:test_id],student_id:current_user.id)
 
     unless @en.start_time.nil?
@@ -46,6 +47,7 @@ class EnrollmentsController < ApplicationController
 
     @now=@en.start_time.getlocal
     #because chrome uses local time by defualt
+
   end
 
 
@@ -53,6 +55,21 @@ class EnrollmentsController < ApplicationController
     @current_question = Question.find(params[:id])
     @current_test=Test.find(params[:test_id])
     @current_enrollment = Enrollment.find_by(test_id:params[:test_id].to_i,student_id:current_user.id)
+    respond_to do |format|
+
+      format.js
+  end
+  end
+
+
+
+  def submit_clicked
+
+    byebug
+    current_enrollment = Enrollment.find_by(test_id:params[:test_id],student_id:current_user.id)
+
+    current_enrollment.response[:question_id] =
+
     respond_to do |format|
     format.js
     end
@@ -121,10 +138,15 @@ class EnrollmentsController < ApplicationController
           flash[:danger] = 'Complete profile first'
           return redirect_to new_student_details_path
       end
+
   end
 
+<<<<<<< HEAD
   def get_total_seconds(t)
     total=t.hour*60*60 + t.min*60 + t.sec
     return total;
   end
+=======
+
+>>>>>>> 32af8081d0b3dc32e1d5e349e9c486914b0b8008
 end
