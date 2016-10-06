@@ -1,10 +1,8 @@
 class TestsController < ApplicationController
     before_action :check_employer_profile, only: [:create, :new]
-
     before_action :get_test_by_id ,only:[:destroy,:activate,:privacy,:show]
+    before_action :check_test_owner,only:[:destroy,:activate,:privacy]
     before_action :get_test_by_test_id,only:[:add_question_to_current_test,:remove_question_from_current_test]
-
-    before_action :check_test_owner,only:[:destroy,:activate,:privacy,:add_question_to_current_test,:remove_question_from_current_test]
 
     def index
         @tests = Test.all
@@ -63,6 +61,7 @@ class TestsController < ApplicationController
 
     def add_question_to_current_test
         #get_test_by_test_id
+
         #check_test_owner
         if @test.active
             flash[:danger] = 'Deactivate test first'
@@ -71,41 +70,68 @@ class TestsController < ApplicationController
 
         tq = TestQuestion.new(test_id: params[:test_id], question_id: params[:question_id], marks: params[:marks])
 
+
         # test required in view to redirect and change the marks and noq after addition
-        if tq.save
-          @test.marks += tq.marks.to_i
-          @test.number_of_questions += 1
-          @test.save
+        @test = Test.find(params[:test_id])
+        @test.marks += tq.marks.to_i
+        @test.number_of_questions += 1
+        @test.save
+
+        # View data logic
+
+        # left partial , all test questions and their assigned marks
+        temp = TestQuestion.all.where(test_id: params[:test_id]).pluck(:question_id, :marks)
+        @test_questions = []
+        temp.each do |q, m|
+            @temp_question = {}
+            @temp_question[:question] = Question.find(q.to_i)
+            @temp_question[:marks] = m
+            @test_questions << @temp_question
         end
 
-        # view logic
-        join_data
-        # redirect_to test_path(@test) (if not using ajax)
+        # Dont show questions added in test ,so not.
+        @questions = Question.where.not(id: temp)
+
+        # redirect_to test_path(@test)
+
+        # ajax ,remote true
         respond_to do |format|
             format.js
         end
     end
 
     def remove_question_from_current_test
-        #get_test_by_test_id
-        #check_owner
+        # check if this test belongs to employer
+        @test = Test.find(params[:test_id])
+
         if @test.active
             flash[:danger] = 'Deactivate test first'
             return redirect_to test_path(@test)
         end
 
         q = TestQuestion.find_by(test_id: params[:test_id], question_id: params[:question_id])
+        q.destroy unless q.nil?
 
-        unless q.nil?
-          if q.destroy
-            @test.marks -= q.marks.to_i
-            @test.number_of_questions -= 1
-            @test.save
-          end
-        end
+        # test required in view to redirect
+        # @test = Test.find(params[:test_id])
+        @test.marks -= q.marks.to_i
+        @test.number_of_questions -= 1
+        @test.save
+
         # view logic
-        join_data
-        # redirect_to test_path(@test) (if not using ajax)
+        temp = TestQuestion.all.where(test_id: params[:test_id]).pluck(:question_id, :marks)
+        @test_questions = []
+        temp.each do |q, m|
+            @temp_question = {}
+            @temp_question[:question] = Question.find(q.to_i)
+            @temp_question[:marks] = m
+            @test_questions << @temp_question
+        end
+
+        # Dont show questions added in test ,so not.
+        @questions = Question.where.not(id: temp)
+
+        # redirect_to test_path(@test)
         respond_to do |format|
             format.js
         end
@@ -114,7 +140,18 @@ class TestsController < ApplicationController
     def show
         #get test
         #check_test_owner
-        join_data
+        #for left partial
+        temp = TestQuestion.all.where(test_id: params[:id]).pluck(:question_id, :marks)
+        @test_questions = []
+        temp.each do |q, m|
+            @temp_question = {}
+            @temp_question[:question] = Question.find(q.to_i)
+            @temp_question[:marks] = m
+            @test_questions << @temp_question
+            # @test_questions[:marks] << m
+        end
+        #for right partial
+        @questions = Question.where.not(id:temp)
     end
 
     def result
@@ -141,8 +178,9 @@ class TestsController < ApplicationController
     # Filters
 
     def check_employer_profile
-        # byebug
-        if current_user.employer_detail.nil? and current_user.type="Employer"
+
+        if current_user.employer_detail.nil?
+
             flash[:danger] = 'Complete profile first'
             redirect_to new_employer_details_path
         end
@@ -157,27 +195,10 @@ class TestsController < ApplicationController
     end
 
     def check_test_owner
+
       unless @test.employer_id==current_user.id
         flash[:danger]="You are not owner of this test"
         redirect_to employer_dashboard_path
       end
-    end
-
-    def join_data
-      #this function gives collections to  partials and javascripts
-      #[TestQuestion joins Question]
-      #for left partial
-      temp = TestQuestion.all.where(test_id:@test.id).pluck(:question_id, :marks)
-      #temp=>[question_id,marks]
-      @test_questions = []
-      temp.each do |q, m|
-          @temp_question = {}
-          @temp_question[:question] = Question.find(q.to_i)
-          @temp_question[:marks] = m
-          @test_questions << @temp_question
-          # @test_questions[:marks] << m
-      end
-      #for right partial
-      @questions = Question.where.not(id:temp.map{|a,b| a})
     end
 end
