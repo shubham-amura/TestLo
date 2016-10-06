@@ -8,6 +8,7 @@ FactoryGirl.define do
     f.phone_no {  Faker::PhoneNumber.cell_phone}
     f.username {  Faker::Internet.user_name    }
     f.password {  Faker::Internet.password     }
+    
 
   end
 end

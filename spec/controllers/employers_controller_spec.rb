@@ -1,5 +1,5 @@
-require 'spec_helper'
-
-describe EmployersController do
-
-end
+# require 'spec_helper'
+#
+# describe EmployersController do
+#
+# end
