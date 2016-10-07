@@ -25,15 +25,14 @@ class Test < ActiveRecord::Base
   validates :duration,
              presence: true
 
-  # validate :duration_greater_than_zero
-  #
-  #
-  # def duration_greater_than_zero
-  #   if duration.to_time.m > 0
-  #     errors.add(:duration, "can't be zero")
-  #   end
-  #
-  # end
+  validate :duration_greater_than_zero
+
+
+  def duration_greater_than_zero
+    if self.duration <= 0
+      errors.add(:duration, "can't be zero")
+    end
+  end
 
 
 

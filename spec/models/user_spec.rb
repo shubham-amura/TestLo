@@ -8,7 +8,16 @@ describe User, type: :model do
     it "invalid if number are used" do
       FactoryGirl.build(:user,name: 131).should_not be_valid
     end
-    
+
+    it "Invalid if special characters are used" do
+        build(:user,name: "!@U^" ).should_not be_valid
+    end
+
+    it "Invalid if numerics and special character are used" do
+        build(:user,name: "ajsdh@218%^$" ).should_not be_valid
+    end
+
+
   end
 
 end
