@@ -17,7 +17,14 @@ describe User, type: :model do
         build(:user,name: "ajsdh@218%^$" ).should_not be_valid
     end
 
-
   end
+
+  describe "Number validation of user phone" do
+
+    it "Invalid phone number" do
+      build(:user,phone_no: "8726371faf" ).should_not be_valid
+    end
+  end
+  
 
 end
