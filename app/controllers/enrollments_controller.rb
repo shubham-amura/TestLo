@@ -49,11 +49,11 @@ class EnrollmentsController < ApplicationController
     end
 
     join_data
-
-    redirect_to taketest_path(@current_test)
-    # respond_to do |format|
-    #   format.js
-    # end
+    @now=@current_enrollment.start_time.getlocal
+    #redirect_to taketest_path(@current_test)
+    respond_to do |format|
+      format.js
+    end
   end
 
   def enroll_for_test
