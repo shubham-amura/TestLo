@@ -23,7 +23,7 @@ class Test < ActiveRecord::Base
 
   #duration validation
   validates :duration,
-             presence: true,
+             presence: true
 
   # validate :duration_greater_than_zero
   #
