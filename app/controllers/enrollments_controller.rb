@@ -4,9 +4,8 @@ class EnrollmentsController < ApplicationController
   before_action :check_student_profile,only:[:enroll_for_test,:taketest]
   before_action :get_test_by_id,only:[:taketest,:show_current_question]
 
-  before_action :get_test_by_id_2,only:[:submit_clicked]
-  before_action :get_enrollment,only:[:taketest,:submit_clicked]
-  before_action :check_test_time,only:[:taketest,:submit_clicked]
+  before_action :get_enrollment,only:[:taketest]
+  before_action :check_test_time,only:[:taketest]
 
   def taketest
     #check_student_profile
@@ -39,6 +38,7 @@ class EnrollmentsController < ApplicationController
     #test
     #enrollments
     #time
+    @current_test=Test.find(params[:test][:id])
     @current_enrollment = Enrollment.find_by(test_id:params[:test][:id].to_i,student_id:current_user.id)
     @question_id=params[:question][:id]
     @response=params[:response]
@@ -48,15 +48,17 @@ class EnrollmentsController < ApplicationController
       @current_enrollment.save
     end
 
-    join data
+    join_data
 
-    respond_to do |format|
-      format.js
-    end
+    redirect_to taketest_path(@current_test)
+    # respond_to do |format|
+    #   format.js
+    # end
   end
 
   def enroll_for_test
     #check_student_profile
+    @user=current_user
     @tests = Test.all.page(params[:page])
     Enrollment.create(student_id: current_user.id,test_id:params[:test_id])
     @enrolled_test = Enrollment.all.where(student_id: current_user.id).pluck(:test_id)
