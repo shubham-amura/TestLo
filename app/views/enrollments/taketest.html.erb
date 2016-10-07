@@ -41,11 +41,6 @@
                         </td>
 
                         <td>
-
-
-                            <strong><%= link_to @questions.find(question_id).question ,show_current_question_path(@questions.find(question_id)),remote: true %></strong>
-                        </td>
-                        <td>
                           <%=  marks %>
                         </td>
                     </tr>
@@ -67,16 +62,9 @@
 
     </div>
 
-<<<<<<< HEAD
       <!--footer  -->
     <div class="panel-footer">
       <%=link_to "Finish Test",finish_path,class:"btn btn-success pull-right"%>
     </div>
 </div>
-=======
-    <div class="panel-footer">
-      <h3 class ="btn btn-success pull-right"> Finish Test</h3>
-    </div>
-
->>>>>>> 32af8081d0b3dc32e1d5e349e9c486914b0b8008
 </div>

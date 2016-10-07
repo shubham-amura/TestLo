@@ -4,6 +4,7 @@ class TestsController < ApplicationController
     before_action :get_test_by_id ,only:[:destroy,:activate,:privacy,:show]
     before_action :get_test_by_test_id,only:[:add_question_to_current_test,:remove_question_from_current_test]
     before_action :check_test_owner,only:[:destroy,:activate,:privacy,:add_question_to_current_test,:remove_question_from_current_test]
+    before_action :check_test_active,only:[:add_question_to_current_test,:remove_question_from_current_test,:destroy]
 
     def index
         @tests = Test.all
@@ -25,15 +26,17 @@ class TestsController < ApplicationController
     end
 
     def destroy
-        #get test
+        #get_test_by_id
         #check_test_owner
-        @test.destroy
-        flash[:success] = 'Deleted Successfully'
-        redirect_to employer_dashboard_path
+        #check_test_active
+        if @test.destroy
+          flash[:success] = 'Deleted Successfully'
+          redirect_to employer_dashboard_path
+        end
     end
 
     def activate
-        #get test
+        #get_test_by_id
         #check_test_owner
         if @test.active
             activate_and_flash
@@ -48,7 +51,7 @@ class TestsController < ApplicationController
     end
 
     def privacy
-        #get test
+        #get_test_by_id
         #check_test_owner
         @test.toggle(:private)
         if @test.save
@@ -63,16 +66,11 @@ class TestsController < ApplicationController
     def add_question_to_current_test
         #get_test_by_test_id
         #check_test_owner
-        if @test.active
-            flash[:danger] = 'Deactivate test first'
-            return redirect_to test_path(@test)
-        end
-
-        tq = TestQuestion.new(test_id: params[:test_id], question_id: params[:question_id], marks: params[:marks])
+        test_question = TestQuestion.new(test_id: params[:test_id], question_id: params[:question_id], marks: params[:marks])
 
         # test required in view to redirect and change the marks and noq after addition
-        if tq.save
-          @test.marks += tq.marks.to_i
+        if test_question.save
+          @test.marks += test_question.marks.to_i
           @test.number_of_questions += 1
           @test.save
         end
@@ -88,16 +86,12 @@ class TestsController < ApplicationController
     def remove_question_from_current_test
         #get_test_by_test_id
         #check_owner
-        if @test.active
-            flash[:danger] = 'Deactivate test first'
-            return redirect_to test_path(@test)
-        end
+        #check if active
+        test_question= TestQuestion.find_by(test_id: params[:test_id], question_id: params[:question_id])
 
-        q = TestQuestion.find_by(test_id: params[:test_id], question_id: params[:question_id])
-
-        unless q.nil?
-          if q.destroy
-            @test.marks -= q.marks.to_i
+        unless test_question.nil?
+          if test_question.destroy
+            @test.marks -= test_question.marks.to_i
             @test.number_of_questions -= 1
             @test.save
           end
@@ -111,7 +105,7 @@ class TestsController < ApplicationController
     end
 
     def show
-        #get test
+        #get_test_by_id
         #check_test_owner
         join_data
     end
@@ -168,6 +162,14 @@ class TestsController < ApplicationController
       end
     end
 
+    def check_test_active
+      if @test.active
+          flash[:danger] = 'Deactivate test first'
+          return redirect_to test_path(@test)
+      end
+    end
+
+    #funtion
 
     def join_data
       #left partial

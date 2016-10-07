@@ -7,8 +7,8 @@ class EnrollmentsController < ApplicationController
 
   def taketest
     #check_student_profile
-    #get test
-    #get enrollment(also check enrolled or not)
+    #get_test_by_id
+    #get_enrollment(also check enrolled or not)
     #check if test is attempted or not
     unless @en.start_time.nil?
       #if user is trying to take test more than once
@@ -25,12 +25,14 @@ class EnrollmentsController < ApplicationController
 
     @temp=TestQuestion.all.where(test_id:params[:test_id]).pluck(:question_id,:marks)
     @q_ids=@temp.map{|a,b| a}
+    @test_questions=TestQuestion.all.where(test_id:@current_test.id).joins(:question).select('test_questions.*,questions.*')
+    byebug
 
+    ##
     @unattempted=@q_ids.select{|t| question_attempted(t,@current_test.id)==false}
-
     @questions = Question.where(id:@unattempted)
-    #todisplay first question ,right side partial
     @current_question = @questions.first
+    ##
 
     if @current_question.nil?
       @current_question=Question.find(@temp[0][0])
@@ -49,7 +51,7 @@ class EnrollmentsController < ApplicationController
   def show_current_question
     @current_question = Question.find(params[:id])
     @current_test=Test.find(params[:test_id])
-    @current_enrollment = Enrollment.find_by(test_id:params[:test_id].to_i,student_id:current_user.id)
+    #@current_enrollment = Enrollment.find_by(test_id:params[:test_id].to_i,student_id:current_user.id)
     respond_to do |format|
     format.js
     end
@@ -137,15 +139,10 @@ class EnrollmentsController < ApplicationController
   end
 
   def check_student_profile
-      if current_user.type=="Student"
         if current_user.student_detail.nil?
             flash[:danger] = 'Complete profile first'
-            return redirect_to new_student_details_path
+            redirect_to new_student_details_path
         end
-      else
-        flash[:danger]="Authorizaion Error"
-        redirect_to error_path
-      end
     end
 
 end
