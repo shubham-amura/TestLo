@@ -38,18 +38,18 @@ class EnrollmentsController < ApplicationController
     #test
     #enrollments
     #time
-    @current_test=Test.find(params[:test][:id])
-    @current_enrollment = Enrollment.find_by(test_id:params[:test][:id].to_i,student_id:current_user.id)
+    @current_test=Test.find(params[:test_id])
+    @enrollment = Enrollment.find_by(test_id:@current_test.id,student_id:current_user.id)
     @question_id=params[:question][:id]
     @response=params[:response]
 
     unless @response.nil? || @response.empty?
-      @current_enrollment.response[@question_id]=@response.is_a?(Array) ? @response:[@response]
-      @current_enrollment.save
+      @enrollment.response[@question_id]=@response.is_a?(Array) ? @response:[@response]
+      @enrollment.save
     end
 
     join_data
-    @now=@current_enrollment.start_time.getlocal
+    @now=@enrollment.start_time.getlocal
     #redirect_to taketest_path(@current_test)
     respond_to do |format|
       format.js
