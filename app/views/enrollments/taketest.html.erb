@@ -26,22 +26,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% @temp.each do |question_id,marks| %>
+                    <% @test_questions.each do |test_question| %>
                     <tr>
                       <td>
-                          <%if question_attempted(question_id,@current_test.id)%>
+                          <%if test_question.question==@current_question%>
                           <strong>
-                            <%= link_to get_question(question_id).question ,show_current_question_path(get_question(question_id),:test_id=>@current_test),remote: true,style:"color:green;"%>
+                            <%= link_to test_question.question.question,show_current_question_path(test_question.question,:test_id=>@current_test),remote: true%>
+                          </strong>
+                          <%elsif question_attempted(test_question.question.id,@current_test.id)%>
+                          <strong>
+                            <%= link_to test_question.question.question,show_current_question_path(test_question.question,:test_id=>@current_test),remote: true,style:"color:black;"%>
                           </strong>
                           <%else%>
                             <strong>
-                              <%= link_to get_question(question_id).question ,show_current_question_path(get_question(question_id),:test_id=>@current_test),remote: true %>
+                              <%= link_to test_question.question.question,show_current_question_path(test_question.question,:test_id=>@current_test),remote: true,style:"color:green;" %>
                             </strong>
                         <%end%>
                         </td>
 
                         <td>
-                          <%=  marks %>
+                          <%=  test_question.marks %>
                         </td>
                     </tr>
 
