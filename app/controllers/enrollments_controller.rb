@@ -2,16 +2,16 @@ class EnrollmentsController < ApplicationController
   include EnrollmentsHelper
   before_action :check_user
   before_action :check_student_profile,only:[:enroll_for_test,:taketest]
-  before_action :get_test_by_id,only:[:taketest,:show_current_question]
+  before_action :get_test_by_id,only:[:taketest,:show_current_question,:submit_clicked]
 
-  before_action :get_enrollment,only:[:taketest]
-  before_action :check_test_time,only:[:taketest]
+  before_action :get_enrollment,only:[:taketest,:submit_clicked]
+  before_action :check_test_time,only:[:taketest,:submit_clicked]
 
   def taketest
     #check_student_profile
     #get_test_by_id
     #get_enrollment(also check enrolled or not)
-    #check if test is attempted or not
+    #check_time
 
     join_data
 
@@ -38,8 +38,7 @@ class EnrollmentsController < ApplicationController
     #test
     #enrollments
     #time
-    @current_test=Test.find(params[:test_id])
-    @enrollment = Enrollment.find_by(test_id:@current_test.id,student_id:current_user.id)
+
     @question_id=params[:question][:id]
     @response=params[:response]
 
@@ -140,7 +139,7 @@ class EnrollmentsController < ApplicationController
 
   def check_test_time
     unless @enrollment.start_time.nil?
-      #means if test is started by student
+      #if test started or not
       #if user is trying to take test more than once
       if Time.now.utc > @enrollment.start_time.plus_with_duration(get_total_seconds(@current_test.duration))
         flash[:danger]="Time is over"
