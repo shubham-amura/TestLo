@@ -4,7 +4,7 @@
     <%= current_question.question %>
   </strong>
   <!-- <%= params%> -->
-  <%= form_tag(submit_clicked_path,remote:true) %>
+  <%= form_tag(submit_clicked_path(@current_test),remote:true) %>
   <%= hidden_field(:question,:id,:value=>current_question[:id])%>
   <%= hidden_field(:test,:id,:value=>@current_test.id)%>
   <%- if current_question.question_type.to_i == 0 %>
