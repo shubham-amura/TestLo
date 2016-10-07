@@ -5,6 +5,7 @@ class StudentDetail < ActiveRecord::Base
 
 	#age
 	validates :age,presence:true
+	
 	#college
 	#resume
 	#experince
