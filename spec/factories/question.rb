@@ -8,7 +8,7 @@ FactoryGirl.define do
     f.employer_id   {Faker::Number.number(2)    }
     f.category_id   {Faker::Number.number(2)    }
     f.question      {Faker::Lorem.sentence      }
-    f.correct_answer {Faker::Lorem.words(4)   }
+    f.correct_answer {Faker::Lorem.words(4)     }
     f.options        {Faker::Lorem.words(4)     }
 
   end

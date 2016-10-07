@@ -31,8 +31,9 @@ class Question < ActiveRecord::Base
 
   #options
   validate :option_map_for_different_question_type
-  #correct_answers
 
+  #correct_answers
+  validate :correct_answers_map_for_different_question_type
 
 
 
@@ -53,5 +54,36 @@ class Question < ActiveRecord::Base
         end
       end
   end
+
+  def correct_answers_map_for_different_question_type
+
+    case self.question_type
+    when 0
+      if correct_answer[0].empty?
+        errors.add(:correct_answer,"Need answer for integer type")
+      end
+
+    when 1
+      if no_of_answer != 1
+        errors.add(:correct_answer,"Incorrect  number of answer")
+      end
+
+    when 2
+
+      if no_of_answer < 2
+        errors.add(:correct_answer,"Incorrect  number of answer")
+      end
+
+    end
+  end
+
+  def no_of_answer
+    number = 0
+    correct_answer.each do |x|
+      number += 1 if !x.empty?
+    end
+      return number
+    end
+
 
 end
