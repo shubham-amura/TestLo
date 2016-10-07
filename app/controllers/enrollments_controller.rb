@@ -15,12 +15,12 @@ class EnrollmentsController < ApplicationController
 
     join_data
 
-    if @en.start_time.nil?
-      @en.start_time=DateTime.now
-      @en.save
+    if @enrollment.start_time.nil?
+      @enrollment.start_time=DateTime.now
+      @enrollment.save
     end
 
-    @now=@en.start_time.getlocal
+    @now=@enrollment.start_time.getlocal
     #because chrome uses local time by defualt
   end
 
@@ -101,8 +101,8 @@ class EnrollmentsController < ApplicationController
   private
 
   def get_enrollment
-    @en=Enrollment.find_by(test_id:@current_test.id,student_id:current_user.id)
-    if @en.nil?
+    @enrollment=Enrollment.find_by(test_id:@current_test.id,student_id:current_user.id)
+    if @enrollment.nil?
       flash[:danger]="Enroll First"
       redirect_to student_dashboard_path
     end
@@ -139,13 +139,13 @@ class EnrollmentsController < ApplicationController
   end
 
   def check_test_time
-    unless @en.start_time.nil?
+    unless @enrollment.start_time.nil?
       #means if test is started by student
       #if user is trying to take test more than once
-      if Time.now.utc > @en.start_time.plus_with_duration(get_total_seconds(@current_test.duration))
+      if Time.now.utc > @enrollment.start_time.plus_with_duration(get_total_seconds(@current_test.duration))
         flash[:danger]="Time is over"
         #if not attempted and time is over ,call finish action
-        unless @en.attempted
+        unless @enrollment.attempted
           redirect_to finish_path
         else
           redirect_to student_dashboard_path
