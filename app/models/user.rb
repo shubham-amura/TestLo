@@ -15,12 +15,12 @@ validates :username,
                     format:{with:/\A[a-zA-Z0-9]+\z/,message:"Allows only alphanumeric characters without spaces"}
 
 validates :name,
-                format: { with: /\A[a-zA-Z\s]+\z/,message: "only allows letters" },
+                format: { with: /\A[a-zA-Z\s\.]+\z/,message: "only allows letters" },
                 presence:true,
                 length:{maximum:25,message:"Name length exceeds limit"}
 
 validates :phone_no,
-                    uniqueness: true, format: { with: /[0-9]/,message: "Must contain only numbers"},
+                    uniqueness: true, format: { with: /\d+\z/ ,message: "Must contain only numbers"},
   				          length: { minimum: 10,maximum:15,message: "Must be 10-15 digits"}
 
 end

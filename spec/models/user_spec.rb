@@ -6,7 +6,7 @@ describe User, type: :model do
   describe "Name Validation on User Model" do
 
     it "invalid if number are used" do
-      FactoryGirl.build(:user,name: 131).should_not be_valid
+      build(:user,name: 131).should_not be_valid
     end
 
     it "Invalid if special characters are used" do
@@ -22,9 +22,12 @@ describe User, type: :model do
   describe "Number validation of user phone" do
 
     it "Invalid phone number" do
-      build(:user,phone_no: "8726371faf" ).should_not be_valid
+      user = build(:user,phone_no: "8726371f21" )
+      byebug
+      user.should_not be_valid
     end
   end
-  
+
+
 
 end
