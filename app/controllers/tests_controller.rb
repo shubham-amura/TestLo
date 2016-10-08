@@ -41,7 +41,7 @@ class TestsController < ApplicationController
         if @test.active
             activate_and_flash
         else
-          if @test.marks > 10 # condition
+          if @test.marks > 10
             activate_and_flash
           else
             flash[:danger] = 'Minimum marks for test is 10'

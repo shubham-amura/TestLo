@@ -37,4 +37,12 @@ class Test < ActiveRecord::Base
     end
   end
 
+  #class functions
+
+  def self.get_test_by_id(test_id)
+    find(test_id)
+  end
+
+
+
 end

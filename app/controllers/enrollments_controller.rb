@@ -56,7 +56,7 @@ class EnrollmentsController < ApplicationController
   end
 
   def enroll_for_test
-    #check_student_profile
+    #check_profile _complete
     @user=current_user
     @tests = Test.all.page(params[:page])
     Enrollment.create(student_id: current_user.id,test_id:params[:test_id])
@@ -133,8 +133,8 @@ class EnrollmentsController < ApplicationController
 
   def check_student_profile
         if current_user.student_detail.nil?
-            flash[:danger] = 'Complete profile first'
-            redirect_to new_student_details_path
+              flash[:danger]= 'Complete profile first'
+              redirect_to new_student_details_path
         end
   end
 
