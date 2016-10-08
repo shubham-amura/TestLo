@@ -37,4 +37,16 @@ class Test < ActiveRecord::Base
     end
   end
 
+  def self.employer_test_which_are(current_user,query_type)
+    if query_type == "active"
+      Test.all.where(employer_id: current_user.id,active:true)
+    elsif query_type == "inactive"
+      Test.all.where(employer_id: current_user.id,active:false)
+    elsif query_type == "public"
+      Test.all.where.not(employer_id:current_user.id).where(active:true,private:false)
+    else
+      Test.all.where(employer_id: current_user.id)
+    end
+  end
+
 end

@@ -1,9 +1,7 @@
 class TestsController < ApplicationController
     before_action :check_employer_profile, only: [:create, :new]
-
     before_action :get_test_by_id ,only:[:destroy,:activate,:privacy,:show]
     before_action :get_test_by_test_id,only:[:add_question_to_current_test,:remove_question_from_current_test]
-
     before_action :check_test_owner,only:[:destroy,:activate,:privacy,:add_question_to_current_test,:remove_question_from_current_test]
 
     def index

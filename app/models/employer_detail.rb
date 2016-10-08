@@ -15,6 +15,6 @@ class EmployerDetail < ActiveRecord::Base
 
 	validates :contact,
 										presence:true
-										
+
 
 end
