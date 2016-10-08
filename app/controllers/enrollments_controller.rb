@@ -139,7 +139,7 @@ class EnrollmentsController < ApplicationController
 
   def check_test_time
     unless @enrollment.start_time.nil?
-      #if test started or not
+      #if
       #if user is trying to take test more than once
       if Time.now.utc > @enrollment.start_time.plus_with_duration(get_total_seconds(@current_test.duration))
         flash[:danger]="Time is over"
