@@ -69,6 +69,7 @@ class EnrollmentsController < ApplicationController
 
 
   def finish
+    #to be done with joins
     @test=Test.find(params[:test_id])
     @score=0
     en=Enrollment.find_by(test_id:params[:test_id],student_id:current_user.id)
