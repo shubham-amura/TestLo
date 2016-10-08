@@ -13,17 +13,7 @@ class ProfilesController < ApplicationController
 
   def employer_dashboard
     #send query parameter for filteration
-    @user = current_user
-    q=params[:q]
-    if q=="active"
-      @tests = Test.all.where(employer_id: current_user.id,active:true)
-    elsif q=="inactive"
-      @tests = Test.all.where(employer_id: current_user.id,active:false)
-    elsif q=="public"
-      @tests = Test.all.where.not(employer_id:current_user.id).where(active:true,private:false)
-    else
-      @tests = Test.all.where(employer_id: current_user.id)
-    end
+    @tests = Test.employer_test_which_are(current_user,params[:q])
   end
 
   def student_dashboard

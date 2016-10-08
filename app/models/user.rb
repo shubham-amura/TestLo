@@ -18,3 +18,6 @@ validates :phone_no,
            uniqueness: true, format: { with: /\d+\z/ ,message: "Must contain only numbers"},
   			   length: { minimum: 10,maximum:15,message: "Must be 10-15 digits"}
 end
+
+#Validation for phone number  to be included
+# ^(?:\+?\d{1,3}\s*-?)?\(?(?:\d{3})?\)?[- ]?\d{3}[- ]?\d{4}$
