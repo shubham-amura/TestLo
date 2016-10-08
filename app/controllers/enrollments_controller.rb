@@ -133,8 +133,13 @@ class EnrollmentsController < ApplicationController
 
   def check_student_profile
         if current_user.student_detail.nil?
-              flash[:danger]= 'Complete profile first'
-              redirect_to new_student_details_path
+          if request.xhr?
+            flash[:danger]= 'Complete profile first'
+            render :js => "window.location = #{new_student_details_path.to_json}"
+          else
+            flash[:danger]= 'Complete profile first'
+            redirect_to new_student_details_path
+          end
         end
   end
 
