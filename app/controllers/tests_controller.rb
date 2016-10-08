@@ -16,8 +16,8 @@ class TestsController < ApplicationController
     end
 
     def create
-        @test = current_user.tests.create(test_params)
-        if @test
+        @test = current_user.tests.build(test_params)
+        if @test.save
             flash[:success] = 'Test created Successfully'
             redirect_to test_path(@test)
         else
