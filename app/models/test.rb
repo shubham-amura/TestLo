@@ -26,7 +26,7 @@ class Test < ActiveRecord::Base
   validate :duration_greater_than_zero
 
   def duration_greater_than_zero
-    if self.duration <= 0
+    if self.duration.seconds_since_midnight == 0
       errors.add(:duration, "can't be zero")
     end
   end
@@ -49,4 +49,8 @@ class Test < ActiveRecord::Base
     end
   end
 
+  #class functions
+  def self.get_test_by_id(test_id)
+    find(test_id)
+  end
 end

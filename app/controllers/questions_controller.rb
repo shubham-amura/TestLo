@@ -1,4 +1,5 @@
 class QuestionsController < ApplicationController
+  before_action :check_user
 
   def new
     @test=Test.find(params[:test_id])
@@ -13,7 +14,6 @@ class QuestionsController < ApplicationController
   def create
     #should logged and should be employer
     @question=current_user.questions.build(question_params)
-
     @test=Test.find(params[:test_id])
 
     if @question.save
@@ -45,4 +45,12 @@ class QuestionsController < ApplicationController
     #passing options and correct answers as arrays
     p params.require(:question).permit(:category_id,:question_type,:question,options:[],correct_answer:[])
   end
+
+  def check_user
+    unless current_user.type=="Employer"
+      flash[:danger]="Authorizaion Error"
+      redirect_to error_path
+    end
+  end
+
 end

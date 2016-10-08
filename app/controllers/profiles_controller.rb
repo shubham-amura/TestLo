@@ -2,7 +2,6 @@ class ProfilesController < ApplicationController
  before_action :authenticate_user!
  # before_action :authorize_user!
  #before_action :l
-
   def show
     @user = current_user
     if @user.type == "Student"
@@ -22,6 +21,7 @@ class ProfilesController < ApplicationController
     @enrolled_test = Enrollment.all.where(student_id:current_user.id).pluck(:test_id)
 
     q=params[:q]
+
     if q=="enrolled"
       @tests = Test.all.where(active:true,id:@enrolled_test).where("date >= ?",Date.today).page(params[:page])
     elsif q=="not enrolled"
@@ -36,4 +36,5 @@ class ProfilesController < ApplicationController
       @tests = Test.all.where(active:true).page(params[:page])
     end
  end
+
 end

@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
 
 
-root 'static_pages#home'
+  root 'static_pages#home'
 
+  get '/error',to:'static_pages#error',as: :error
+  get '/not_found',to:'static_pages#not_found',as: :not_found
   #devise_for :users
 
 
@@ -13,7 +15,6 @@ root 'static_pages#home'
     get 'profile/employer_dashboard' => 'profiles#employer_dashboard', as: :employer_dashboard
 
     get 'profile/:id' => 'profiles#show' , as: :profile
-
 
   resources :tests do
     member do
@@ -31,11 +32,12 @@ root 'static_pages#home'
 
   get 'taketest/:test_id/finish',to: 'enrollments#finish',as: :finish
   get 'taketest/:test_id/timeup',to: 'enrollments#timeup'
+  post 'taketest/:test_id/submit_clicked' ,to: 'enrollments#submit_clicked', as: :submit_clicked
+
+
+
 
   get 'show_current_question/:id', to: 'enrollments#show_current_question' ,as: :show_current_question
-  post 'submit_clicked' ,to: 'enrollments#submit_clicked', as: :submit_clicked
-
-
 
 
   post 'add_question_to_current_test/:test_id/:question_id' , to: 'tests#add_question_to_current_test' ,as: :add_question_to_current_test
@@ -43,8 +45,9 @@ root 'static_pages#home'
 
   get 'enroll_for_test/:test_id' , to: 'enrollments#enroll_for_test',as: :enroll_for_test
 
-  get 'details/edit',to:'details#edit',as: :edit_details
 
+  #common for both student and employer
+  get 'details/edit',to:'details#edit',as: :edit_details
   #student_details
   get '/details/edit_student_details',to:'details#edit_student_details',as: :edit_student_details
   get '/details/new_student_details',to:'details#new_student_details',as: :new_student_details

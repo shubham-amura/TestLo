@@ -1,2 +1,2 @@
-$('#test_question_list').html('<%= escape_javascript(render "test_question", temp: @test_questions) %>');
+$('#test_question_list').html('<%= escape_javascript(render "test_question", test_questions: @test_questions) %>');
 $('#question_bank_list').html('<%= escape_javascript(render "questions/question") %>');

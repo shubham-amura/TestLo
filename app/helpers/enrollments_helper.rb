@@ -26,4 +26,9 @@ module EnrollmentsHelper
     en.response.key?("#{q_id}")
   end
 
+  def get_total_seconds(t)
+    total=t.hour*60*60 + t.min*60 + t.sec
+    return total;
+  end
+
 end

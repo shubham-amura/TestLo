@@ -1,8 +1,11 @@
 class TestsController < ApplicationController
+    before_action :check_user ,except:[:result]    #for all actions
     before_action :check_employer_profile, only: [:create, :new]
+
     before_action :get_test_by_id ,only:[:destroy,:activate,:privacy,:show]
     before_action :get_test_by_test_id,only:[:add_question_to_current_test,:remove_question_from_current_test]
     before_action :check_test_owner,only:[:destroy,:activate,:privacy,:add_question_to_current_test,:remove_question_from_current_test]
+    before_action :check_test_active,only:[:add_question_to_current_test,:remove_question_from_current_test,:destroy]
 
     def index
         @tests = Test.all
@@ -24,20 +27,22 @@ class TestsController < ApplicationController
     end
 
     def destroy
-        #get test
+        #get_test_by_id
         #check_test_owner
-        @test.destroy
-        flash[:success] = 'Deleted Successfully'
-        redirect_to employer_dashboard_path
+        #check_test_active
+        if @test.destroy
+          flash[:success] = 'Deleted Successfully'
+          redirect_to employer_dashboard_path
+        end
     end
 
     def activate
-        #get test
+        #get_test_by_id
         #check_test_owner
         if @test.active
             activate_and_flash
         else
-          if @test.marks > 10 # condition
+          if @test.marks > 10
             activate_and_flash
           else
             flash[:danger] = 'Minimum marks for test is 10'
@@ -47,7 +52,7 @@ class TestsController < ApplicationController
     end
 
     def privacy
-        #get test
+        #get_test_by_id
         #check_test_owner
         @test.toggle(:private)
         if @test.save
@@ -62,16 +67,11 @@ class TestsController < ApplicationController
     def add_question_to_current_test
         #get_test_by_test_id
         #check_test_owner
-        if @test.active
-            flash[:danger] = 'Deactivate test first'
-            return redirect_to test_path(@test)
-        end
-
-        tq = TestQuestion.new(test_id: params[:test_id], question_id: params[:question_id], marks: params[:marks])
+        test_question = TestQuestion.new(test_id: params[:test_id], question_id: params[:question_id], marks: params[:marks])
 
         # test required in view to redirect and change the marks and noq after addition
-        if tq.save
-          @test.marks += tq.marks.to_i
+        if test_question.save
+          @test.marks += test_question.marks.to_i
           @test.number_of_questions += 1
           @test.save
         end
@@ -87,30 +87,26 @@ class TestsController < ApplicationController
     def remove_question_from_current_test
         #get_test_by_test_id
         #check_owner
-        if @test.active
-            flash[:danger] = 'Deactivate test first'
-            return redirect_to test_path(@test)
-        end
+        #check if active
+        test_question= TestQuestion.find_by(test_id: params[:test_id], question_id: params[:question_id])
 
-        q = TestQuestion.find_by(test_id: params[:test_id], question_id: params[:question_id])
-
-        unless q.nil?
-          if q.destroy
-            @test.marks -= q.marks.to_i
+        unless test_question.nil?
+          if test_question.destroy
+            @test.marks -= test_question.marks.to_i
             @test.number_of_questions -= 1
             @test.save
           end
         end
         # view logic
         join_data
-        # redirect_to test_path(@test) (if not using ajax)
+
         respond_to do |format|
             format.js
         end
     end
 
     def show
-        #get test
+        #get_test_by_id
         #check_test_owner
         join_data
     end
@@ -138,11 +134,17 @@ class TestsController < ApplicationController
     end
     # Filters
 
+    def check_user
+        unless current_user.type=="Employer"
+          flash[:danger]="Authorizaion Error"
+          redirect_to error_path
+        end
+    end
+
     def check_employer_profile
-        # byebug
-        if current_user.employer_detail.nil? and current_user.type="Employer"
-            flash[:danger] = 'Complete profile first'
-            redirect_to new_employer_details_path
+        if current_user.employer_detail.nil?
+          flash[:danger] = 'Complete profile first'
+          redirect_to new_employer_details_path
         end
     end
 
@@ -161,21 +163,40 @@ class TestsController < ApplicationController
       end
     end
 
-    def join_data
-      #this function gives collections to  partials and javascripts
-      #[TestQuestion joins Question]
-      #for left partial
-      temp = TestQuestion.all.where(test_id:@test.id).pluck(:question_id, :marks)
-      #temp=>[question_id,marks]
-      @test_questions = []
-      temp.each do |q, m|
-          @temp_question = {}
-          @temp_question[:question] = Question.find(q.to_i)
-          @temp_question[:marks] = m
-          @test_questions << @temp_question
-          # @test_questions[:marks] << m
+    def check_test_active
+      if @test.active
+          flash[:danger] = 'Deactivate test first'
+          return redirect_to test_path(@test)
       end
-      #for right partial
-      @questions = Question.where.not(id:temp.map{|a,b| a})
     end
+
+    #funtion
+
+    def join_data
+      #left partial
+      @test_questions=TestQuestion.all.where(test_id:@test.id).joins(:question).select('test_questions.question_id,test_questions.marks,questions.question')
+
+      #right partial
+      @questions=Question.all.where.not(id:@test_questions.map{|t| t.question.id})
+    end
+
+
+    # def join_data
+    #
+    #   #[TestQuestion joins Question]
+    #   #for left partial
+    #   temp = TestQuestion.all.where(test_id:@test.id).pluck(:question_id, :marks)
+    #   #temp=>[question_id,marks]
+    #   @test_questions = []
+    #   temp.each do |q, m|
+    #       @temp_question = {}
+    #       @temp_question[:question] = Question.find(q.to_i)
+    #       @temp_question[:marks] = m
+    #       @test_questions << @temp_question
+    #       # @test_questions[:marks] << m
+    #   end
+    #   #for right partial
+    #   @questions = Question.where.not(id:temp.map{|a,b| a})
+    # end
+
 end
