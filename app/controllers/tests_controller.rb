@@ -54,7 +54,7 @@ class TestsController < ApplicationController
     def privacy
         #get_test_by_id
         #check_test_owner
-        @test.toggle(:private)
+        @test.change_privacy
         if @test.save
           flash[:success] ="This test is #{@test.private? ? 'Private' : 'Public'} now"
           redirect_to test_path(@test)

@@ -25,6 +25,8 @@ class Test < ActiveRecord::Base
 
   validate :duration_greater_than_zero
 
+  #Validation Methods
+
   def duration_greater_than_zero
     if self.duration.seconds_since_midnight == 0
       errors.add(:duration, "can't be zero")
@@ -37,19 +39,33 @@ class Test < ActiveRecord::Base
     end
   end
 
-  def self.employer_test_which_are(current_user,query_type)
-    if query_type == "active"
-      Test.all.where(employer_id: current_user.id,active:true)
-    elsif query_type == "inactive"
-      Test.all.where(employer_id: current_user.id,active:false)
-    elsif query_type == "public"
-      Test.all.where.not(employer_id:current_user.id).where(active:true,private:false)
-    else
-      Test.all.where(employer_id: current_user.id)
-    end
+  #Instance Methods
+  def change_number_of_questions(number)
+    self.number_of_questions+=number
   end
 
-  #class functions
+  def change_marks(marks)
+    self.marks+=marks
+  end
+
+  def change_privacy
+    self.toggle(:private)
+  end
+
+  #Class Methods
+  def self.employer_test_which_are(current_user,query_type)
+      case query_type
+      when "active"
+        Test.all.where(employer_id: current_user.id,active:true)
+      when "inactive"
+        Test.all.where(employer_id: current_user.id,active:false)
+      when "public"
+        Test.all.where.not(employer_id:current_user.id).where(active:true,private:false)
+      else
+        Test.all.where(employer_id: current_user.id)
+      end
+  end
+
   def self.get_test_by_id(test_id)
     find(test_id)
   end
