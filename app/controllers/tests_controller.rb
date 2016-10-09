@@ -66,6 +66,7 @@ class TestsController < ApplicationController
     def add_question_to_current_test
         #get_test_by_test_id
         #check_test_owner
+        #check_if_active
         TestQuestion.create_test_question(params[:test_id],params[:question_id],params[:marks])
         # view logic
         join_data
@@ -79,18 +80,9 @@ class TestsController < ApplicationController
         #get_test_by_test_id
         #check_owner
         #check if active
-        test_question= TestQuestion.find_by(test_id:params[:test_id], question_id: params[:question_id])
-
-        unless test_question.nil?
-          if test_question.destroy
-            @test.marks -= test_question.marks.to_i
-            @test.number_of_questions -= 1
-            @test.save
-          end
-        end
+        TestQuestion.remove_test_question(params[:test_id],params[:question_id])
         # view logic
         join_data
-
         respond_to do |format|
             format.js
         end
