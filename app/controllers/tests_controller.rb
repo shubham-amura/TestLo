@@ -54,8 +54,7 @@ class TestsController < ApplicationController
     def privacy
         #get_test_by_id
         #check_test_owner
-        @test.change_privacy
-        if @test.save
+        if @test.change_privacy
           flash[:success] ="This test is #{@test.private? ? 'Private' : 'Public'} now"
           redirect_to test_path(@test)
         else
@@ -67,15 +66,7 @@ class TestsController < ApplicationController
     def add_question_to_current_test
         #get_test_by_test_id
         #check_test_owner
-        test_question = TestQuestion.new(test_id: params[:test_id], question_id: params[:question_id], marks: params[:marks])
-
-        # test required in view to redirect and change the marks and noq after addition
-        if test_question.save
-          @test.marks += test_question.marks.to_i
-          @test.number_of_questions += 1
-          @test.save
-        end
-
+        TestQuestion.create_test_question(params[:test_id],params[:question_id],params[:marks])
         # view logic
         join_data
         # redirect_to test_path(@test) (if not using ajax)
@@ -88,7 +79,7 @@ class TestsController < ApplicationController
         #get_test_by_test_id
         #check_owner
         #check if active
-        test_question= TestQuestion.find_by(test_id: params[:test_id], question_id: params[:question_id])
+        test_question= TestQuestion.find_by(test_id:params[:test_id], question_id: params[:question_id])
 
         unless test_question.nil?
           if test_question.destroy
@@ -125,8 +116,7 @@ class TestsController < ApplicationController
 
     def activate_and_flash
       #toggles test activation and displays appropriate flash
-      @test.toggle(:active)
-      if @test.save
+      if @test.change_activity
           flash[:success] = "Test is #{@test.active? ? 'Active' : 'Inactive'} now"
       else
           flash[:danger] = 'Unable to deactivate,Try later'

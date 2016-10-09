@@ -50,6 +50,12 @@ class Test < ActiveRecord::Base
 
   def change_privacy
     self.toggle(:private)
+    self.save
+  end
+
+  def change_activity
+    self.toggle(:active)
+    self.save
   end
 
   #Class Methods
