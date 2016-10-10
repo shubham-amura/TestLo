@@ -1,7 +1,6 @@
 class TestsController < ApplicationController
     before_action :check_user ,except:[:result]    #for all actions
     before_action :check_employer_profile, only: [:create, :new]
-
     before_action :get_test_by_id ,only:[:destroy,:activate,:privacy,:show,:result]
     before_action :get_test_by_test_id,only:[:add_question_to_current_test,:remove_question_from_current_test]
     before_action :check_test_owner,only:[:destroy,:activate,:privacy,:add_question_to_current_test,:remove_question_from_current_test]
@@ -151,8 +150,6 @@ class TestsController < ApplicationController
       end
     end
 
-    #funtion
-
     def join_data
       #left partial
       @test_questions=TestQuestion.get_questions_of_test(@test)
@@ -160,24 +157,4 @@ class TestsController < ApplicationController
       #right partial
       @questions=Question.get_questions_excluding(@test_questions.map{|t| t.question.id})
     end
-
-
-    # def join_data
-    #
-    #   #[TestQuestion joins Question]
-    #   #for left partial
-    #   temp = TestQuestion.all.where(test_id:@test.id).pluck(:question_id, :marks)
-    #   #temp=>[question_id,marks]
-    #   @test_questions = []
-    #   temp.each do |q, m|
-    #       @temp_question = {}
-    #       @temp_question[:question] = Question.find(q.to_i)
-    #       @temp_question[:marks] = m
-    #       @test_questions << @temp_question
-    #       # @test_questions[:marks] << m
-    #   end
-    #   #for right partial
-    #   @questions = Question.where.not(id:temp.map{|a,b| a})
-    # end
-
 end

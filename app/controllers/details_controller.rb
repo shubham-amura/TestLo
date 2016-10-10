@@ -1,7 +1,4 @@
 class DetailsController < ApplicationController
-
-#fork
-
   def edit
       @user=User.find(current_user.id)
       if @user.type=="Student"
@@ -10,9 +7,7 @@ class DetailsController < ApplicationController
             redirect_to edit_employer_details_path
       end
   end
-
-##students
-
+#students
   def edit_student_details
       @student=Student.find(current_user.id)
       if @student.student_detail.nil?
@@ -43,9 +38,7 @@ class DetailsController < ApplicationController
       render 'edit_student_details'
     end
   end
-
   ##Employer
-
   def edit_employer_details
       @employer=Employer.find(current_user.id)
       if @employer.employer_detail.nil?
@@ -60,7 +53,6 @@ class DetailsController < ApplicationController
 
   def create_employer_details
       @employer=Employer.find(current_user.id)
-
       @detail=@employer.build_employer_detail(employer_details_params)
       if @detail.save
         flash[:success]="Profile Created Successfully"
