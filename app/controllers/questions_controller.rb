@@ -15,7 +15,6 @@ class QuestionsController < ApplicationController
     #should logged and should be employer
     @question=current_user.questions.build(question_params)
     @test=Test.find(params[:test_id])
-
     if @question.save
       flash[:success]="Question added to Bank successfully"
       redirect_to test_path(@test)
@@ -52,5 +51,4 @@ class QuestionsController < ApplicationController
       redirect_to error_path
     end
   end
-
 end
