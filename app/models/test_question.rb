@@ -4,7 +4,8 @@ class TestQuestion < ActiveRecord::Base
 
   after_save :add_to_test
   after_destroy :remove_from_test
- #marks validation
+
+  #marks validation
   validates :marks ,
             numericality: { only_integer: true}
 
@@ -32,9 +33,9 @@ class TestQuestion < ActiveRecord::Base
   end
 
   def remove_from_test
-    @test=Test.find(test_id)
-    @test.change_marks(-marks)
-    @test.change_number_of_questions(-1)
-    @test.save
+      @test=Test.find(test_id)
+      @test.change_marks(-marks)
+      @test.change_number_of_questions(-1)
+      @test.save
   end
 end

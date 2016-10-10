@@ -2,7 +2,7 @@ class TestsController < ApplicationController
     before_action :check_user ,except:[:result]    #for all actions
     before_action :check_employer_profile, only: [:create, :new]
 
-    before_action :get_test_by_id ,only:[:destroy,:activate,:privacy,:show]
+    before_action :get_test_by_id ,only:[:destroy,:activate,:privacy,:show,:result]
     before_action :get_test_by_test_id,only:[:add_question_to_current_test,:remove_question_from_current_test]
     before_action :check_test_owner,only:[:destroy,:activate,:privacy,:add_question_to_current_test,:remove_question_from_current_test]
     before_action :check_test_active,only:[:add_question_to_current_test,:remove_question_from_current_test,:destroy]
@@ -64,11 +64,11 @@ class TestsController < ApplicationController
     end
 
     def add_question_to_current_test
-        #get_test_by_test_id
-        #check_test_owner
-        #check_if_active
+        #filter-get_test_by_test_id
+        #filter-check_test_owner
+        #filter-check_if_active
         TestQuestion.create_test_question(params[:test_id],params[:question_id],params[:marks])
-        # view logic
+        #view logic
         join_data
         # redirect_to test_path(@test) (if not using ajax)
         respond_to do |format|
@@ -77,9 +77,9 @@ class TestsController < ApplicationController
     end
 
     def remove_question_from_current_test
-        #get_test_by_test_id
-        #check_owner
-        #check if active
+        #filter-get_test_by_test_id
+        #filter-check_test_owner
+        #filter-check_if_active
         TestQuestion.remove_test_question(params[:test_id],params[:question_id])
         # view logic
         join_data
@@ -95,9 +95,8 @@ class TestsController < ApplicationController
     end
 
     def result
-        #get result of tests
-        @test=Test.find(params[:id])
-        @result=Enrollment.where(test_id:params[:id],attempted:true).order(score: :desc).joins(:student).pluck(:name,:username,:email,:score)
+        #filter-get_test_by_id
+        @result=Enrollment.get_results_of_test(@test)
     end
 
     private
@@ -131,11 +130,11 @@ class TestsController < ApplicationController
     end
 
     def get_test_by_id
-      @test=Test.find(params[:id])
+      @test=Test.get_test_by_id(params[:id])
     end
 
     def get_test_by_test_id
-      @test=Test.find(params[:test_id])
+      @test=Test.get_test_by_test_id(params[:test_id])
     end
 
     def check_test_owner
@@ -156,10 +155,10 @@ class TestsController < ApplicationController
 
     def join_data
       #left partial
-      @test_questions=TestQuestion.all.where(test_id:@test.id).joins(:question).select('test_questions.question_id,test_questions.marks,questions.question')
+      @test_questions=TestQuestion.where(test_id:@test.id).joins(:question).select('test_questions.question_id,test_questions.marks,questions.question')
 
       #right partial
-      @questions=Question.all.where.not(id:@test_questions.map{|t| t.question.id})
+      @questions=Question.where.not(id:@test_questions.map{|t| t.question.id})
     end
 
 
