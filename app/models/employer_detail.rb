@@ -9,7 +9,7 @@ class EmployerDetail < ActiveRecord::Base
 	#contact
 	validates :company,
 										presence:true,
-										length:{maximum:10,message:"Comapny name should have < 10 characters"}
+										length:{maximum:20,message:"Comapny name should have < 10 characters"}
 
 	validates :company_address,
 										presence:true,

@@ -11,6 +11,10 @@ describe StudentDetail do
       build(:student_detail,age:"AA").should_not be_valid
     end
 
+    it "should pass if number" do
+      build(:student_detail,age:12).should be_valid
+    end
+
   end
 
   describe "Experience" do
@@ -31,6 +35,10 @@ describe StudentDetail do
       build(:student_detail,college:nil).should_not be_valid
     end
 
+    it "should pass if college is valid" do
+      build(:student_detail,college:"MIT").should be_valid
+    end
+
     it "should contain alphabetics" do
       build(:student_detail,college:"MIT123").should_not be_valid
     end
@@ -43,8 +51,12 @@ describe StudentDetail do
   end
 
   describe "Skills" do
-    it "shoul be present" do
+    it "shoul fail if skills are empty" do
       build(:student_detail,skills:nil).should_not be_valid
+    end
+
+    it "shoul pass if skills are not empty" do
+      build(:student_detail,skills:"python,c++").should be_valid
     end
   end
 
