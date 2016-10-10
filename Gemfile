@@ -21,6 +21,7 @@ gem "less-rails"
 
 #pagination
 gem 'kaminari'
+gem "pry-rails"
 
 
 

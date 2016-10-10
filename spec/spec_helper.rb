@@ -5,6 +5,7 @@ SimpleCov.start
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
+require 'devise'
 
 #require 'rspec/autorun'
 
@@ -29,6 +30,15 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+  config.include Devise::TestHelpers, :type => :controller
+  config.include Devise::TestHelpers, :type => :view
+  config.include Warden::Test::Helpers
+  # config.extend ControllerMacros,type: :controller
+  Warden.test_mode!
+  config.after(:each) do
+    Warden.test_reset!
+  end
+
 
   # config.expect_with(:rspec) { |c| c.syntax = :should }
 
