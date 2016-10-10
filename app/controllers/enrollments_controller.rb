@@ -13,14 +13,8 @@ class EnrollmentsController < ApplicationController
     #get_enrollment(also check enrolled or not)
     #check_time
     join_data
-
-    if @enrollment.start_time.nil?
-      @enrollment.start_time=DateTime.now
-      @enrollment.save
-    end
-
-    @now=@enrollment.start_time.getlocal
-    #because chrome uses local time by defualt
+    @enrollment.record_start_time
+    @now=@enrollment.get_start_time
   end
 
 
