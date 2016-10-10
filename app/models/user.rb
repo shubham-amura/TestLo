@@ -12,7 +12,7 @@ validates :username, uniqueness: true, presence:true,
 validates :name,
            format: { with: /\A[a-zA-Z\s\.]+\z/,message: "only allows letters" },
            presence:true,
-          length:{maximum:25,message:"Name length exceeds limit"}
+           length:{maximum:25,message:"Name length exceeds limit"}
 
 validates :phone_no,
            uniqueness: true, format: { with: /\A\d+\z/ ,message: "Must contain only numbers"},
