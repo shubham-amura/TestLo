@@ -26,4 +26,16 @@ describe TestQuestion, type: :model do
         build(:test_question,test_id:22).should be_valid
     end
   end
+
+  describe "associations" do
+    it "belongs to test" do
+      assc = described_class.reflect_on_association(:test)
+      expect(assc.macro).to eq :belongs_to
+    end
+
+    it "belongs to question" do
+      assc = described_class.reflect_on_association(:question)
+      expect(assc.macro).to eq :belongs_to
+    end
+  end
 end

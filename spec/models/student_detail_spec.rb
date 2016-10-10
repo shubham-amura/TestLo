@@ -61,4 +61,11 @@ describe StudentDetail do
         build(:student_detail,resume:"https://abc.com").should be_valid
       end
   end
+
+  describe "associations" do
+    it "belongs to student" do
+      assc = described_class.reflect_on_association(:student)
+      expect(assc.macro).to eq :belongs_to
+    end
+  end
 end

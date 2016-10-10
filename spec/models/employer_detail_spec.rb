@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe EmployerDetail do
 
-  describe "Company name" do
+  context "Company name" do
 
     it "should be present" do
       build(:employer_detail,company:nil).should_not be_valid
@@ -14,7 +14,7 @@ describe EmployerDetail do
 
   end
 
-  describe "Company address" do
+  context "Company address" do
 
     it "should be present" do
       build(:employer_detail,company_address:nil).should_not be_valid
@@ -25,7 +25,7 @@ describe EmployerDetail do
     end
   end
 
-  describe "Company contact" do
+  context "Company contact" do
 
       it "should be present" do
         build(:employer_detail,contact:nil).should_not be_valid
@@ -43,5 +43,13 @@ describe EmployerDetail do
         build(:employer_detail,contact:"9"*16).should_not be_valid
       end
   end
+
+    context "associations" do
+      it "belongs to employer" do
+        assc = described_class.reflect_on_association(:employer)
+        expect(assc.macro).to eq :belongs_to
+      end
+
+    end
 
 end

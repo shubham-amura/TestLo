@@ -25,4 +25,27 @@ describe Question, type: :model do
           build(:question,question_type: 1,correct_answer:["df","dfsd","",""]).should_not be_valid
       end
   end
+
+    describe "associations" do
+      it "has many test_questions" do
+        assc = described_class.reflect_on_association(:test_questions)
+        expect(assc.macro).to eq :has_many
+      end
+
+      it "has many tests" do
+        assc = described_class.reflect_on_association(:tests)
+        expect(assc.macro).to eq :has_many
+      end
+
+      it "belongs to employer" do
+        assc = described_class.reflect_on_association(:employer)
+        expect(assc.macro).to eq :belongs_to
+      end
+
+      it "belongs to category" do
+        assc = described_class.reflect_on_association(:category)
+        expect(assc.macro).to eq :belongs_to
+      end
+
+    end
 end
