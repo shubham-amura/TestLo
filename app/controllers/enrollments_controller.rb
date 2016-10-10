@@ -61,12 +61,12 @@ class EnrollmentsController < ApplicationController
   def finish
     #filter get_test_by_id
     #filter-get_enrollement
+    @score=@enrollment.submit_test
+
+    #for view
+    @total_marks=@current_test.marks
     @total_noq=TestQuestion.get_test_questions_join(@current_test.id).size
     @attempted=@enrollment.response.count
-
-    @score=@enrollment.submit_test
-    @total_marks=@current_test.marks
-
     @percentage=(@score/@total_marks.to_f).round(4)*100
 
     respond_to do |format|

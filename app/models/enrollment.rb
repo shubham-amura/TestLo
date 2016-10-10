@@ -78,4 +78,5 @@ class Enrollment < ActiveRecord::Base
     Enrollment.where(student_id:current_user.id)
   end
 
+
 end
