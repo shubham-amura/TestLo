@@ -72,6 +72,23 @@ class Test < ActiveRecord::Base
       end
   end
 
+  def self.student_test_which_are_enrolled(current_user,query_type,enrolled_test,page_no)
+    case query_type
+    when "enrolled"
+      Test.all.where(active:true,id:enrolled_test).where("date >= ?",Date.today).page(page_no)
+    when "not enrolled"
+      #not enrolled and not expired yet
+      Test.all.where.not(id:enrolled_test).where(active:true).where("date >= ?",Date.today).page(page_no)
+    when "expired"
+      Test.all.where.not(id:enrolled_test).where(active:true).where("date < ?",Date.today).page(page_no)
+    when "attempted"
+      enrolled_test_for_attempted = Enrollment.all.where(student_id:current_user.id,attempted:true).pluck(:test_id)
+      Test.all.where(id:enrolled_test_for_attempted).page(page_no)
+    else
+      Test.all.where(active:true).page(page_no)
+    end
+  end
+
   def self.get_test_by_id(test_id)
     find(test_id)
   end

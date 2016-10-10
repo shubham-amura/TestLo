@@ -17,24 +17,9 @@ class ProfilesController < ApplicationController
   end
 
   def student_dashboard
-    @user = current_user
+    #send query paramater and enrolled test for filteration
     @enrolled_test = Enrollment.all.where(student_id:current_user.id).pluck(:test_id)
-
-    q=params[:q]
-
-    if q=="enrolled"
-      @tests = Test.all.where(active:true,id:@enrolled_test).where("date >= ?",Date.today).page(params[:page])
-    elsif q=="not enrolled"
-      #not enrolled and not expired yet
-      @tests = Test.all.where.not(id:@enrolled_test).where(active:true).where("date >= ?",Date.today).page(params[:page])
-    elsif q=="expired"
-      @tests = Test.all.where.not(id:@enrolled_test).where(active:true).where("date < ?",Date.today).page(params[:page])
-    elsif q=="attempted"
-      @enrolled_test = Enrollment.all.where(student_id:current_user.id,attempted:true).pluck(:test_id)
-      @tests=Test.all.where(id:@enrolled_test).page(params[:page])
-    else
-      @tests = Test.all.where(active:true).page(params[:page])
-    end
+    @tests = Test.student_test_which_are_enrolled(current_user,params[:q],@enrolled_test,params[:page])
  end
 
 end
