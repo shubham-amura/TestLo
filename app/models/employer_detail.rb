@@ -9,12 +9,14 @@ class EmployerDetail < ActiveRecord::Base
 	#contact
 	validates :company,
 										presence:true,
-										length:{maximum:20,message:"Comapny name should have < 20 characters"}
+										length:{maximum:10,message:"Comapny name should have < 10 characters"}
+
 	validates :company_address,
-										presence:true
+										presence:true,
+										length:{maximum:30,message:"Comapny address should have < 30 characters"}
 
 	validates :contact,
-										presence:true
-
-
+										presence:true,
+										format: { with: /\A\d+\z/ ,message: "Must contain only numbers"},
+										length: { minimum: 10,maximum:15,message: "Must be 10-15 digits"}
 end

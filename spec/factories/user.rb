@@ -5,7 +5,7 @@ FactoryGirl.define do
 
     f.email    {  Faker::Internet.email        }
     f.name     {  Faker::Name.name             }
-    f.phone_no {  Faker::PhoneNumber.cell_phone}
+    f.phone_no {  Faker::Number.number(10)}
     f.username { "djbsfbsi"  }
     f.password {  Faker::Internet.password     }
 
