@@ -33,6 +33,7 @@ class TestQuestion < ActiveRecord::Base
   private
 
   def add_to_test
+      byebug
       @test=Test.find(test_id)
       @test.change_marks(marks)
       @test.change_number_of_questions(1)
