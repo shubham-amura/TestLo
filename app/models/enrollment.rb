@@ -36,4 +36,12 @@ class Enrollment < ActiveRecord::Base
       Enrollment.find_by(test_id:test.id,student_id:current_user.id)
   end
 
+  def self.enroll_user_for_test(test,current_user)
+    Enrollment.create(test_id:test.id,student_id:current_user.id)
+  end
+
+  def self.tests_enrolled_by_user(current_user)
+    Enrollment.where(student_id:current_user.id)
+  end
+
 end

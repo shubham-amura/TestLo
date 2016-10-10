@@ -2,7 +2,7 @@ class EnrollmentsController < ApplicationController
   include EnrollmentsHelper
   before_action :check_user
   before_action :check_student_profile,only:[:enroll_for_test,:taketest]
-  before_action :get_test_by_id,only:[:taketest,:show_current_question,:submit_clicked]
+  before_action :get_test_by_id,only:[:enroll_for_test,:taketest,:show_current_question,:submit_clicked]
 
   before_action :get_enrollment,only:[:taketest,:submit_clicked]
   before_action :check_test_time,only:[:taketest,:submit_clicked]
@@ -46,8 +46,10 @@ class EnrollmentsController < ApplicationController
     #check_profile _complete
     @user=current_user
     @tests = Test.all.page(params[:page])
-    Enrollment.create(student_id: current_user.id,test_id:params[:test_id])
-    @enrolled_test = Enrollment.all.where(student_id: current_user.id).pluck(:test_id)
+
+    Enrollment.enroll_user_for_test(@current_test,current_user)
+
+    @enrolled_test= Enrollment.tests_enrolled_by_user(current_user).pluck(:test_id)
 
     respond_to do |format|
       format.js
