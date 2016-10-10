@@ -2,9 +2,9 @@ class EnrollmentsController < ApplicationController
   include EnrollmentsHelper
   before_action :check_user
   before_action :check_student_profile,only:[:enroll_for_test,:taketest]
-  before_action :get_test_by_id,only:[:enroll_for_test,:taketest,:show_current_question,:submit_clicked]
+  before_action :get_test_by_id,only:[:enroll_for_test,:taketest,:show_current_question,:submit_clicked,:finish]
 
-  before_action :get_enrollment,only:[:taketest,:submit_clicked]
+  before_action :get_enrollment,only:[:taketest,:submit_clicked,:finish]
   before_action :check_test_time,only:[:taketest,:submit_clicked]
 
   def taketest
@@ -43,6 +43,7 @@ class EnrollmentsController < ApplicationController
   end
 
   def enroll_for_test
+
     #check_profile _complete
     @user=current_user
     @tests = Test.all.page(params[:page])
@@ -58,28 +59,15 @@ class EnrollmentsController < ApplicationController
 
 
   def finish
-    #to be done with joins
-    @test=Test.find(params[:test_id])
-    @score=0
-    en=Enrollment.find_by(test_id:params[:test_id],student_id:current_user.id)
-    user_response_hash=en.response
+    #filter get_test_by_id
+    #filter-get_enrollement
+    @total_noq=TestQuestion.get_test_questions_join(@current_test.id).size
+    @attempted=@enrollment.response.count
 
-    temp=TestQuestion.all.where(test_id:params[:test_id]).pluck(:question_id,:marks)
-    correct_response_hash={}
+    @score=@enrollment.submit_test
+    @total_marks=@current_test.marks
 
-    temp.each do |id,marks|
-      question=Question.find(id)
-      correct_response_hash[id]={:cr=>question.correct_answer,:marks=>marks}
-    end
-
-    temp.map{|a,b| a}.each do |t|
-        if user_response_hash["#{t}"]==correct_response_hash[t][:cr]
-          @score+=correct_response_hash[t][:marks]
-        end
-    end
-    en.score=@score
-    en.attempted=true
-    en.save
+    @percentage=(@score/@total_marks.to_f).round(4)*100
 
     respond_to do |format|
       format.html

@@ -1,12 +1,19 @@
+
 <div>
   <h1>
-    Score is <%=@score%> out of <%=@test.marks%>
+    attempted <%=@attempted%> out of <%=@total_noq%>
   </h1>
 </div>
 
 <div>
   <h1>
-    percentage is <%=(@score/@test.marks.to_f).round(4)*100%> %
+    Score is <%=@score%> out of <%=@total_marks%>
+  </h1>
+</div>
+
+<div>
+  <h1>
+    Percentage is <%=@percentage%> %
   </h1>
 </div>
 
@@ -14,5 +21,5 @@
   <h1>
 
   </h1>
-    <%=link_to "See Leaderboard",result_test_path(@test)%>
+    <%=link_to "See Leaderboard",result_test_path(@current_test)%>
 </div>

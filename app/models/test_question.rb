@@ -25,6 +25,11 @@ class TestQuestion < ActiveRecord::Base
     test_question.destroy
   end
 
+  def self.get_test_questions_join(test_id)
+    TestQuestion.where(test_id:test_id).joins(:question).select('test_questions.*,questions.*')
+  end
+
+
   private
 
   def add_to_test
