@@ -13,8 +13,8 @@ class Enrollment < ActiveRecord::Base
   validates :score,
                   numericality:true
 
-
-
+  validates :attempted, inclusion: { in: [ true, false ] }
+  
 
   #instance method
   def record_start_time

@@ -30,6 +30,9 @@ class Test < ActiveRecord::Base
 
   validates :number_of_questions,
                   numericality:true
+
+  validates :private, inclusion: { in: [ true, false ] }
+  validates :active, inclusion: { in: [ true, false ] }
   #Validation Methods
 
   def duration_greater_than_zero

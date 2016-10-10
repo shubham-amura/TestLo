@@ -9,9 +9,26 @@ describe Test, type: :model do
       expect(build(:test,duration:Time.parse("00:00:00"))).to_not be_valid
     end
 
-    it "invalid marks are invalid" do
+    it "should pass if valid time is given" do
+      expect(build(:test,duration:Time.parse("00:10:00"))).to be_valid
+    end
+
+    it "should not pass if marks are invalid" do
       expect(build(:test,marks:"abc")).to_not be_valid
     end
+
+    it "should pass if marks are valid" do
+      expect(build(:test,marks:10)).to be_valid
+    end
+
+    it "should not pass if number_of_questions are invalid" do
+      expect(build(:test,number_of_questions:"abc")).to_not be_valid
+    end
+
+    it "should pass if number_of_questions are  valid" do
+      expect(build(:test,number_of_questions:1)).to be_valid
+    end
+
   end
 
     describe "associations" do
