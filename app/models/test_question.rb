@@ -12,7 +12,7 @@ class TestQuestion < ActiveRecord::Base
 #class methods
   def self.get_questions_of_test(test)
 
-    TestQuestion.where(test_id:test.id).joins(:question).select('test_questions.question_id,test_questions.marks,questions.question')
+    TestQuestion.where(test_id:test.id).joins(:question).select('test_questions.*,questions.*')
 
   end
 

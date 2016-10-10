@@ -12,7 +12,6 @@ class EnrollmentsController < ApplicationController
     #get_test_by_id
     #get_enrollment(also check enrolled or not)
     #check_time
-
     join_data
 
     if @enrollment.start_time.nil?
@@ -151,9 +150,17 @@ class EnrollmentsController < ApplicationController
         flash[:danger]="Time is over"
         #if not attempted and time is over ,call finish action
         unless @enrollment.attempted
-          redirect_to finish_path
+          if request.xhr?
+            render :js => "window.location = #{finish_path.to_json}"
+          else
+            redirect_to finish_path
+          end
         else
-          redirect_to student_dashboard_path
+          if request.xhr?
+            render :js => "window.location = #{student_dashboard_path.to_json}"
+          else
+            redirect_to student_dashboard_path
+          end
         end
       end
     end
@@ -161,7 +168,7 @@ class EnrollmentsController < ApplicationController
 
   def join_data
     #all questions in test
-    @test_questions=TestQuestion.all.where(test_id:@current_test.id).joins(:question).select('test_questions.*,questions.*')
+    @test_questions=TestQuestion.get_questions_of_test(@current_test)
     #filter attempted
     @unattempted=@test_questions.select{|t| question_attempted(t.question.id,@current_test.id)==false}
 
