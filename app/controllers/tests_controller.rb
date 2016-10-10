@@ -67,7 +67,7 @@ class TestsController < ApplicationController
         #filter-get_test_by_test_id
         #filter-check_test_owner
         #filter-check_if_active
-        TestQuestion.create_test_question(params[:test_id],params[:question_id],params[:marks])
+        TestQuestion.create_test_question(@test.id,params[:question_id],params[:marks])
         #view logic
         join_data
         # redirect_to test_path(@test) (if not using ajax)
@@ -80,7 +80,7 @@ class TestsController < ApplicationController
         #filter-get_test_by_test_id
         #filter-check_test_owner
         #filter-check_if_active
-        TestQuestion.remove_test_question(params[:test_id],params[:question_id])
+        TestQuestion.remove_test_question(@test.id,params[:question_id])
         # view logic
         join_data
         respond_to do |format|
@@ -134,7 +134,7 @@ class TestsController < ApplicationController
     end
 
     def get_test_by_test_id
-      @test=Test.get_test_by_test_id(params[:test_id])
+      @test=Test.get_test_by_id(params[:test_id])
     end
 
     def check_test_owner
@@ -155,10 +155,10 @@ class TestsController < ApplicationController
 
     def join_data
       #left partial
-      @test_questions=TestQuestion.where(test_id:@test.id).joins(:question).select('test_questions.question_id,test_questions.marks,questions.question')
+      @test_questions=TestQuestion.get_questions_of_test(@test)
 
       #right partial
-      @questions=Question.where.not(id:@test_questions.map{|t| t.question.id})
+      @questions=Question.get_questions_excluding(@test_questions.map{|t| t.question.id})
     end
 
 

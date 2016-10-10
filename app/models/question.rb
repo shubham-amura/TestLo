@@ -70,4 +70,8 @@ class Question < ActiveRecord::Base
     number
   end
 
+  #class methods
+  def self.get_questions_excluding(test_question_ids)
+    Question.where.not(id:test_question_ids)
+  end
 end

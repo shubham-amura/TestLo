@@ -10,7 +10,9 @@ class TestQuestion < ActiveRecord::Base
             numericality: { only_integer: true}
 
 #class methods
-  def self.getTestQuestion
+  def self.get_questions_of_test(test)
+
+    TestQuestion.where(test_id:test.id).joins(:question).select('test_questions.question_id,test_questions.marks,questions.question')
 
   end
 
