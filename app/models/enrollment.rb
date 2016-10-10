@@ -4,6 +4,15 @@ class Enrollment < ActiveRecord::Base
 
   serialize :response,Hash
 
+  validates :test_id,
+                    presence:true
+
+  validates :student_id,
+                      presence:true
+
+  validates :score,
+                  numericality:true
+
 
 
 

@@ -9,6 +9,12 @@ class TestQuestion < ActiveRecord::Base
   validates :marks ,
             numericality: { only_integer: true}
 
+  validates :test_id,
+                    presence:true
+
+  validates :question_id,
+                        presence:true
+
 #class methods
   def self.get_questions_of_test(test)
 

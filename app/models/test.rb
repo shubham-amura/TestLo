@@ -25,6 +25,11 @@ class Test < ActiveRecord::Base
 
   validate :duration_greater_than_zero
 
+  validates :marks,
+                  numericality:true
+
+  validates :number_of_questions,
+                  numericality:true
   #Validation Methods
 
   def duration_greater_than_zero
