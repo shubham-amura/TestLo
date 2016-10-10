@@ -29,6 +29,15 @@ describe Test, type: :model do
       expect(build(:test,number_of_questions:1)).to be_valid
     end
 
+    it "should pass if date is valid" do
+      expect(build(:test,date:DateTime.now)).to be_valid
+    end
+
+    it "should fail if date is invalid" do
+      expect(build(:test,date:DateTime.yesterday)).to_not be_valid
+    end
+
+
   end
 
     describe "associations" do
