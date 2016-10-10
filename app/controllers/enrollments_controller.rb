@@ -20,29 +20,23 @@ class EnrollmentsController < ApplicationController
 
   def show_current_question
     #get_test_by_id
-    @current_question = Question.find(params[:id])
-
+    @current_question = Question.get_question_by_id(params[:id])
     respond_to do |format|
       format.js
     end
   end
 
   def submit_clicked
-    #test
-    #enrollments
-    #time
-
+    #filter get_test_by_id
+    #filter get_enrollment
+    #filter time
     @question_id=params[:question][:id]
     @response=params[:response]
 
-    unless @response.nil? || @response.empty?
-      @enrollment.response[@question_id]=@response.is_a?(Array) ? @response:[@response]
-      @enrollment.save
-    end
+    @enrollment.save_response_for_question(@response,@question_id)
 
     join_data
-    @now=@enrollment.start_time.getlocal
-    #redirect_to taketest_path(@current_test)
+    @now=@enrollment.get_start_time
     respond_to do |format|
       format.js
     end
@@ -94,33 +88,37 @@ class EnrollmentsController < ApplicationController
   private
 
   def get_enrollment
-    @enrollment=Enrollment.find_by(test_id:@current_test.id,student_id:current_user.id)
+    @enrollment=Enrollment.get_enrollment_for_test(@current_test,current_user)
     if @enrollment.nil?
       flash[:danger]="Enroll First"
+      if request.xhr?
+        render :js=> "window.location = #{student_dashboard_path.to_json}"
+      else
       redirect_to student_dashboard_path
+      end
     end
   end
 
   def get_test_by_id
-    @current_test = Test.find_by(id:params[:test_id])
+    @current_test = Test.get_test_by_id(params[:test_id])
     if @current_test.nil?
       flash[:danger]="Test doesnt exist"
-      redirect_to student_dashboard_path
-    end
-  end
-
-  def get_test_by_id_2
-    @current_test = Test.find_by(id:params[:test][:id])
-    if @current_test.nil?
-      flash[:danger]="Test doesnt exist"
-      redirect_to student_dashboard_path
+      if request.xhr?
+        render :js=> "window.location = #{student_dashboard_path.to_json}"
+      else
+        redirect_to student_dashboard_path
+      end
     end
   end
 
   def check_user
       unless current_user.type=="Student"
         flash[:danger]="Authorizaion Error"
-        redirect_to error_path
+        if request.xhr?
+          render :js=> "window.location = #{error_path.to_json}"
+        else
+          redirect_to error_path
+        end
       end
   end
 

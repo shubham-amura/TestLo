@@ -19,11 +19,21 @@ class Enrollment < ActiveRecord::Base
     self.start_time.getlocal
   end
 
+  def save_response_for_question(response,question_id)
+    unless (response.nil? || response.empty? || question_id.nil? || question_id.empty?)
+      self.response[question_id]=response.is_a?(Array) ? response:[response]
+      self.save
+    end
+  end
+
   #class methods
   def self.get_results_of_test(test)
     @result=Enrollment.where(test_id:test.id,attempted:true).order(score: :desc).joins(:student).pluck(:name,:username,:email,:score)
     return @result
   end
 
+  def self.get_enrollment_for_test(test,current_user)
+      Enrollment.find_by(test_id:test.id,student_id:current_user.id)
+  end
 
 end
