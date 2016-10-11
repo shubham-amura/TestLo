@@ -14,7 +14,7 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2016-10-11T16:49:03+05:30">2016-10-11T16:49:03+05:30</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2016-10-11T19:13:40+05:30">2016-10-11T19:13:40+05:30</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -5967,7 +5967,7 @@
         <li class="never" data-hits="" data-linenumber="10">
           
           
-          <code class="ruby">          format: { with: /\A[a-zA-Z0-9]+\z/, message: &quot;Allows only alphanumeric characters without spaces&quot; }</code>
+          <code class="ruby">          format: { with: /\A[a-zA-Z0-9_]+\z/, message: &quot;Allows only alphanumeric characters without spaces&quot; }</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="11">
@@ -10545,7 +10545,7 @@
         <li class="covered" data-hits="8" data-linenumber="9">
           <span class="hits">8</span>
           
-          <code class="ruby">    f.username {  Faker::Internet.user_name(&#39;swapnil&#39;)  }</code>
+          <code class="ruby">    f.username {  Faker::Pokemon.name[0..6]  }</code>
         </li>
       
         <li class="covered" data-hits="8" data-linenumber="10">
@@ -10983,7 +10983,7 @@
         <li class="covered" data-hits="3" data-linenumber="9">
           <span class="hits">3</span>
           
-          <code class="ruby">    f.username {  Faker::Internet.user_name(&#39;hacker&#39;)  }</code>
+          <code class="ruby">    f.username {  Faker::Pokemon.name[0..8]  }</code>
         </li>
       
         <li class="covered" data-hits="3" data-linenumber="10">
@@ -11343,7 +11343,7 @@
         <li class="covered" data-hits="13" data-linenumber="9">
           <span class="hits">13</span>
           
-          <code class="ruby">    f.username {  Faker::Internet.user_name(&#39;Swapnil&#39;)  }</code>
+          <code class="ruby">    f.username {  Faker::Pokemon.name[0..8]  }</code>
         </li>
       
         <li class="covered" data-hits="17" data-linenumber="10">

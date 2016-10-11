@@ -7,7 +7,7 @@ devise :database_authenticatable, :registerable,
 #validations
 validates :username, uniqueness: true, presence:true,
           length: { minimum:4, maximum:10, message: "Username should have minimum length between 4-10" },
-          format: { with: /\A[a-zA-Z0-9]+\z/, message: "Allows only alphanumeric characters without spaces" }
+          format: { with: /\A[a-zA-Z0-9_]+\z/, message: "Allows only alphanumeric characters without spaces" }
 
 validates :name,
            format: { with: /\A[a-zA-Z\s\.']+\z/,message: "only allows letters" },
