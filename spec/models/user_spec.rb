@@ -30,7 +30,7 @@ describe User, type: :model do
     end
 
     it "should fail if username is invalid" do
-        build(:user,username: 131).should_not be_valid
+        build(:user,username:131).should_not be_valid
     end
 
     it "should fail if username is invalid" do
