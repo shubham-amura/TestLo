@@ -9,7 +9,7 @@ describe EmployerDetail do
     end
 
     it "should be less than 20 characters" do
-      build(:employer_detail,company:"a"*21).should_not be_valid
+      build(:employer_detail,company:"a"*51).should_not be_valid
     end
 
     it "should pass if company name is valid" do
@@ -26,7 +26,7 @@ describe EmployerDetail do
     end
 
     it "should be less than 30 characters" do
-      build(:employer_detail,company_address:"a"*31).should_not be_valid
+      build(:employer_detail,company_address:"a"*101).should_not be_valid
     end
 
     it "should pass if address is valid" do
