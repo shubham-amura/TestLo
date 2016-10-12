@@ -1,3 +1,4 @@
+
 require 'simplecov'
 SimpleCov.start
 
@@ -7,6 +8,8 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'devise'
 
+require 'capybara/rspec'
+require 'capybara/rails'
 #require 'rspec/autorun'
 
 
@@ -33,6 +36,7 @@ RSpec.configure do |config|
   config.include Devise::TestHelpers, :type => :controller
   config.include Devise::TestHelpers, :type => :view
   config.include Warden::Test::Helpers
+  config.include Capybara::DSL
   # config.extend ControllerMacros,type: :controller
   Warden.test_mode!
   config.after(:each) do
