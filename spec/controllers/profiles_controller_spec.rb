@@ -28,7 +28,6 @@ RSpec.describe ProfilesController, type: :controller do
       @student_user.save
       @student_user.confirm
       sign_in @student_user
-      byebug
     end
     describe "Get Methods" do
         it "Get student dashboard" do
