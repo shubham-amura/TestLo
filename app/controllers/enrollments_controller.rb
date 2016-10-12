@@ -24,6 +24,7 @@ class EnrollmentsController < ApplicationController
     end
   end
 
+
   def submit_clicked
     #filter get_test_by_id
     #filter get_enrollment
@@ -111,7 +112,7 @@ class EnrollmentsController < ApplicationController
             redirect_to new_student_details_path
           end
       end
-  end
+  # end
 
   def check_test_time
     unless @enrollment.start_time.nil?
