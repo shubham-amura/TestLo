@@ -5,7 +5,9 @@ class EnrollmentsController < ApplicationController
   before_action :get_test_by_id,only:[:enroll_for_test,:taketest,:show_current_question,:submit_clicked,:finish]
   before_action :get_enrollment,only:[:taketest,:submit_clicked,:finish]
   before_action :check_test_time,only:[:taketest,:submit_clicked]
-
+#Method for test simulation which take test_id as paramater
+#and start timer for test
+#params[:test_id] test chosen by student
   def taketest
     #check_student_profile
     #get_test_by_id

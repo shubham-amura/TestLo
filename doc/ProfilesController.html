@@ -161,9 +161,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>before_action :authorize_user! before_action :l.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -185,7 +183,11 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Method for loading Student dashboard enrolled test shows all enrolled test
+by the current student user tests are fetched from database which include
+all active test.</p>
+</div></span>
   
 </li>
 
@@ -237,13 +239,13 @@
       <pre class="lines">
 
 
+13
+14
 15
-16
-17
-18</pre>
+16</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/profiles_controller.rb', line 15</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/profiles_controller.rb', line 13</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_employer_dashboard'>employer_dashboard</span>
   <span class='comment'>#send query parameter for filteration
@@ -263,34 +265,23 @@
   
 
   
-</h3><div class="docstring">
-  <div class="discussion">
-    
-<p>before_action :authorize_user! before_action :l</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div><table class="source_code">
+</h3><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
+3
+4
 5
 6
 7
 8
 9
-10
-11
-12</pre>
+10</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/profiles_controller.rb', line 5</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/profiles_controller.rb', line 3</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_show'>show</span>
   <span class='ivar'>@user</span> <span class='op'>=</span> <span class='id identifier rubyid_current_user'>current_user</span>
@@ -314,7 +305,20 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Method for loading Student dashboard enrolled test shows all enrolled test
+by the current student user tests are fetched from database which include
+all active test.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
@@ -344,7 +348,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Oct 12 15:44:07 2016 by
+  Generated on Wed Oct 12 15:49:49 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.5 (ruby-2.3.0).
 </div>

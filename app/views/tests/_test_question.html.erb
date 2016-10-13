@@ -1,34 +1,30 @@
 <div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Marks</th>
-                <% if @test.employer_id==current_user.id%>
-                <th>Action</th>
-                <%end%>
-            </tr>
-        </thead>
-        <tbody>
-            <% test_questions.each do |test_question| %>
-
-            <tr>
-                <td>
-                    <strong><%=test_question.question.question%></strong>
-                </td>
-
-                <td>
-                    <strong><%=test_question.marks%></strong>
-                </td>
-
-                <%if current_user.id==@test.employer_id%>
-                <td>
-                    <%=link_to "Remove", remove_question_from_current_test_path(@test,test_question.question),remote:true,method:"DELETE",class: 'btn btn-danger'%>
-                </td>
-                <%end%>
-            </tr>
-            <%- end %>
-        </tbody>
-
-    </table>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Marks</th>
+        <% if @test.employer_id==current_user.id%>
+          <th>Action</th>
+        <%-end%>
+       </tr>
+     </thead>
+     <tbody>
+       <% test_questions.each do |test_question| %>
+         <tr>
+            <td>
+              <strong><%=test_question.question.question%></strong>
+            </td>
+            <td>
+              <strong><%=test_question.marks%></strong>
+            </td>
+            <%if current_user.id==@test.employer_id%>
+            <td>
+              <%=link_to "Remove", remove_question_from_current_test_path(@test,test_question.question),remote:true,method:"DELETE",class: 'btn btn-danger'%>
+            </td>
+            <%end%>
+          </tr>
+       <%- end %>
+    </tbody>
+  </table>
 </div>

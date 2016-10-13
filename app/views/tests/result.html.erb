@@ -1,18 +1,18 @@
-<table class="table">
-    <tr>
-        <th class="">Name</th>
-        <th>Username</th>
-        <th>Email</th>
-        <th>Score</th>
-        <th>Percentage</th>
-    </tr>
-
-    <%@result.each do |student|%>
-      <tr>
-        <td><%=student[0]%></td>
-        <td><%=student[1]%></td>
-        <td><%=student[2]%></td>
-        <td><%=student[3]%></td>
-        <td><%=(student[3]/@test.marks.to_f).round(4)*100%> %</td>
-      </tr>
-    <%end%>
+<table class = "table" >
+  <tr>
+    <th> Name </th>
+    <th> Username </th>
+    <th> Email </th>
+    <th> Score </th>
+    <th> Percentage </th>
+  </tr>
+  <% @result.each do |student| %>
+  <tr>
+    <td><%= student[0] %></td>
+    <td><%= student[1] %></td>
+    <td><%= student[2] %></td>
+    <td><%= student[3] %></td>
+    <td><%= (student[3]/@test.marks.to_f).round(4)*100 %> %</td>
+  </tr>
+  <% end %>
+</table>

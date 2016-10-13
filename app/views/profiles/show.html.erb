@@ -1,9 +1,10 @@
 
-<span class="LogoutButton white-text"><%= link_to "Logout", destroy_user_session_path %>
-    <span>
-        <h1 class=" white-text"><%= @user.name %>'s Dashboard
-        </h1>
-        <p>
-            <%= @user.name %></p>
-
-<!-- not using this one -->
+<span class="LogoutButton white-text">
+  <%= link_to "Logout", destroy_user_session_path %>
+</span>
+<h1 class=" white-text">
+  <%= @user.name %>'s Dashboard
+</h1>
+<p>
+  <%= @user.name %>
+</p>

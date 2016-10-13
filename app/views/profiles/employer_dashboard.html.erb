@@ -3,9 +3,7 @@
         Dash Board
     </h1>
 </span>
-
-    <h2 class="pull-left center"><%= link_to "Create Test",new_test_path ,:class => "btn btn-success" %></h2>
-
-    <!-- partial for lising tests ,works even if @tests is not passed,because @tests is defined in action -->
-    <%=render 'tests/test',collection:@tests%>
-    <!-- renders tests/_test.html.erb -->
+<h2 class="pull-left center"><%= link_to "Create Test",new_test_path ,:class => "btn btn-success" %></h2>
+<!-- partial for lising tests ,works even if @tests is not passed,because @tests is defined in action -->
+<%=render 'tests/test',collection:@tests%>
+<!-- renders tests/_test.html.erb -->

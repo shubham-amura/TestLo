@@ -1,7 +1,7 @@
-<span>
-    <h1 class=""><%= current_user.name %>'s Dashboard
+<div>
+    <h1 class="">
+        <%= current_user.name %>'s Dashboard
     </h1>
-
     <table class="table">
         <tr>
             <th class="">Name</th>
@@ -24,27 +24,27 @@
                 <td><%= test.marks%></td>
 
                 <%if DateTime.now.utc.to_date < test.date%>
-                  <% if @enrolled_test.include? test.id%>
-                    <td style="margin:10px;" class="btn btn-success">
+                <% if @enrolled_test.include? test.id%>
+                  <td style="margin:10px;" class="btn btn-success">
                       <%= link_to "Enrolled",'#',:class => "no-link" %>
-                    </td>
-                  <%else%>
+                  </td>
+                <%else%>
                   <td style="margin:10px;">
                       <%= link_to "Enroll",enroll_for_test_path(test, page: params[:page]),remote:true,:class => "btn btn-primary no-link" %>
                   </td>
-                  <% end %>
+                <% end %>
 
                 <%elsif DateTime.now.utc.to_date ==test.date%>
                   <%if @enrolled_test.include? test.id%>
-                      <%if test_attempted(test.id)%>
-                        <td style="margin:10px;" class="btn btn-success">
+                    <%if test_attempted(test.id)%>
+                      <td style="margin:10px;" class="btn btn-success">
                           <%= link_to "Result",result_test_path(test),:class => "no-link" %>
-                        </td>
-                      <%else%>
-                        <td style="margin:10px;" class="btn btn-success">
+                      </td>
+                    <%else%>
+                      <td style="margin:10px;" class="btn btn-success">
                           <%= link_to "Take Test",taketest_path(test),:class => "no-link" %>
-                        </td>
-                      <%end%>
+                      </td>
+                    <%end%>
                   <%else%>
                     <td style="margin:10px;">
                         <%= link_to "Enroll",enroll_for_test_path(test, page: params[:page]),remote:true,:class => "btn btn-primary no-link" %>
@@ -52,7 +52,7 @@
                   <%end%>
                 <%else%>
                   <td style="margin:10px;" class="btn btn-success">
-                    <%= link_to "Result",result_test_path(test),:class => "no-link" %>
+                      <%= link_to "Result",result_test_path(test),:class => "no-link" %>
                   </td>
                 <%end%>
             </tr>
@@ -60,3 +60,4 @@
         </div>
     </table>
     <%= paginate @tests , :params => {:controller => 'profiles',:action => 'student_dashboard'} %>
+</div>
